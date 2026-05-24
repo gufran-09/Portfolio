@@ -19,7 +19,7 @@ export function Projects() {
   const filtered = filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.tags.includes(filter));
 
   return (
-    <section id="projects" className="section surface-section" style={{ position: "relative", overflow: "hidden" }}>
+    <section id="projects" className="section surface-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
       <MarqueeTitle text="PROJECTS" direction="right" top="50%" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div

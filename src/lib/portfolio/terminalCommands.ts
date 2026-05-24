@@ -21,6 +21,7 @@ export type Line = {
 export type CommandResult = {
   lines?: Line[];
   scrollTo?: string;
+  scrollDelayMs?: number;
   clear?: boolean;
   matrix?: boolean;
 };
@@ -41,6 +42,9 @@ export function runCommand(raw: string): CommandResult {
       experience: "experience",
       education: "education",
       achievements: "achievements",
+      askai: "ask-ai",
+      ai: "ask-ai",
+      "ask-ai": "ask-ai",
       methodology: "methodology",
       contact: "contact",
     };
@@ -126,6 +130,13 @@ export function runCommand(raw: string): CommandResult {
         ],
         scrollTo: "contact",
       };
+    case "askai":
+    case "ai":
+      return {
+        lines: [{ text: "🤖 Opening Gufran-AI...", color: "brand" }],
+        scrollTo: "ask-ai",
+        scrollDelayMs: 800,
+      };
     case "help":
       return {
         lines: [
@@ -141,6 +152,7 @@ export function runCommand(raw: string): CommandResult {
           { text: "  coffee           Caffeine level" },
           { text: "  matrix           Enter the matrix" },
           { text: "  hire             Jump to contact" },
+          { text: "  askai / ai       Open Gufran-AI" },
           { text: "  clear            Clear terminal" },
           { text: "  help             Show this list" },
         ],

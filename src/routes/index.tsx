@@ -10,6 +10,8 @@ import { Projects } from "@/components/portfolio/Projects";
 import { Experience } from "@/components/portfolio/Experience";
 import { Education } from "@/components/portfolio/Education";
 import { Achievements } from "@/components/portfolio/Achievements";
+import { CodingJourney } from "@/components/portfolio/CodingJourney";
+import { AskAI } from "@/components/portfolio/AskAI";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { Terminal } from "@/components/portfolio/Terminal";
@@ -50,6 +52,8 @@ function Index() {
         <Experience />
         <Education />
         <Achievements />
+        <CodingJourney />
+        <AskAI />
         <Contact />
       </main>
       <Footer />

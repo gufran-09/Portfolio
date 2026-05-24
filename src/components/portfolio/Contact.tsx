@@ -192,7 +192,7 @@ export function Contact() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.45 }}
         >
-          <div className="section-label">08 / CONTACT</div>
+          <div className="section-label">10 / CONTACT</div>
           <h2 className="h1 mb-3">Let's build something.</h2>
           <p className="body mb-16 max-w-2xl">
             Available for full-time roles, freelance projects, and interesting conversations.

@@ -336,5 +336,6 @@ export const SECTIONS = [
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "achievements", label: "Achievements" },
+  { id: "ask-ai", label: "Ask AI" },
   { id: "contact", label: "Contact" },
 ];

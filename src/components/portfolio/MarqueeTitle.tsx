@@ -19,7 +19,6 @@ interface MarqueeTitleProps {
 export function MarqueeTitle({
     text,
     direction = "left",
-    top = "50%",
 }: MarqueeTitleProps) {
     const trackRef = useRef<HTMLDivElement>(null);
 
@@ -79,17 +78,7 @@ export function MarqueeTitle({
     return (
         <div
             aria-hidden="true"
-            style={{
-                position: "absolute",
-                top,
-                left: 0,
-                right: 0,
-                transform: "translateY(-50%)",
-                overflow: "hidden",
-                pointerEvents: "none",
-                userSelect: "none",
-                zIndex: 0,
-            }}
+            className="marquee-wrapper"
         >
             <div
                 ref={trackRef}

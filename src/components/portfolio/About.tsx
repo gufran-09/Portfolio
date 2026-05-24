@@ -391,7 +391,7 @@ function DevIllustration() {
 // ─── Main About section ──────────────────────────────────────────────────────
 export function About() {
   return (
-    <section id="about" className="section bg-section" style={{ position: "relative", overflow: "hidden" }}>
+    <section id="about" className="section bg-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
       <MarqueeTitle text="ABOUT ME" direction="left" top="45%" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div

@@ -43,7 +43,7 @@ export function Methodology() {
     <section
       id="methodology"
       className="section bg-section"
-      style={{ position: "relative", overflow: "hidden" }}
+      style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}
     >
       <MarqueeTitle text="HOW I WORK" direction="left" top="50%" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>

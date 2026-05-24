@@ -38,13 +38,16 @@ export function Navbar({ active }: { active: string }) {
             <button
               key={s.id}
               onClick={() => scrollToSection(s.id)}
-              className="px-3 py-1.5 rounded-[7px] text-sm font-medium transition-colors"
+              className="px-3 py-1.5 rounded-[7px] text-sm font-medium transition-colors inline-flex items-center gap-1.5"
               style={{
                 color: active === s.id ? "var(--color-text-1)" : "var(--color-text-3)",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
               onMouseLeave={(e) => (e.currentTarget.style.color = active === s.id ? "var(--color-text-1)" : "var(--color-text-3)")}
             >
+              {s.id === "ask-ai" && (
+                <span className="h-1 w-1 rounded-full" style={{ background: "var(--color-accent)" }} />
+              )}
               {s.label}
             </button>
           ))}
@@ -120,7 +123,7 @@ export function Navbar({ active }: { active: string }) {
                   scrollToSection(s.id);
                   setMobileOpen(false);
                 }}
-                className="px-3 py-2 text-left text-sm font-medium rounded-[7px] transition-all"
+                className="px-3 py-2 text-left text-sm font-medium rounded-[7px] transition-all inline-flex items-center gap-2"
                 style={{
                   color: active === s.id ? "var(--color-text-1)" : "var(--color-text-3)",
                   background: active === s.id ? "var(--color-surface-2)" : "transparent",
@@ -128,6 +131,9 @@ export function Navbar({ active }: { active: string }) {
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = active === s.id ? "var(--color-text-1)" : "var(--color-text-3)")}
               >
+                {s.id === "ask-ai" && (
+                  <span className="h-1 w-1 rounded-full" style={{ background: "var(--color-accent)" }} />
+                )}
                 {s.label}
               </button>
             ))}

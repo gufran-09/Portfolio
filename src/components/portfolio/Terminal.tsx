@@ -109,7 +109,7 @@ export function Terminal() {
     }
 
     if (result.scrollTo) {
-      setTimeout(() => scrollToSection(result.scrollTo!), 400);
+      setTimeout(() => scrollToSection(result.scrollTo!), result.scrollDelayMs ?? 400);
     }
 
     setHistory((h) => [raw, ...h].slice(0, 20));
@@ -189,11 +189,12 @@ export function Terminal() {
             >
               <button
                 onClick={() => setOpen(false)}
-                className="h-2 w-2 rounded-full bg-[#ef4444]"
+                className="h-2 w-2 rounded-full"
+                style={{ background: "#f87171" }}
                 aria-label="Close terminal"
               />
               <span className="h-2 w-2 rounded-full bg-[#f59e0b]" />
-              <span className="h-2 w-2 rounded-full bg-[#10b981]" />
+              <span className="h-2 w-2 rounded-full" style={{ background: "#4ade80" }} />
               <span className="flex-1 text-center font-mono text-[0.72rem]" style={{ color: "#666666" }}>
                 gufran@portfolio ~ terminal
               </span>

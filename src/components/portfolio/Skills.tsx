@@ -27,7 +27,7 @@ export function Skills() {
   const tabs = Object.keys(SKILLS);
 
   return (
-    <section id="skills" className="section surface-section" style={{ position: "relative", overflow: "hidden" }}>
+    <section id="skills" className="section surface-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
       <MarqueeTitle text="SKILLS" direction="right" top="55%" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
