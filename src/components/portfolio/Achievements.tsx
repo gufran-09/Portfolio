@@ -1,160 +1,107 @@
 import { motion } from "framer-motion";
-import { useMemo } from "react";
-import { Flame } from "lucide-react";
-import { SectionLabel, fadeUp } from "./SectionLabel";
-import { TROPHIES, IDENTITY } from "@/lib/portfolio/data";
+import { Trophy, PenTool, Award, Flame, Medal } from "lucide-react";
+import { TROPHIES } from "@/lib/portfolio/data";
 
-function Heatmap() {
-  const cells = useMemo(() => {
-    return Array.from({ length: 12 * 7 }, () => {
-      const r = Math.random();
-      if (r < 0.45) return 0;
-      if (r < 0.7) return 1;
-      if (r < 0.9) return 2;
-      return 3;
-    });
-  }, []);
-  const opacity = [0, 0.3, 0.6, 1];
-  return (
-    <div className="mt-6 inline-grid grid-flow-col grid-rows-7 gap-[3px]">
-      {cells.map((c, i) => (
-        <div
-          key={i}
-          title={c === 0 ? "No activity" : `${c * 3} problems solved`}
-          className="h-[10px] w-[10px] rounded-[2px]"
-          style={{
-            background: c === 0 ? "#1a1a1a" : `rgba(99,102,241,${opacity[c]})`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
+
+const iconMap: Record<string, any> = {
+  Trophy,
+  PenTool,
+  Award,
+  Flame,
+  Medal,
+};
 
 export function Achievements() {
   return (
-    <section id="achievements" className="py-[120px]">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionLabel number="07" label="ACHIEVEMENTS" />
-        <motion.h2
-          {...fadeUp}
-          className="font-display text-[2rem] font-bold text-white"
+    <section id="achievements" className="section bg-section">
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          Milestones & recognition.
-        </motion.h2>
+          <div className="section-label">07 / ACHIEVEMENTS</div>
+          <h2 className="h1 mb-16">Milestones & recognition.</h2>
+        </motion.div>
 
-        {/* Trophies */}
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {TROPHIES.map((t, i) => (
-            <motion.div
-              key={t.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="rounded-xl border border-white/[0.06] bg-[#111] p-5"
-            >
-              <div className="text-[1.6rem]">{t.emoji}</div>
-              <div className="mt-3 text-[0.9rem] font-semibold text-white">
-                {t.title}
+        {/* Achievement cards grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          {TROPHIES.map((trophy, i) => {
+            const Icon = iconMap[trophy.icon] || Trophy;
+            return (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: i * 0.06 }}
+                className="card"
+              >
+                <Icon size={20} style={{ color: "var(--color-accent)" }} />
+                <h3 className="h3 mt-4 mb-2">{trophy.title}</h3>
+                <p className="small mb-3">{trophy.sub}</p>
+                <p className="mono">{trophy.year}</p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Coding Activity Dashboard */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="border-t pt-24"
+          style={{ borderColor: "var(--color-border)" }}
+        >
+          <div className="section-label mb-8">CODING ACTIVITY</div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* GitHub */}
+            <motion.div className="lg:col-span-2 card p-0 overflow-hidden">
+              <div className="p-8 pb-4">
+                <h3 className="h3 mb-6">GitHub Contributions</h3>
               </div>
-              <div className="mt-0.5 text-[0.8rem] text-[#666]">{t.sub}</div>
-              <div className="mt-2 font-mono text-[0.72rem] text-[#444]">
-                {t.year}
+              <div className="px-8 pb-8">
+                <img
+                  src="https://github-readme-stats.vercel.app/api?username=gufran-09&theme=dark&hide_border=true&bg_color=161616&title_color=6366f1&icon_color=6366f1&text_color=a0a0a0&border_radius=12"
+                  alt="GitHub Stats"
+                  className="w-full rounded-lg"
+                />
               </div>
             </motion.div>
-          ))}
-        </div>
 
-        {/* Coding activity */}
-        <div className="mt-16">
-          <motion.h3
-            {...fadeUp}
-            className="font-display text-[1.25rem] font-semibold text-white"
-          >
-            Coding activity
-          </motion.h3>
-
-          <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            <motion.div
-              {...fadeUp}
-              className="rounded-xl border border-white/[0.06] bg-[#111] p-5"
-            >
-              <div className="mb-4 text-[0.75rem] font-semibold tracking-[0.15em] text-[#666] uppercase">
-                GitHub Stats
+            {/* LeetCode */}
+            <motion.div className="card p-0 overflow-hidden">
+              <div className="p-8 pb-4">
+                <h3 className="h3 mb-6">LeetCode Progress</h3>
               </div>
-              <img
-                src={`https://github-readme-stats.vercel.app/api?username=${IDENTITY.githubUser}&theme=dark&hide_border=true&bg_color=111111&title_color=6366f1&icon_color=6366f1&text_color=888888`}
-                alt="GitHub stats"
-                className="w-full"
-                loading="lazy"
-              />
-            </motion.div>
-            <motion.div
-              {...fadeUp}
-              className="rounded-xl border border-white/[0.06] bg-[#111] p-5"
-            >
-              <div className="mb-4 text-[0.75rem] font-semibold tracking-[0.15em] text-[#666] uppercase">
-                LeetCode Progress
-              </div>
-              <img
-                src={`https://leetcard.jacoblin.cool/${IDENTITY.githubUser}?theme=dark&font=JetBrains%20Mono&ext=heatmap`}
-                alt="LeetCode stats"
-                className="w-full"
-                loading="lazy"
-              />
-            </motion.div>
-            <motion.div
-              {...fadeUp}
-              className="rounded-xl border border-white/[0.06] bg-[#111] p-5 lg:col-span-2"
-            >
-              <div className="mb-4 text-[0.75rem] font-semibold tracking-[0.15em] text-[#666] uppercase">
-                GitHub Contributions
-              </div>
-              <img
-                src={`https://github-readme-activity-graph.vercel.app/graph?username=${IDENTITY.githubUser}&theme=github-compact&bg_color=111111&color=6366f1&line=6366f1&point=818cf8&hide_border=true`}
-                alt="Contribution graph"
-                className="w-full"
-                loading="lazy"
-              />
-            </motion.div>
-
-            <motion.div
-              {...fadeUp}
-              className="rounded-xl border border-white/[0.06] p-6 lg:col-span-2"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(99,102,241,0.06), transparent)",
-              }}
-            >
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <div className="mb-2 text-[0.75rem] font-semibold tracking-[0.15em] text-[#666] uppercase">
-                    Codolio
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Flame size={32} className="text-[#f59e0b]" />
-                    <div className="font-display text-[3rem] font-extrabold text-white leading-none">
-                      342
-                    </div>
-                  </div>
-                  <div className="mt-2 text-[0.85rem] text-[#888]">
-                    Day coding streak on Codolio
-                  </div>
-                  <a
-                    href={IDENTITY.codolio}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 inline-block rounded-lg border border-white/15 px-4 py-2 text-[0.8rem] text-white transition-colors hover:border-white/30"
-                  >
-                    View Full Profile →
-                  </a>
-                </div>
-                <Heatmap />
+              <div className="px-8 pb-8">
+                <img
+                  src="https://leetcard.jacoblin.cool/gufran_21?theme=dark&font=JetBrains+Mono&ext=heatmap&border=0&radius=12"
+                  alt="LeetCode"
+                  className="w-full rounded-lg"
+                />
               </div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

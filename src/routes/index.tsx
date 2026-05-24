@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   const active = useActiveSection();
   return (
-    <div className="dark min-h-screen bg-[#0a0a0a] text-white">
+    <div className="dark min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text-1)" }}>
       <CustomCursor />
       <ReadingProgress />
       <Navbar active={active} />

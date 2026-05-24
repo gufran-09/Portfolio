@@ -1,91 +1,105 @@
 import { motion } from "framer-motion";
-import { SectionLabel, fadeUp } from "./SectionLabel";
 import { EDUCATION, CERTIFICATIONS } from "@/lib/portfolio/data";
+import { MarqueeTitle } from "./MarqueeTitle";
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
 
 export function Education() {
   return (
-    <section id="education" className="py-[120px]">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionLabel number="06" label="EDUCATION" />
-        <motion.h2
-          {...fadeUp}
-          className="font-display text-[2rem] font-bold text-white"
+    <section id="education" className="section surface-section">
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          Academic background.
-        </motion.h2>
+          <div className="section-label">06 / EDUCATION</div>
+          <h2 className="h1 mb-16">Academic background.</h2>
+        </motion.div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-2">
-          <motion.div
-            {...fadeUp}
-            className="rounded-xl border border-white/[0.06] bg-[#111] p-6"
-          >
-            <div className="flex items-start gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-md bg-[#1a1a1a] font-display text-[0.8rem] font-bold text-white">
-                {EDUCATION.initials}
-              </div>
-              <div className="flex-1">
-                <div className="text-[1rem] font-semibold text-white">
-                  {EDUCATION.degree}
-                </div>
-                <div className="text-[0.85rem] text-[#6366f1]">
-                  {EDUCATION.university}
-                </div>
-                <div className="mt-1 flex flex-wrap items-center gap-3 font-mono text-[0.75rem] text-[#555]">
-                  <span>{EDUCATION.date}</span>
-                  <span>•</span>
-                  <span>{EDUCATION.location}</span>
-                  <span>•</span>
-                  <span>CGPA {EDUCATION.cgpa}</span>
-                </div>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          {/* Left — Degree */}
+          <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="card">
+            <h3 className="h3 mb-2">{EDUCATION.degree}</h3>
+            <p className="body mb-6">{EDUCATION.university}</p>
+
+            <div className="flex gap-4 mb-6 text-xs font-mono" style={{ color: "var(--color-text-3)" }}>
+              <span>{EDUCATION.date}</span>
+              <span>•</span>
+              <span>CGPA: {EDUCATION.cgpa}</span>
             </div>
-            <div className="mt-5 text-[0.75rem] font-semibold tracking-[0.15em] text-[#666] uppercase">
-              Relevant coursework
-            </div>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {EDUCATION.coursework.map((c) => (
-                <span
-                  key={c}
-                  className="rounded-md border border-white/[0.06] bg-[#1a1a1a] px-2.5 py-1 text-[0.75rem] text-[#888]"
-                >
-                  {c}
-                </span>
-              ))}
+
+            <div className="divider mb-6" />
+
+            <div>
+              <p className="small mb-3">Relevant Coursework</p>
+              <div className="flex flex-wrap gap-1.5">
+                {EDUCATION.coursework.map((course) => (
+                  <span key={course} className="pill">
+                    {course}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {CERTIFICATIONS.map((c, i) => (
+          {/* Right — Certifications */}
+          <motion.div
+            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.06 } } }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            className="space-y-0"
+          >
+            <h3 className="h3 mb-6">Certifications</h3>
+
+            {CERTIFICATIONS.map((cert, i) => (
               <motion.div
-                key={c.name}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="rounded-lg border border-white/[0.06] bg-[#111] p-4"
+                key={i}
+                variants={itemVariants}
+                className="flex items-start gap-4 py-4 border-b"
+                style={{ borderColor: i === CERTIFICATIONS.length - 1 ? "transparent" : "var(--color-border)" }}
               >
-                <div className="flex items-center gap-3">
-                  <div className="grid h-9 w-9 place-items-center rounded-md bg-[#1a1a1a] font-display text-[0.7rem] font-bold text-white">
-                    {c.initials}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="truncate text-[0.85rem] font-semibold text-white">
-                      {c.name}
-                    </div>
-                    <div className="text-[0.72rem] text-[#666]">
-                      {c.issuer} · {c.year}
-                    </div>
-                  </div>
+                {/* Icon */}
+                <div
+                  className="h-10 w-10 rounded-lg flex items-center justify-center flex-shrink-0 font-display font-bold text-xs"
+                  style={{
+                    background: "var(--color-surface-2)",
+                    border: "1px solid var(--color-border)",
+                    color: "var(--color-text-2)",
+                  }}
+                >
+                  {cert.initials}
                 </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h4 className="h3 mb-1">{cert.name}</h4>
+                  <p className="small mb-1">{cert.issuer}</p>
+                  <p className="mono">{cert.year}</p>
+                </div>
+
+                {/* Verify link */}
                 <a
                   href="#"
-                  className="mt-3 inline-block text-[0.72rem] text-[#6366f1] hover:underline"
+                  className="text-xs font-medium flex-shrink-0 transition-colors"
+                  style={{ color: "var(--color-text-3)" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
                 >
                   Verify →
                 </a>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -14,10 +14,11 @@ const WELCOME: Line[] = [
 
 const colorMap = {
   brand: "#6366f1",
-  muted: "#555",
-  error: "#ef4444",
-  success: "#10b981",
-  default: "#aaa",
+  muted: "#666666",
+  error: "#f87171",
+  success: "#4ade80",
+  command: "#f0f0f0",
+  default: "#a0a0a0",
 } as const;
 
 function MatrixRain({ onDone }: { onDone: () => void }) {
@@ -44,7 +45,7 @@ function MatrixRain({ onDone }: { onDone: () => void }) {
     };
   }, [onDone]);
   return (
-    <div className="font-mono text-[0.75rem] text-[#10b981] leading-tight">
+    <div className="font-mono text-[0.75rem] leading-tight" style={{ color: "#4ade80" }}>
       {lines.map((l, i) => (
         <div key={i}>{l}</div>
       ))}
@@ -92,7 +93,7 @@ export function Terminal() {
     if (!raw.trim()) return;
     const promptLine: Line = {
       text: `alex@portfolio:~$ ${raw}`,
-      color: "muted",
+      color: "command",
     };
     const result = runCommand(raw);
 
@@ -149,10 +150,19 @@ export function Terminal() {
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => setOpen(true)}
             title="Open Terminal (press /)"
-            className="fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-[10px] border border-white/10 bg-[#111] transition-colors hover:border-white/25 hover:bg-[#1a1a1a]"
+            className="fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-[10px] border transition-colors"
+            style={{ background: "var(--color-surface)", borderColor: "var(--color-border)" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--color-surface-2)";
+              e.currentTarget.style.borderColor = "var(--color-border-hover)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "var(--color-surface)";
+              e.currentTarget.style.borderColor = "var(--color-border)";
+            }}
             aria-label="Open Terminal"
           >
-            <TerminalIcon size={18} className="text-[#6366f1]" />
+            <TerminalIcon size={18} style={{ color: "#6366f1" }} />
           </motion.button>
         )}
       </AnimatePresence>
@@ -164,18 +174,18 @@ export function Terminal() {
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, x: 40, y: 40 }}
             transition={{ type: "spring", damping: 22, stiffness: 240 }}
-            className="fixed bottom-6 right-6 z-50 flex w-[min(360px,90vw)] flex-col overflow-hidden rounded-xl border border-white/10"
+            className="fixed bottom-6 right-6 z-50 flex w-[min(360px,90vw)] flex-col overflow-hidden rounded-xl border"
             style={{
               height: 280,
-              background: "rgba(10,10,10,0.95)",
+              background: "rgba(15,15,15,0.97)",
+              borderColor: "#2a2a2a",
               backdropFilter: "blur(20px)",
-              boxShadow: "0 24px 60px rgba(0,0,0,0.6)",
             }}
           >
             {/* Header */}
             <div
-              className="flex items-center gap-2 border-b border-white/[0.06] px-3.5 py-2.5"
-              style={{ background: "rgba(255,255,255,0.03)" }}
+              className="flex items-center gap-2 border-b px-3.5 py-2.5"
+              style={{ background: "#1e1e1e", borderColor: "#2a2a2a" }}
             >
               <button
                 onClick={() => setOpen(false)}
@@ -184,11 +194,11 @@ export function Terminal() {
               />
               <span className="h-2 w-2 rounded-full bg-[#f59e0b]" />
               <span className="h-2 w-2 rounded-full bg-[#10b981]" />
-              <span className="flex-1 text-center font-mono text-[0.72rem] text-[#555]">
+              <span className="flex-1 text-center font-mono text-[0.72rem]" style={{ color: "#666666" }}>
                 gufran@portfolio ~ terminal
               </span>
               <button onClick={() => setOpen(false)} aria-label="Close">
-                <X size={12} className="text-[#555] hover:text-white" />
+                <X size={12} style={{ color: "#666666" }} />
               </button>
             </div>
 
@@ -206,8 +216,8 @@ export function Terminal() {
             </div>
 
             {/* Input */}
-            <div className="flex items-center gap-2 border-t border-white/[0.04] px-3.5 py-2.5">
-              <span className="font-mono text-[0.78rem] text-[#6366f1]">
+            <div className="flex items-center gap-2 border-t px-3.5 py-2.5" style={{ borderColor: "#2a2a2a" }}>
+              <span className="font-mono text-[0.78rem]" style={{ color: "#6366f1" }}>
                 gufran@portfolio:~$
               </span>
               <input
@@ -215,7 +225,8 @@ export function Terminal() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onKeyDown}
-                className="flex-1 bg-transparent font-mono text-[0.78rem] text-white outline-none"
+                className="flex-1 bg-transparent font-mono text-[0.78rem] outline-none"
+                style={{ color: "#f0f0f0" }}
                 spellCheck={false}
                 autoComplete="off"
               />

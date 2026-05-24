@@ -15,7 +15,7 @@ export const JOKES = [
 
 export type Line = {
   text: string;
-  color?: "brand" | "muted" | "error" | "success" | "default";
+  color?: "brand" | "muted" | "error" | "success" | "command" | "default";
 };
 
 export type CommandResult = {

@@ -1,69 +1,88 @@
 import { motion } from "framer-motion";
 import { Search, Layers, Code2, Rocket } from "lucide-react";
-import { SectionLabel, fadeUp } from "./SectionLabel";
-import { METHODOLOGY } from "@/lib/portfolio/data";
+import { MarqueeTitle } from "./MarqueeTitle";
 
-const ICONS = { Search, Layers, Code2, Rocket };
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
+
+const steps = [
+  {
+    num: "01",
+    Icon: Search,
+    title: "Discover",
+    desc: "Deep understanding before a single line of code.",
+  },
+  {
+    num: "02",
+    Icon: Layers,
+    title: "Design",
+    desc: "Architecture, API contracts, component hierarchy first.",
+  },
+  {
+    num: "03",
+    Icon: Code2,
+    title: "Build",
+    desc: "Typed, tested, documented. CI/CD from commit one.",
+  },
+  {
+    num: "04",
+    Icon: Rocket,
+    title: "Ship",
+    desc: "Deploy early, measure everything, iterate fast.",
+  },
+];
 
 export function Methodology() {
   return (
-    <section id="methodology" className="py-[120px]">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionLabel number="03" label="HOW I WORK" />
-        <motion.h2
-          {...fadeUp}
-          className="font-display text-[2rem] font-bold text-white"
+    <section
+      id="methodology"
+      className="section bg-section"
+      style={{ position: "relative", overflow: "hidden" }}
+    >
+      <MarqueeTitle text="HOW I WORK" direction="left" top="50%" />
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16"
         >
-          My development methodology.
-        </motion.h2>
+          <div className="section-label">03 / HOW I WORK</div>
+          <h2 className="h1">My development process.</h2>
+        </motion.div>
 
-        <div className="relative mt-14">
-          {/* connecting line */}
-          <div
-            aria-hidden
-            className="absolute left-0 right-0 top-12 hidden h-px md:block"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, rgba(99,102,241,0.4), transparent)",
-            }}
-          />
-          <div className="grid gap-6 md:grid-cols-4">
-            {METHODOLOGY.map((m, i) => {
-              const Icon = ICONS[m.icon as keyof typeof ICONS];
-              return (
-                <motion.div
-                  key={m.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="relative rounded-xl border border-white/[0.06] bg-[#111] p-6"
-                >
-                  <span
-                    aria-hidden
-                    className="absolute top-4 right-5 font-display text-[3rem] font-extrabold text-[#1a1a1a] leading-none select-none"
-                  >
-                    0{i + 1}
-                  </span>
-                  <div
-                    className="grid h-9 w-9 place-items-center rounded-md border"
-                    style={{
-                      background: "rgba(99,102,241,0.1)",
-                      borderColor: "rgba(99,102,241,0.2)",
-                    }}
-                  >
-                    <Icon size={16} className="text-[#6366f1]" />
-                  </div>
-                  <h3 className="mt-5 text-[1rem] font-semibold text-white">
-                    {m.title}
-                  </h3>
-                  <p className="mt-2 text-[0.85rem] leading-[1.7] text-[#666]">
-                    {m.desc}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.num}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{
+                duration: 0.45,
+                delay: i * 0.06,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="py-12 px-10"
+              style={{
+                borderRight: i < steps.length - 1 ? "1px solid var(--color-border)" : "none",
+              }}
+            >
+              <div className="h1 mb-6" style={{ color: "var(--color-text-4)" }}>
+                {step.num}
+              </div>
+              <step.Icon size={20} style={{ color: "var(--color-accent)", marginBottom: "24px" }} />
+              <h3 className="h3 mb-3">{step.title}</h3>
+              <p className="body">{step.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

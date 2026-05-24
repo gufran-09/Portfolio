@@ -109,7 +109,8 @@ export function CustomCursor() {
       >
         <span
           ref={labelRef}
-          className="font-mono text-[0.6rem] tracking-wider text-white opacity-0 transition-opacity"
+          className="font-mono text-[0.6rem] tracking-wider opacity-0 transition-opacity"
+          style={{ color: "var(--color-text-1)" }}
         />
       </div>
     </>

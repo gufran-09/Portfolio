@@ -1,40 +1,59 @@
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 import { IDENTITY } from "@/lib/portfolio/data";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] py-8">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-4 md:grid-cols-3">
-          <div className="font-display text-[0.95rem] font-semibold text-white">
-            {IDENTITY.name}
+    <footer className="border-t py-12" style={{ borderColor: "var(--color-border)" }}>
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+          <div>
+            <p className="small">
+              © 2025 {IDENTITY.name}. All rights reserved.
+            </p>
           </div>
-          <div className="text-center text-[0.8rem] text-[#444]">
-            Designed & built with <span className="text-[#ef4444]">❤</span>{" "}
-            using React + Framer Motion
+
+          <div className="flex items-center gap-6">
+            <a
+              href={IDENTITY.github}
+              target="_blank"
+              rel="noreferrer"
+              className="small transition-colors"
+              style={{ color: "var(--color-text-3)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+            >
+              GitHub
+            </a>
+            <a
+              href={IDENTITY.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="small transition-colors"
+              style={{ color: "var(--color-text-3)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+            >
+              LinkedIn
+            </a>
+            <a
+              href={IDENTITY.twitter}
+              target="_blank"
+              rel="noreferrer"
+              className="small transition-colors"
+              style={{ color: "var(--color-text-3)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+            >
+              Twitter
+            </a>
           </div>
-          <div className="flex items-center gap-4 md:justify-end">
-            {[
-              { Icon: Github, href: IDENTITY.github },
-              { Icon: Linkedin, href: IDENTITY.linkedin },
-              { Icon: Twitter, href: IDENTITY.twitter },
-              { Icon: Mail, href: `mailto:${IDENTITY.email}` },
-            ].map(({ Icon, href }, i) => (
-              <a
-                key={i}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[#555] transition-colors hover:text-white"
-              >
-                <Icon size={16} />
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className="mt-6 text-center text-[0.75rem] text-[#333]">
-          © {new Date().getFullYear()} {IDENTITY.name}. All rights reserved.
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

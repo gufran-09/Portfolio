@@ -5,10 +5,31 @@ import { IDENTITY, TYPEWRITER_STRINGS, HERO_STATS } from "@/lib/portfolio/data";
 import { scrollToSection } from "@/lib/portfolio/terminalCommands";
 import { useEffect, useState } from "react";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
+
 export function Hero() {
   const [showScroll, setShowScroll] = useState(true);
+
   useEffect(() => {
-    const onScroll = () => setShowScroll(window.scrollY < 100);
+    const onScroll = () => setShowScroll(window.scrollY < 80);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -16,227 +37,229 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen overflow-hidden pt-[60px]"
-      style={{ alignItems: "center" }}
+      className="relative min-h-screen flex items-center pt-14 overflow-hidden"
+      style={{ background: "var(--color-bg)" }}
     >
-      {/* Radial glow behind avatar — item 9 */}
+      {/* Background glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 700px 500px at 75% 50%, rgba(99,102,241,0.07) 0%, transparent 70%)",
+            "radial-gradient(ellipse 500px 400px at 80% 50%, rgba(99,102,241,0.05) 0%, transparent 70%)",
         }}
       />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 px-6 md:grid-cols-2 md:gap-10">
-        {/* ── Left column ── */}
-        <div>
-          {/* Availability pill — item 10: pulse ring on green dot */}
+      <div className="container relative grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        {/* Left column */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-6"
+        >
+          {/* Availability badge */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5"
+            variants={itemVariants}
+            className="inline-flex items-center gap-2"
             style={{
-              background: "rgba(16,185,129,0.08)",
-              borderColor: "rgba(16,185,129,0.2)",
+              background: "var(--color-success-dim)",
+              border: "1px solid var(--color-success-border)",
+              borderRadius: "999px",
+              padding: "6px 10px",
             }}
           >
-            {/* Pulse ring wrapper */}
-            <span className="relative flex h-2 w-2 items-center justify-center">
+            <span className="relative flex h-1.5 w-1.5">
               <span
-                className="absolute inline-flex h-full w-full rounded-full bg-[#10b981]"
-                style={{ animation: "ping-ring 1.4s ease-out infinite" }}
+                className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-success)]"
+                style={{ animation: "pulse-ring 2s ease-out infinite" }}
               />
-              <span className="relative h-1.5 w-1.5 rounded-full bg-[#10b981]" />
+              <span className="relative h-1.5 w-1.5 rounded-full bg-[var(--color-success)]" />
             </span>
-            <span className="text-[0.78rem] text-[#10b981]">Available for work</span>
+            <span style={{ color: "var(--color-success)", fontFamily: "var(--font-sans)", fontSize: "13px", fontWeight: 500 }}>
+              Available for work
+            </span>
           </motion.div>
 
-          {/* Name — item 3: full "Ahmed" gradient */}
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 font-display font-extrabold text-white leading-[0.95] tracking-tight"
-            style={{ fontSize: "clamp(3.5rem, 8vw, 6.5rem)" }}
-          >
-            {IDENTITY.firstName}{" "}
+          {/* Name */}
+          <motion.h1 variants={itemVariants} className="display">
+            Gufran{" "}
             <span
-              className="inline-block"
               style={{
-                background: "linear-gradient(180deg, #ffffff 0%, #6366f1 100%)",
+                background: "linear-gradient(180deg, var(--color-text-1) 0%, var(--color-accent) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
             >
-              {IDENTITY.lastName}
+              Ahmed
             </span>
           </motion.h1>
 
-          {/* Typewriter — item 4: 1.6rem, #aaa, weight 500 */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-5 font-display"
-            style={{ fontSize: "1.6rem", color: "#aaa", fontWeight: 500 }}
-          >
-            <TypeAnimation
-              sequence={TYPEWRITER_STRINGS as (string | number)[]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-              cursor={false}
-            />
-            <span className="ml-0.5 inline-block w-[2px] h-6 bg-[#6366f1] animate-pulse align-middle" />
+          {/* Typewriter */}
+          <motion.div variants={itemVariants} className="h-8">
+            <div style={{ fontFamily: "var(--font-display)", fontSize: "1.375rem", color: "var(--color-text-2)" }}>
+              <TypeAnimation
+                sequence={TYPEWRITER_STRINGS as (string | number)[]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                cursor={false}
+              />
+              <span
+                className="ml-1 inline-block w-0.5 h-7 animate-pulse"
+                style={{ background: "var(--color-accent)" }}
+              />
+            </div>
           </motion.div>
 
+          {/* Bio */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-6 max-w-lg text-[0.95rem] leading-[1.75] text-[#666]"
+            variants={itemVariants}
+            className="body max-w-md"
           >
-            I craft scalable web applications and elegant user experiences.
-            Passionate about clean code, great design, and shipping fast.
+            I craft scalable web applications and elegant user experiences. Passionate about clean code, great design, and shipping fast.
           </motion.p>
 
-          {/* Buttons — item 5 */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
-          >
-            {/* Filled white */}
+          {/* CTA buttons */}
+          <motion.div variants={itemVariants} className="flex gap-3 pt-2">
             <button
               onClick={() => scrollToSection("projects")}
-              className="group inline-flex items-center gap-2 rounded-lg px-7 py-3 text-[0.9rem] font-semibold transition-all hover:opacity-90"
-              style={{ background: "#fff", color: "#000" }}
+              className="btn-primary inline-flex items-center gap-2"
             >
               View My Work
-              <ArrowDown
-                size={16}
-                className="transition-transform group-hover:translate-y-0.5"
-              />
+              <ArrowDown size={14} />
             </button>
-            {/* Transparent border only */}
-            <a
-              href="#"
-              data-cursor="PDF"
-              className="inline-flex items-center gap-2 rounded-lg px-7 py-3 text-[0.9rem] font-semibold text-white transition-colors hover:border-white/40"
-              style={{ border: "1px solid rgba(255,255,255,0.2)", background: "transparent" }}
-            >
+            <a href="#" data-cursor="PDF" className="btn-secondary">
               Download Resume
             </a>
           </motion.div>
 
-          {/* Social icons — item 6: #555, hover white */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-8 flex items-center gap-4"
-          >
+          {/* Social links */}
+          <motion.div variants={itemVariants} className="flex gap-4 pt-4">
             {[
-              { Icon: Github, href: IDENTITY.github, cursor: "GITHUB" },
-              { Icon: Linkedin, href: IDENTITY.linkedin, cursor: "LINKEDIN" },
-              { Icon: Twitter, href: IDENTITY.twitter, cursor: "TWITTER" },
-              { Icon: Mail, href: `mailto:${IDENTITY.email}`, cursor: "MAIL" },
-            ].map(({ Icon, href, cursor }, i) => (
+              { Icon: Github, href: IDENTITY.github, label: "GitHub" },
+              { Icon: Linkedin, href: IDENTITY.linkedin, label: "LinkedIn" },
+              { Icon: Twitter, href: IDENTITY.twitter, label: "Twitter" },
+              { Icon: Mail, href: `mailto:${IDENTITY.email}`, label: "Email" },
+            ].map(({ Icon, href, label }, i) => (
               <a
                 key={i}
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                data-cursor={cursor}
                 className="transition-colors"
-                style={{ color: "#555" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
-                aria-label={cursor}
+                style={{ color: "var(--color-text-3)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+                aria-label={label}
               >
-                <Icon size={18} />
+                <Icon size={16} />
               </a>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* ── Right column: avatar card ── */}
+        {/* Right column — Avatar card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="relative mx-auto h-[280px] w-[280px] md:mx-0 md:ml-auto"
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          className="relative mx-auto md:mx-0 md:ml-auto"
+          style={{ width: "260px", aspectRatio: "1" }}
         >
-          {/* Card — item 2: radial glow inside */}
+          {/* Avatar card */}
           <div
-            className="grid h-full w-full place-items-center rounded-[20px] border border-white/[0.08]"
+            className="h-full w-full rounded-[20px] border flex items-center justify-center relative overflow-hidden"
             style={{
-              background:
-                "radial-gradient(circle at center, rgba(99,102,241,0.08), transparent 70%), #111",
-              animation: "border-glow 3s ease-in-out infinite",
+              borderColor: "var(--color-border)",
+              background: "var(--color-surface)",
             }}
           >
-            {/* item 2: GA text color rgba(255,255,255,0.18) */}
+            {/* Inner glow */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle at 30% 70%, rgba(99,102,241,0.08) 0%, transparent 60%)",
+              }}
+            />
             <span
-              className="font-display text-[4rem] font-extrabold"
-              style={{ color: "rgba(255,255,255,0.18)" }}
+              className="font-display font-bold text-6xl relative z-10"
+              style={{ color: "var(--color-text-4)" }}
             >
               {IDENTITY.monogram}
             </span>
           </div>
 
-          {/* Stat pills — item 1: 50+ Projects already fixed in data.ts */}
+          {/* Stat pills */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="absolute -top-3 -right-3 flex items-center gap-2 rounded-full border border-white/[0.08] bg-[#111] px-3 py-1.5 text-[0.75rem] text-white"
+            className="absolute -top-3 -right-3 card p-3"
+            style={{ padding: "6px 12px" }}
           >
-            <span className="h-1.5 w-1.5 rounded-full" style={{ background: HERO_STATS[0].dot }} />
-            {HERO_STATS[0].value} {HERO_STATS[0].label}
+            <div className="flex items-center gap-2">
+              <span
+                className="h-1 w-1 rounded-full"
+                style={{ background: "var(--color-accent)" }}
+              />
+              <span className="small">{HERO_STATS[0].value} {HERO_STATS[0].label}</span>
+            </div>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85 }}
-            className="absolute -bottom-3 -left-3 flex items-center gap-2 rounded-full border border-white/[0.08] bg-[#111] px-3 py-1.5 text-[0.75rem] text-white"
+            className="absolute -bottom-3 -left-3 card p-3"
+            style={{ padding: "6px 12px" }}
           >
-            <span className="h-1.5 w-1.5 rounded-full" style={{ background: HERO_STATS[1].dot }} />
-            {HERO_STATS[1].value} {HERO_STATS[1].label}
+            <div className="flex items-center gap-2">
+              <span
+                className="h-1 w-1 rounded-full"
+                style={{ background: "var(--color-success)" }}
+              />
+              <span className="small">{HERO_STATS[1].value} {HERO_STATS[1].label}</span>
+            </div>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
-            className="absolute -bottom-3 -right-3 flex items-center gap-2 rounded-full border border-white/[0.08] bg-[#111] px-3 py-1.5 text-[0.75rem] text-white"
+            className="absolute -bottom-3 -right-3 card p-3"
+            style={{ padding: "6px 12px" }}
           >
-            <span className="h-1.5 w-1.5 rounded-full" style={{ background: HERO_STATS[2].dot }} />
-            {HERO_STATS[2].value} {HERO_STATS[2].label}
+            <div className="flex items-center gap-2">
+              <span
+                className="h-1 w-1 rounded-full"
+                style={{ background: "#f59e0b" }}
+              />
+              <span className="small">{HERO_STATS[2].value} {HERO_STATS[2].label}</span>
+            </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator — item 11: gap + bouncing chevron */}
+      {/* Scroll indicator */}
       {showScroll && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center"
-          style={{ gap: "10px" }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5 pointer-events-none"
         >
-          <span className="text-[0.7rem] tracking-[0.15em] text-[#444] uppercase">
-            scroll
+          <span className="label" style={{ color: "var(--color-text-3)" }}>
+            SCROLL
           </span>
           <ChevronDown
-            size={16}
-            className="text-[#444]"
-            style={{ animation: "chevron-bounce 1.5s ease-in-out infinite" }}
+            size={14}
+            style={{
+              color: "var(--color-text-3)",
+              animation: "chevron-bounce 1.8s ease-in-out infinite",
+            }}
           />
         </motion.div>
       )}

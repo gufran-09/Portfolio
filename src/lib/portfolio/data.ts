@@ -16,21 +16,21 @@ export const IDENTITY = {
 };
 
 export const TYPEWRITER_STRINGS = [
-  "Software Engineer",
-  2000,
-  "React Specialist",
-  2000,
-  "Open Source Contributor",
+  "Full Stack Engineer",
   2000,
   "System Design Enthusiast",
   2000,
-  "300+ Coding Problems Solved",
+  "React & Node.js Developer",
+  2000,
+  "Open Source Contributor",
+  2000,
+  "1000+ LeetCode Solved",
   2000,
 ];
 
 export const HERO_STATS = [
-  { label: "Years Exp", value: "3+", dot: "var(--primary)" },
-  { label: "Projects", value: "50+", dot: "var(--success)" },
+  { label: "Years Exp", value: "3+", dot: "var(--color-accent)" },
+  { label: "Projects", value: "50+", dot: "var(--color-success)" },
   { label: "LeetCode", value: "1K+", dot: "#f59e0b" },
 ];
 
