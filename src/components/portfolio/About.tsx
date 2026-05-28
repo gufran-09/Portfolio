@@ -392,7 +392,7 @@ function DevIllustration() {
 export function About() {
   return (
     <section id="about" className="section bg-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
-      <MarqueeTitle text="ABOUT ME" direction="left" top="45%" />
+      <MarqueeTitle text="ABOUT ME" direction="left" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -420,7 +420,7 @@ export function About() {
               My approach is methodical: I start by deeply understanding the problem, design the architecture carefully, and then execute with precision. I believe that great software is built by teams that communicate clearly and iterate fast.
             </motion.p>
             <motion.p variants={itemVariants} className="body">
-              Outside of code, I'm an open-source contributor, a LeetCode enthusiast (1000+ problems solved), and someone who genuinely enjoys mentoring junior developers. I'm always learning, always shipping, and always looking for the next interesting challenge.
+              Outside of code, I'm an open-source contributor, a LeetCode enthusiast (100+ problems solved), and someone who genuinely enjoys mentoring junior developers. I'm always learning, always shipping, and always looking for the next interesting challenge.
             </motion.p>
             <motion.div
               variants={containerVariants}
@@ -476,7 +476,7 @@ export function About() {
             <div className="grid grid-cols-2 gap-4">
               <StatCard target={50} label="Projects Built" format={(n) => `${n}+`} />
               <StatCard target={3} label="Years Experience" format={(n) => `${n}+`} />
-              <StatCard target={1000} label="LeetCode Solved" format={(n) => n >= 1000 ? "1K+" : `${n}`} />
+              <StatCard target={1000} label="LeetCode Solved" format={(n) => n >= 100 ? "100+" : `${n}`} />
               <StatCard target={15} label="Happy Clients" format={(n) => `${n}+`} />
             </div>
           </motion.div>

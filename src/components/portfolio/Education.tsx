@@ -13,8 +13,9 @@ const itemVariants = {
 
 export function Education() {
   return (
-    <section id="education" className="section surface-section">
-      <div className="container">
+    <section id="education" className="section surface-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
+      <MarqueeTitle text="EDUCATION" direction="right" />
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

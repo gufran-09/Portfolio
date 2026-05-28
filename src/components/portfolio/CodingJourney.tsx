@@ -1,16 +1,33 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Activity, Code2, ExternalLink, Flame, Github, Zap } from "lucide-react";
-import { useMemo, useState } from "react";
-import { ContributionGraph, ContributionLegend, type ContributionDay } from "./ContributionGraph";
+import { Activity, Code2, ExternalLink, Github, Zap } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ContributionGraph, type ContributionDay } from "./ContributionGraph";
 
 const USERNAMES = {
   github: "gufran-09", // Replace with your GitHub username.
   leetcode: "gufran_21", // Replace with your LeetCode username.
-  gfg: "gufran_09", // Replace with your GeeksForGeeks username.
+  gfg: "gufran21", // Replace with your GeeksForGeeks username.
   codolio: "gufran_21", // Replace with your Codolio username.
 };
 
 type PlatformId = "github" | "leetcode" | "gfg" | "codolio";
+
+type GitHubStats = {
+  publicRepos: number;
+  followers: number;
+  following: number;
+  publicGists: number;
+};
+
+type LeetCodeStats = {
+  totalSolved?: number;
+  easySolved?: number;
+  mediumSolved?: number;
+  hardSolved?: number;
+  acceptanceRate?: number;
+  ranking?: number;
+  submissionCalendar?: Record<string, number | string>;
+};
 
 const platforms = [
   {
@@ -21,8 +38,8 @@ const platforms = [
     borderColor: "rgba(255,255,255,0.15)",
     titleLine1: "GITHUB",
     titleLine2: "ACTIVITY",
-    subtitle: "A visualization of my consistent coding habits and contributions over the past year.",
-    summary: "259 contributions this year",
+    subtitle: "A live view of my public GitHub activity and profile stats.",
+    summary: "Live GitHub profile data",
     cta: "VIEW ON GITHUB",
     href: `https://github.com/${USERNAMES.github}`,
   },
@@ -34,8 +51,8 @@ const platforms = [
     borderColor: "rgba(255,161,22,0.3)",
     titleLine1: "LEETCODE",
     titleLine2: "STREAK",
-    subtitle: "My competitive programming journey — 1000+ problems solved and counting.",
-    summary: "1000+ problems solved",
+    subtitle: "Live LeetCode progress pulled from my public profile data.",
+    summary: "Live LeetCode profile data",
     cta: "VIEW ON LEETCODE",
     href: `https://leetcode.com/${USERNAMES.leetcode}`,
   },
@@ -47,8 +64,8 @@ const platforms = [
     borderColor: "rgba(47,141,70,0.3)",
     titleLine1: "GFG",
     titleLine2: "PROGRESS",
-    subtitle: "Data structures, algorithms, and interview prep — tracked on GeeksForGeeks.",
-    summary: "500+ problems solved",
+    subtitle: "My public GeeksForGeeks profile rendered from the live stats card.",
+    summary: "Live GFG profile card",
     cta: "VIEW ON GFG",
     href: `https://www.geeksforgeeks.org/user/${USERNAMES.gfg}`,
   },
@@ -60,35 +77,35 @@ const platforms = [
     borderColor: "rgba(99,102,241,0.25)",
     titleLine1: "CODOLIO",
     titleLine2: "JOURNEY",
-    subtitle: "My overall coding consistency tracked across platforms on Codolio.",
-    summary: "342 day streak",
+    subtitle: "My real aggregate coding profile as maintained on Codolio.",
+    summary: "Live Codolio profile link",
     cta: "VIEW ON CODOLIO",
     href: `https://codolio.com/profile/${USERNAMES.codolio}`,
   },
 ] as const;
 
-const githubScale = ["#1a1a1a", "rgba(99,102,241,0.25)", "rgba(99,102,241,0.50)", "rgba(99,102,241,0.75)", "#6366f1"];
 const leetcodeScale = ["#1a1a1a", "rgba(255,161,22,0.2)", "rgba(255,161,22,0.45)", "rgba(255,161,22,0.7)", "#FFA116"];
-const codolioScale = ["#1a1a1a", "rgba(99,102,241,0.2)", "rgba(99,102,241,0.45)", "rgba(99,102,241,0.7)", "#6366f1"];
 
-function seededRandom(seed: number) {
-  const value = Math.sin(seed) * 10000;
-  return value - Math.floor(value);
+function toNumber(value: unknown) {
+  if (typeof value === "number") return value;
+  if (typeof value === "string") return Number(value) || 0;
+  return 0;
 }
 
-function generateContributionData(seed: number, recentBoost = 0): ContributionDay[][] {
-  const start = new Date();
-  start.setDate(start.getDate() - 52 * 7);
+function calendarToWeeks(calendar?: Record<string, number | string>): ContributionDay[][] | null {
+  if (!calendar) return null;
+
+  const today = new Date();
+  const start = new Date(today);
+  start.setDate(today.getDate() - 52 * 7);
 
   return Array.from({ length: 53 }, (_, weekIndex) =>
     Array.from({ length: 7 }, (_, dayIndex) => {
       const date = new Date(start);
       date.setDate(start.getDate() + weekIndex * 7 + dayIndex);
-      const recency = weekIndex / 52;
-      const activityChance = 0.32 + recentBoost * recency;
-      const roll = seededRandom(seed + weekIndex * 17 + dayIndex * 31);
-      const count = roll > activityChance ? 0 : Math.floor(seededRandom(seed + weekIndex * 43 + dayIndex * 11) * 13);
-      const level = count === 0 ? 0 : count <= 3 ? 1 : count <= 6 ? 2 : count <= 9 ? 3 : 4;
+      const key = Math.floor(date.getTime() / 1000).toString();
+      const count = toNumber(calendar[key]);
+      const level = count === 0 ? 0 : count <= 2 ? 1 : count <= 4 ? 2 : count <= 7 ? 3 : 4;
 
       return {
         date: date.toISOString().slice(0, 10),
@@ -99,10 +116,10 @@ function generateContributionData(seed: number, recentBoost = 0): ContributionDa
   );
 }
 
-function StatCard({ number, label, sub, color, compact = false }: { number: string; label: string; sub?: string; color: string; compact?: boolean }) {
+function StatCard({ number, label, sub, color }: { number: string; label: string; sub?: string; color: string }) {
   return (
     <div className="coding-stat-card">
-      <div style={{ fontFamily: "var(--font-display)", fontSize: compact ? "1.4rem" : "1.8rem", fontWeight: 700, color }}>
+      <div style={{ fontFamily: "var(--font-display)", fontSize: "1.8rem", fontWeight: 700, color }}>
         {number}
       </div>
       <div style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 400, color: "var(--color-text-3)", marginTop: 4 }}>
@@ -117,20 +134,55 @@ function StatCard({ number, label, sub, color, compact = false }: { number: stri
   );
 }
 
-function GithubPanel({ data }: { data: ContributionDay[][] }) {
+function LiveNotice({ children }: { children: string }) {
+  return <p className="coding-live-note">{children}</p>;
+}
+
+function GithubPanel({ stats }: { stats: GitHubStats | null }) {
   return (
-    <ContributionGraph data={data} colorScale={githubScale} />
+    <div>
+      <div className="coding-live-card">
+        <img
+          src={`https://github-readme-activity-graph.vercel.app/graph?username=${USERNAMES.github}&bg_color=161616&color=f0f0f0&line=6366f1&point=818cf8&hide_border=true&theme=github-compact`}
+          alt={`${USERNAMES.github} GitHub activity graph`}
+          style={{ width: "100%", borderRadius: 8, display: "block" }}
+          loading="lazy"
+        />
+      </div>
+      {stats ? (
+        <div className="coding-gfg-stats">
+          <StatCard number={String(stats.publicRepos)} label="Public Repositories" color="#f0f0f0" />
+          <StatCard number={String(stats.followers)} label="Followers" color="#f0f0f0" />
+          <StatCard number={String(stats.publicGists)} label="Public Gists" color="#f0f0f0" />
+        </div>
+      ) : (
+        <LiveNotice>GitHub public profile stats are loading. The graph above is rendered live from GitHub activity data.</LiveNotice>
+      )}
+    </div>
   );
 }
 
-function LeetCodePanel({ data }: { data: ContributionDay[][] }) {
+function LeetCodePanel({ stats }: { stats: LeetCodeStats | null }) {
+  const heatmapData = useMemo(() => calendarToWeeks(stats?.submissionCalendar), [stats]);
+
   return (
     <div className="coding-two-col">
-      <ContributionGraph data={data} colorScale={leetcodeScale} />
+      <div>
+        {heatmapData ? (
+          <ContributionGraph data={heatmapData} colorScale={leetcodeScale} />
+        ) : (
+          <img
+            src={`https://leetcard.jacoblin.cool/${USERNAMES.leetcode}?theme=dark&font=JetBrains+Mono&ext=heatmap&border=0&radius=8`}
+            alt={`${USERNAMES.leetcode} LeetCode profile card`}
+            style={{ width: "100%", borderRadius: 8, display: "block" }}
+            loading="lazy"
+          />
+        )}
+      </div>
       <div className="coding-stats-stack">
-        <StatCard number="1000+" label="Problems Solved" sub="Top 5% globally" color="#FFA116" />
-        <StatCard number="68%" label="Acceptance Rate" color="var(--color-text-1)" />
-        <StatCard number="45 days" label="Current Streak" color="#FFA116" compact />
+        <StatCard number={stats?.totalSolved != null ? String(stats.totalSolved) : "Live"} label="Problems Solved" color="#FFA116" />
+        <StatCard number={stats?.acceptanceRate != null ? `${Math.round(stats.acceptanceRate)}%` : "Live"} label="Acceptance Rate" color="var(--color-text-1)" />
+        <StatCard number={stats?.ranking != null ? `#${stats.ranking}` : "Live"} label="Global Ranking" color="#FFA116" />
       </div>
     </div>
   );
@@ -141,81 +193,77 @@ function GfgPanel() {
     <div>
       <img
         src={`https://geeks-for-geeks-stats-card.vercel.app/?username=${USERNAMES.gfg}`}
-        alt="GeeksForGeeks stats"
+        alt={`${USERNAMES.gfg} GeeksForGeeks stats`}
         style={{ width: "100%", maxWidth: 800, margin: "0 auto", display: "block", borderRadius: 8 }}
         loading="lazy"
       />
-      <div className="coding-gfg-stats">
-        <StatCard number="500+" label="Problems Solved" color="#2F8D46" />
-        <StatCard number="1800+" label="Coding Score" color="#2F8D46" />
-        <StatCard number="Top 10%" label="Monthly Rank" color="#2F8D46" compact />
-      </div>
+      <LiveNotice>GeeksForGeeks does not expose a stable browser-readable JSON API, so this panel renders the live public stats card for the account.</LiveNotice>
     </div>
   );
 }
 
-function CodolioPanel({ data }: { data: ContributionDay[][] }) {
-  const radius = 80;
-  const circumference = 2 * Math.PI * radius;
-  const progress = 342 / 365;
-
+function CodolioPanel() {
   return (
-    <div className="coding-two-col">
+    <div className="coding-codolio-live">
       <div>
-        <h3 className="coding-panel-title">Activity Heatmap</h3>
-        <ContributionGraph data={data} colorScale={codolioScale} />
-      </div>
-      <div className="coding-codolio-panel">
-        <div className="coding-ring">
-          <svg width="190" height="190" viewBox="0 0 190 190" aria-hidden="true">
-            <circle cx="95" cy="95" r={radius} stroke="var(--color-border)" strokeWidth="4" fill="none" />
-            <motion.circle
-              cx="95"
-              cy="95"
-              r={radius}
-              stroke="#6366f1"
-              strokeWidth="4"
-              fill="none"
-              strokeLinecap="round"
-              strokeDasharray={circumference}
-              initial={{ strokeDashoffset: circumference }}
-              whileInView={{ strokeDashoffset: (1 - progress) * circumference }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              style={{ transform: "rotate(-90deg)", transformOrigin: "50% 50%" }}
-            />
-          </svg>
-          <div className="coding-ring-center">
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "2.5rem", fontWeight: 800, color: "var(--color-text-1)", lineHeight: 1 }}>
-              342 <span style={{ fontSize: "1.5rem" }}>🔥</span>
-            </div>
-            <div style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 400, color: "var(--color-text-3)", marginTop: 8 }}>
-              day streak
-            </div>
-          </div>
-        </div>
-        <div className="coding-mini-stats">
-          <StatCard number="1000+" label="Problems" color="#6366f1" compact />
-          <StatCard number="342" label="Day Streak" color="#6366f1" compact />
-          <StatCard number="Top 5%" label="Ranking" color="#6366f1" compact />
-        </div>
-        <a href={`https://codolio.com/profile/${USERNAMES.codolio}`} target="_blank" rel="noreferrer" className="btn-secondary inline-flex items-center justify-center gap-2" style={{ marginTop: 20 }}>
-          View on Codolio
+        <h3 className="coding-panel-title">Codolio Profile</h3>
+        <p className="body" style={{ marginBottom: 20 }}>
+          Codolio aggregates verified coding platform data into one public profile. Their public docs describe the profile as the source of truth for connected platform stats, but they do not publish a browser embeddable stats API.
+        </p>
+        <a href={`https://codolio.com/profile/${USERNAMES.codolio}`} target="_blank" rel="noreferrer" className="btn-secondary inline-flex items-center justify-center gap-2">
+          Open live Codolio profile
           <ExternalLink size={14} />
         </a>
       </div>
+      <iframe
+        title="Codolio profile preview"
+        src={`https://codolio.com/profile/${USERNAMES.codolio}`}
+        className="coding-codolio-frame"
+      />
     </div>
   );
 }
 
 export function CodingJourney() {
   const [activePlatform, setActivePlatform] = useState<PlatformId>("github");
-  const githubData = useMemo(() => generateContributionData(21, 0.12), []);
-  const leetcodeData = useMemo(() => generateContributionData(42, 0.18), []);
-  const codolioData = useMemo(() => generateContributionData(84, 0.26), []);
+  const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
+  const [leetcodeStats, setLeetcodeStats] = useState<LeetCodeStats | null>(null);
   const active = platforms.find((platform) => platform.id === activePlatform) ?? platforms[0];
 
-  const legendScale = activePlatform === "github" ? githubScale : activePlatform === "codolio" ? codolioScale : null;
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch(`https://api.github.com/users/${USERNAMES.github}`)
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data) => {
+        if (!cancelled) {
+          setGithubStats({
+            publicRepos: data.public_repos,
+            followers: data.followers,
+            following: data.following,
+            publicGists: data.public_gists,
+          });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setGithubStats(null);
+      });
+
+    fetch(`https://leetcode-stats.tashif.codes/${USERNAMES.leetcode}`)
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data) => {
+        if (!cancelled && data?.status !== "error") {
+          setLeetcodeStats(data);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setLeetcodeStats(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <section id="coding-journey" className="coding-journey-section">
@@ -272,16 +320,16 @@ export function CodingJourney() {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            {activePlatform === "github" && <GithubPanel data={githubData} />}
-            {activePlatform === "leetcode" && <LeetCodePanel data={leetcodeData} />}
+            {activePlatform === "github" && <GithubPanel stats={githubStats} />}
+            {activePlatform === "leetcode" && <LeetCodePanel stats={leetcodeStats} />}
             {activePlatform === "gfg" && <GfgPanel />}
-            {activePlatform === "codolio" && <CodolioPanel data={codolioData} />}
+            {activePlatform === "codolio" && <CodolioPanel />}
           </motion.div>
         </AnimatePresence>
       </div>
 
       <footer className="coding-journey-footer">
-        <div>{legendScale && <ContributionLegend colorScale={legendScale} />}</div>
+        <div />
         <a
           href={active.href}
           target="_blank"

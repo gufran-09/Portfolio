@@ -14,7 +14,7 @@ const itemVariants = {
 export function Experience() {
   return (
     <section id="experience" className="section bg-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
-      <MarqueeTitle text="EXPERIENCE" direction="left" top="40%" />
+      <MarqueeTitle text="EXPERIENCE" direction="left" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}

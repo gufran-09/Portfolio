@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
-import { TypeAnimation } from "react-type-animation";
-import { ArrowDown, Github, Linkedin, Twitter, Mail, ChevronDown } from "lucide-react";
-import { IDENTITY, TYPEWRITER_STRINGS, HERO_STATS } from "@/lib/portfolio/data";
+import { ChevronDown, Mail } from "lucide-react";
 import { scrollToSection } from "@/lib/portfolio/terminalCommands";
 import { useEffect, useState } from "react";
+import { DeveloperCharacter } from "./DeveloperCharacter";
+import { FloatingIcon } from "./FloatingIcon";
+import { TestimonialCard } from "./TestimonialCard";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.2,
     },
   },
 };
@@ -37,232 +38,382 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-14 overflow-hidden"
-      style={{ background: "var(--color-bg)" }}
+      className="relative min-h-screen flex items-center overflow-hidden"
+      style={{
+        background: "#0a0a0a",
+        paddingTop: 56,
+      }}
     >
-      {/* Background glow */}
+      {/* Radial gradient glow behind character */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 500px 400px at 80% 50%, rgba(99,102,241,0.05) 0%, transparent 70%)",
+            "radial-gradient(ellipse 700px 600px at 75% 60%, rgba(99,102,241,0.12) 0%, transparent 70%)",
         }}
       />
 
-      <div className="container relative grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        {/* Left column */}
+      {/* Concentric orbit rings */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute hidden md:block"
+        style={{
+          top: "50%",
+          left: "72%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 0,
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 1 }}
+        >
+          {/* Ring 1 */}
+          <div
+            style={{
+              position: "absolute",
+              width: 280,
+              height: 280,
+              borderRadius: "50%",
+              border: "1px solid rgba(255,255,255,0.04)",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+          {/* Ring 2 */}
+          <div
+            style={{
+              position: "absolute",
+              width: 420,
+              height: 420,
+              borderRadius: "50%",
+              border: "1px solid rgba(255,255,255,0.04)",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        </motion.div>
+      </div>
+
+      <div
+        className="container relative w-full"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "55% 45%",
+          alignItems: "center",
+          minHeight: "calc(100vh - 56px)",
+        }}
+      >
+        {/* ── Left Column ── */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-6"
+          style={{ display: "flex", flexDirection: "column", gap: 0 }}
         >
-          {/* Availability badge */}
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2"
-            style={{
-              background: "var(--color-success-dim)",
-              border: "1px solid var(--color-success-border)",
-              borderRadius: "999px",
-              padding: "6px 10px",
-            }}
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span
-                className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-success)]"
-                style={{ animation: "pulse-ring 2s ease-out infinite" }}
-              />
-              <span className="relative h-1.5 w-1.5 rounded-full bg-[var(--color-success)]" />
-            </span>
-            <span style={{ color: "var(--color-success)", fontFamily: "var(--font-sans)", fontSize: "13px", fontWeight: 500 }}>
-              Available for work
-            </span>
-          </motion.div>
-
-          {/* Name */}
-          <motion.h1 variants={itemVariants} className="display">
-            Gufran{" "}
+          {/* Row 1 — Greeting */}
+          <motion.div variants={itemVariants}>
             <span
               style={{
-                background: "linear-gradient(180deg, var(--color-text-1) 0%, var(--color-accent) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 400,
+                fontSize: "1.1rem",
+                color: "#a0a0a0",
               }}
             >
-              Ahmed
+              Hey, I am{" "}
             </span>
-          </motion.h1>
-
-          {/* Typewriter */}
-          <motion.div variants={itemVariants} className="h-8">
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "1.375rem", color: "var(--color-text-2)" }}>
-              <TypeAnimation
-                sequence={TYPEWRITER_STRINGS as (string | number)[]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-                cursor={false}
-              />
-              <span
-                className="ml-1 inline-block w-0.5 h-7 animate-pulse"
-                style={{ background: "var(--color-accent)" }}
-              />
-            </div>
+            <span
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                color: "#6366f1",
+              }}
+            >
+              Gufran
+            </span>
           </motion.div>
 
-          {/* Bio */}
+          {/* Row 2 — Main title */}
+          <motion.h1
+            variants={itemVariants}
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(3rem, 7vw, 5.5rem)",
+              color: "#f0f0f0",
+              lineHeight: 1.0,
+              letterSpacing: "-0.03em",
+              margin: "12px 0 0",
+            }}
+          >
+            Full Stack
+            <br />
+            Engineer
+          </motion.h1>
+
+          {/* Row 3 — Bio */}
           <motion.p
             variants={itemVariants}
-            className="body max-w-md"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 400,
+              fontSize: 15,
+              color: "#a0a0a0",
+              lineHeight: 1.7,
+              maxWidth: 440,
+              marginTop: 16,
+            }}
           >
-            I craft scalable web applications and elegant user experiences. Passionate about clean code, great design, and shipping fast.
+            Building scalable web apps and elegant user experiences. Clean code,
+            great design, fast shipping.
           </motion.p>
 
-          {/* CTA buttons */}
-          <motion.div variants={itemVariants} className="flex gap-3 pt-2">
+          {/* Row 4 — Divider */}
+          <motion.div
+            variants={itemVariants}
+            style={{
+              width: 200,
+              height: 1,
+              background: "var(--color-border)",
+              margin: "20px 0",
+            }}
+          />
+
+          {/* Row 5 — CTA buttons */}
+          <motion.div
+            variants={itemVariants}
+            style={{ display: "flex", alignItems: "center", gap: 12 }}
+          >
+            {/* Hire Me pill button */}
             <button
-              onClick={() => scrollToSection("projects")}
-              className="btn-primary inline-flex items-center gap-2"
+              onClick={() => scrollToSection("contact")}
+              style={{
+                background: "#f0f0f0",
+                color: "#0a0a0a",
+                borderRadius: 100,
+                padding: "12px 28px",
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 600,
+                fontSize: 14,
+                border: "none",
+                cursor: "pointer",
+                transition: "background 0.15s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "#d4d4d4")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "#f0f0f0")
+              }
             >
-              View My Work
-              <ArrowDown size={14} />
+              Hire Me
             </button>
-            <a href="#" data-cursor="PDF" className="btn-secondary">
-              Download Resume
+
+            {/* Mail icon button */}
+            <a
+              href="mailto:gufranahmed0921@gmail.com"
+              style={{
+                width: 46,
+                height: 46,
+                borderRadius: "50%",
+                background: "transparent",
+                border: "1px solid var(--color-border)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--color-surface)";
+                e.currentTarget.style.borderColor =
+                  "var(--color-border-hover)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "var(--color-border)";
+              }}
+            >
+              <Mail size={18} color="#f0f0f0" />
             </a>
           </motion.div>
 
-          {/* Social links */}
-          <motion.div variants={itemVariants} className="flex gap-4 pt-4">
-            {[
-              { Icon: Github, href: IDENTITY.github, label: "GitHub" },
-              { Icon: Linkedin, href: IDENTITY.linkedin, label: "LinkedIn" },
-              { Icon: Twitter, href: IDENTITY.twitter, label: "Twitter" },
-              { Icon: Mail, href: `mailto:${IDENTITY.email}`, label: "Email" },
-            ].map(({ Icon, href, label }, i) => (
-              <a
-                key={i}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors"
-                style={{ color: "var(--color-text-3)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
-                aria-label={label}
-              >
-                <Icon size={16} />
-              </a>
-            ))}
-          </motion.div>
+          {/* Row 6 — Testimonial card */}
+          <TestimonialCard />
         </motion.div>
 
-        {/* Right column — Avatar card */}
+        {/* ── Right Column — Character + Icons ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="relative mx-auto md:mx-0 md:ml-auto"
-          style={{ width: "260px", aspectRatio: "1" }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+          className="hero-right-col relative hidden md:flex"
+          style={{
+            alignItems: "flex-end",
+            justifyContent: "center",
+            height: "100%",
+            minHeight: 500,
+            position: "relative",
+          }}
         >
-          {/* Avatar card */}
+          {/* Character */}
           <div
-            className="h-full w-full rounded-[20px] border flex items-center justify-center relative overflow-hidden"
             style={{
-              borderColor: "var(--color-border)",
-              background: "var(--color-surface)",
+              position: "relative",
+              zIndex: 2,
+              width: "65%",
+              maxWidth: 280,
+              marginBottom: 20,
             }}
           >
-            {/* Inner glow */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(circle at 30% 70%, rgba(99,102,241,0.08) 0%, transparent 60%)",
-              }}
-            />
-            <span
-              className="font-display font-bold text-6xl relative z-10"
-              style={{ color: "var(--color-text-4)" }}
-            >
-              {IDENTITY.monogram}
-            </span>
+            <DeveloperCharacter />
           </div>
 
-          {/* Stat pills */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="absolute -top-3 -right-3 card p-3"
-            style={{ padding: "6px 12px" }}
-          >
-            <div className="flex items-center gap-2">
-              <span
-                className="h-1 w-1 rounded-full"
-                style={{ background: "var(--color-accent)" }}
-              />
-              <span className="small">{HERO_STATS[0].value} {HERO_STATS[0].label}</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85 }}
-            className="absolute -bottom-3 -left-3 card p-3"
-            style={{ padding: "6px 12px" }}
-          >
-            <div className="flex items-center gap-2">
-              <span
-                className="h-1 w-1 rounded-full"
-                style={{ background: "var(--color-success)" }}
-              />
-              <span className="small">{HERO_STATS[1].value} {HERO_STATS[1].label}</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            className="absolute -bottom-3 -right-3 card p-3"
-            style={{ padding: "6px 12px" }}
-          >
-            <div className="flex items-center gap-2">
-              <span
-                className="h-1 w-1 rounded-full"
-                style={{ background: "#f59e0b" }}
-              />
-              <span className="small">{HERO_STATS[2].value} {HERO_STATS[2].label}</span>
-            </div>
-          </motion.div>
+          {/* Floating Tech Icons */}
+          <FloatingIcon
+            label="⚛"
+            bg="rgba(97,218,251,0.15)"
+            borderColor="rgba(97,218,251,0.3)"
+            color="#61DAFB"
+            size={44}
+            fontSize="20px"
+            top="12%"
+            left="8%"
+            floatY={[0, -10, 0]}
+            floatDuration={3}
+            entranceDelay={0.7}
+          />
+          <FloatingIcon
+            label="N"
+            bg="rgba(104,160,99,0.15)"
+            borderColor="rgba(104,160,99,0.3)"
+            color="#68A063"
+            size={40}
+            fontSize="16px"
+            top="8%"
+            right="12%"
+            floatY={[0, -8, 0]}
+            floatDuration={3.5}
+            floatDelay={0.5}
+            entranceDelay={0.8}
+          />
+          <FloatingIcon
+            label="TS"
+            bg="rgba(49,120,198,0.15)"
+            borderColor="rgba(49,120,198,0.3)"
+            color="#3178C6"
+            size={40}
+            fontSize="12px"
+            fontWeight={700}
+            top="40%"
+            right="2%"
+            floatY={[0, -12, 0]}
+            floatDuration={2.8}
+            floatDelay={1}
+            entranceDelay={0.9}
+          />
+          <FloatingIcon
+            label="Py"
+            bg="rgba(255,212,59,0.12)"
+            borderColor="rgba(255,212,59,0.25)"
+            color="#FFD43B"
+            size={40}
+            fontSize="13px"
+            fontWeight={700}
+            bottom="15%"
+            right="5%"
+            floatY={[0, -6, 0]}
+            floatDuration={4}
+            floatDelay={0.3}
+            entranceDelay={1.0}
+          />
+          <FloatingIcon
+            label="🐳"
+            bg="rgba(13,183,237,0.12)"
+            borderColor="rgba(13,183,237,0.25)"
+            color="#0DB7ED"
+            size={40}
+            fontSize="18px"
+            top="50%"
+            left="2%"
+            floatY={[0, -9, 0]}
+            floatDuration={3.2}
+            floatDelay={0.8}
+            entranceDelay={1.1}
+          />
+          <FloatingIcon
+            label="AW"
+            bg="rgba(255,153,0,0.12)"
+            borderColor="rgba(255,153,0,0.25)"
+            color="#FF9900"
+            size={40}
+            fontSize="11px"
+            fontWeight={700}
+            bottom="22%"
+            left="10%"
+            floatY={[0, -7, 0]}
+            floatDuration={3.8}
+            floatDelay={1.2}
+            entranceDelay={1.2}
+          />
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      {showScroll && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5 pointer-events-none"
+      {/* ── Scroll Indicator ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showScroll ? 1 : 0 }}
+        transition={{ delay: 1.2, duration: 0.3 }}
+        className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none"
+        style={{ bottom: 28 }}
+      >
+        <span
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 400,
+            fontSize: 10,
+            color: "#3f3f46",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+          }}
         >
-          <span className="label" style={{ color: "var(--color-text-3)" }}>
-            SCROLL
-          </span>
-          <ChevronDown
-            size={14}
-            style={{
-              color: "var(--color-text-3)",
-              animation: "chevron-bounce 1.8s ease-in-out infinite",
-            }}
-          />
-        </motion.div>
-      )}
+          scroll
+        </span>
+        <ChevronDown
+          size={14}
+          style={{
+            color: "#3f3f46",
+            animation: "chevron-bounce 1.8s ease-in-out infinite",
+          }}
+        />
+      </motion.div>
+
+      {/* ── Mobile Layout (shows character above text) ── */}
+      <style>{`
+        @media (max-width: 767px) {
+          #home .container {
+            grid-template-columns: 1fr !important;
+            padding-top: 32px;
+          }
+          .hero-right-col {
+            display: flex !important;
+            order: -1;
+            min-height: 280px !important;
+            justify-content: center !important;
+            align-items: center !important;
+          }
+          .hero-right-col > div:first-child {
+            width: 55% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

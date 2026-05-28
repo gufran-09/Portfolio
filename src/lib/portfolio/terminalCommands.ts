@@ -1,4 +1,4 @@
-import { IDENTITY, SKILLS, EXPERIENCE } from "./data";
+import { IDENTITY, EXPERIENCE } from "./data";
 
 export const JOKES = [
   "Why do programmers prefer dark mode? Because light attracts bugs! 🐛",
@@ -37,7 +37,6 @@ export function runCommand(raw: string): CommandResult {
     const map: Record<string, string> = {
       home: "home",
       about: "about",
-      skills: "skills",
       projects: "projects",
       experience: "experience",
       education: "education",
@@ -66,14 +65,6 @@ export function runCommand(raw: string): CommandResult {
           { text: `React · Node.js · Java · TypeScript`, color: "muted" },
         ],
       };
-    case "skills": {
-      const out: Line[] = [];
-      for (const [cat, v] of Object.entries(SKILLS)) {
-        out.push({ text: cat, color: "brand" });
-        out.push({ text: "  " + v.items.join(", "), color: "muted" });
-      }
-      return { lines: out };
-    }
     case "experience": {
       const top = EXPERIENCE[0];
       return {
@@ -143,7 +134,7 @@ export function runCommand(raw: string): CommandResult {
           { text: "Available commands:", color: "brand" },
           { text: "  goto <section>   Navigate to a section" },
           { text: "  whoami           About me" },
-          { text: "  skills           List my technical skills" },
+          
           { text: "  experience       Current role" },
           { text: "  social           My social links" },
           { text: "  status           Availability" },

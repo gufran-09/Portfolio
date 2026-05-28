@@ -466,6 +466,78 @@
   }
 }
 
+@keyframes eq1 {
+
+  0%,
+  100% {
+    height: 5px;
+  }
+
+  50% {
+    height: 18px;
+  }
+}
+
+@keyframes eq2 {
+
+  0%,
+  100% {
+    height: 10px;
+  }
+
+  50% {
+    height: 22px;
+  }
+}
+
+@keyframes eq3 {
+
+  0%,
+  100% {
+    height: 7px;
+  }
+
+  50% {
+    height: 16px;
+  }
+}
+
+@keyframes eq4 {
+
+  0%,
+  100% {
+    height: 14px;
+  }
+
+  40% {
+    height: 4px;
+  }
+}
+
+@keyframes eq5 {
+
+  0%,
+  100% {
+    height: 6px;
+  }
+
+  60% {
+    height: 20px;
+  }
+}
+
+@keyframes character-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 @keyframes count-up {
   from {
     opacity: 0;
@@ -569,6 +641,11 @@
 .marquee-span::after {
   content: none;
   /* bullets are inline in the text string */
+}
+
+/* Extra bottom padding for sections with a marquee strip */
+.section-has-marquee {
+  padding-bottom: calc(128px + 3rem) !important;
 }
 
 .ask-ai-traffic-dot {
@@ -720,6 +797,7 @@
 }
 
 @keyframes ask-ai-typing {
+
   0%,
   100% {
     transform: translateY(0);
@@ -951,6 +1029,38 @@
   margin-bottom: 12px;
 }
 
+.coding-live-note {
+  max-width: 760px;
+  margin: 20px auto 0;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-text-3);
+  text-align: center;
+}
+
+.coding-live-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.coding-codolio-live {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.coding-codolio-frame {
+  width: 100%;
+  min-height: 420px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
 .coding-codolio-panel {
   display: flex;
   flex-direction: column;
@@ -989,11 +1099,11 @@
   gap: 24px;
 }
 
-.coding-journey-footer > div {
+.coding-journey-footer>div {
   flex: 1;
 }
 
-.coding-journey-footer > div:last-child {
+.coding-journey-footer>div:last-child {
   text-align: right;
 }
 
@@ -1079,6 +1189,14 @@
     grid-template-columns: 1fr;
   }
 
+  .coding-codolio-live {
+    grid-template-columns: 1fr;
+  }
+
+  .coding-codolio-frame {
+    min-height: 360px;
+  }
+
   .coding-gfg-stats,
   .coding-mini-stats {
     grid-template-columns: 1fr;
@@ -1091,8 +1209,8 @@
     text-align: center;
   }
 
-  .coding-journey-footer > div,
-  .coding-journey-footer > div:last-child {
+  .coding-journey-footer>div,
+  .coding-journey-footer>div:last-child {
     text-align: center;
   }
 

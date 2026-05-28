@@ -113,14 +113,7 @@ export const SKILLS = {
     items: ["Git", "Figma", "Postman", "VS Code", "IntelliJ", "Jira"],
   },
 };
-
-export const SKILL_BARS = [
-  { label: "React", value: 95 },
-  { label: "TypeScript", value: 88 },
-  { label: "Next.js", value: 85 },
-  { label: "Java / Spring", value: 82 },
-  { label: "System Design", value: 78 },
-];
+export const METHODOLOGY = [
 
 export const METHODOLOGY = [
   {
@@ -330,7 +323,6 @@ export const TROPHIES = [
 export const SECTIONS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
   { id: "methodology", label: "Methodology" },
   { id: "projects", label: "Projects" },
   { id: "experience", label: "Experience" },

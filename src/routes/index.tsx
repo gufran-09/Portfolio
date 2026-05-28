@@ -4,7 +4,6 @@ import { ReadingProgress } from "@/components/portfolio/ReadingProgress";
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { About } from "@/components/portfolio/About";
-import { Skills } from "@/components/portfolio/Skills";
 import { Methodology } from "@/components/portfolio/Methodology";
 import { Projects } from "@/components/portfolio/Projects";
 import { Experience } from "@/components/portfolio/Experience";
@@ -46,7 +45,6 @@ function Index() {
       <main>
         <Hero />
         <About />
-        <Skills />
         <Methodology />
         <Projects />
         <Experience />
