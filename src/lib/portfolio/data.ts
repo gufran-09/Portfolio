@@ -114,8 +114,6 @@ export const SKILLS = {
   },
 };
 export const METHODOLOGY = [
-
-export const METHODOLOGY = [
   {
     icon: "Search",
     title: "Discover",

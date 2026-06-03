@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { FloatingDock } from "@/components/portfolio/FloatingDock";
 import { projectsData } from "@/components/portfolio/projectsData";
 import { CustomCursor } from "@/components/portfolio/CustomCursor";
 
@@ -98,6 +100,26 @@ function ProjectPage() {
 
 // Inline card component for the grid
 function ProjectGridCard({ project }: { project: typeof projectsData[0] }) {
+  const techStackItems = project.stack.map((tech) => ({
+    title: tech,
+    icon: (
+      <span
+        style={{
+          fontSize: "8px",
+          fontWeight: 700,
+          letterSpacing: "0.08em",
+          color: "var(--color-text-1)",
+          fontFamily: "Inter",
+        }}
+      >
+        {tech
+          .replace(/[^a-zA-Z0-9]/g, "")
+          .slice(0, 2)
+          .toUpperCase()}
+      </span>
+    ),
+  }));
+
   const renderMockup = () => {
     const browserChrome = (
       <div style={{ height: '28px', background: '#111113', borderRadius: '10px 10px 0 0', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -345,31 +367,25 @@ function ProjectGridCard({ project }: { project: typeof projectsData[0] }) {
         </div>
       </div>
 
-      {/* Tech Tags */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-        {project.stack.map(tech => (
-          <div key={tech} style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.05)',
-            borderRadius: '6px',
-            padding: '4px 10px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontFamily: 'Inter',
-            fontWeight: 600,
-            fontSize: '9px',
-            color: 'var(--color-text-2)',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase'
-          }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: project.accentColor, opacity: 0.2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: '8px', color: project.accentColor, opacity: 1, position: 'absolute' }}>{tech.substring(0, 2)}</span>
-            </div>
-            {tech}
-          </div>
-        ))}
-      </div>
+      {/* Tech Stack */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}
+      >
+        <span style={{
+          fontFamily: 'Inter',
+          fontWeight: 600,
+          fontSize: '10px',
+          letterSpacing: '0.2em',
+          color: 'var(--color-text-3)',
+          textTransform: 'uppercase'
+        }}>
+          Tech Stack
+        </span>
+        <FloatingDock items={techStackItems} />
+      </motion.div>
     </div>
   );
 }

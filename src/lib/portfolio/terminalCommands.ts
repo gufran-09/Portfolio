@@ -134,7 +134,6 @@ export function runCommand(raw: string): CommandResult {
           { text: "Available commands:", color: "brand" },
           { text: "  goto <section>   Navigate to a section" },
           { text: "  whoami           About me" },
-          
           { text: "  experience       Current role" },
           { text: "  social           My social links" },
           { text: "  status           Availability" },
