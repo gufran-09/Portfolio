@@ -43,7 +43,11 @@ export function Methodology() {
     <section
       id="methodology"
       className="section bg-section"
-      style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        paddingBottom: "calc(128px + 3rem)",
+      }}
     >
       <MarqueeTitle text="HOW I WORK" direction="left" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
@@ -72,13 +76,19 @@ export function Methodology() {
               }}
               className="py-12 px-10"
               style={{
-                borderRight: i < steps.length - 1 ? "1px solid var(--color-border)" : "none",
+                borderRight:
+                  i < steps.length - 1
+                    ? "1px solid var(--color-border)"
+                    : "none",
               }}
             >
               <div className="h1 mb-6" style={{ color: "var(--color-text-4)" }}>
                 {step.num}
               </div>
-              <step.Icon size={20} style={{ color: "var(--color-accent)", marginBottom: "24px" }} />
+              <step.Icon
+                size={20}
+                style={{ color: "var(--color-accent)", marginBottom: "24px" }}
+              />
               <h3 className="h3 mb-3">{step.title}</h3>
               <p className="body">{step.desc}</p>
             </motion.div>

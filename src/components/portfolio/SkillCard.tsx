@@ -10,7 +10,14 @@ type SkillCardProps = {
   buttonRef: (node: HTMLButtonElement | null) => void;
 };
 
-export function SkillCard({ skill, selected, index, onSelect, onNavigate, buttonRef }: SkillCardProps) {
+export function SkillCard({
+  skill,
+  selected,
+  index,
+  onSelect,
+  onNavigate,
+  buttonRef,
+}: SkillCardProps) {
   const levelStyles = LEVEL_BADGE_STYLES[skill.level];
 
   return (
@@ -38,7 +45,9 @@ export function SkillCard({ skill, selected, index, onSelect, onNavigate, button
       aria-pressed={selected}
       className="group relative flex items-center gap-3 overflow-hidden rounded-[10px] border px-4 py-3 text-left transition-all"
       style={{
-        background: selected ? "rgba(99,102,241,0.04)" : "var(--color-surface-2)",
+        background: selected
+          ? "rgba(99,102,241,0.04)"
+          : "var(--color-surface-2)",
         borderColor: selected ? "rgba(99,102,241,0.4)" : "var(--color-border)",
       }}
     >
@@ -53,10 +62,19 @@ export function SkillCard({ skill, selected, index, onSelect, onNavigate, button
         style={{
           background: skill.iconBg,
           color: skill.iconColor,
-          boxShadow: selected ? "inset 0 0 0 1px rgba(255,255,255,0.04)" : "none",
+          boxShadow: selected
+            ? "inset 0 0 0 1px rgba(255,255,255,0.04)"
+            : "none",
         }}
       >
-        <span style={{ fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 700, lineHeight: 1 }}>
+        <span
+          style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "11px",
+            fontWeight: 700,
+            lineHeight: 1,
+          }}
+        >
           {skill.icon}
         </span>
       </span>

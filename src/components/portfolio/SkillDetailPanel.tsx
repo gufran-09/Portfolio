@@ -7,7 +7,10 @@ type SkillDetailPanelProps = {
   onProjectClick: (projectName: string) => void;
 };
 
-export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProps) {
+export function SkillDetailPanel({
+  skill,
+  onProjectClick,
+}: SkillDetailPanelProps) {
   return (
     <div
       className="relative overflow-hidden rounded-[16px] border bg-[var(--color-surface)]"
@@ -27,7 +30,14 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
                 className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[12px]"
                 style={{ background: skill.iconBg, color: skill.iconColor }}
               >
-                <span style={{ fontFamily: "var(--font-sans)", fontSize: "22px", fontWeight: 700, lineHeight: 1 }}>
+                <span
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "22px",
+                    fontWeight: 700,
+                    lineHeight: 1,
+                  }}
+                >
                   {skill.icon}
                 </span>
               </span>
@@ -35,7 +45,12 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
               <div className="min-w-0">
                 <h3
                   className="truncate"
-                  style={{ fontFamily: "var(--font-display)", fontSize: "1.4rem", fontWeight: 700, color: "var(--color-text-1)" }}
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "1.4rem",
+                    fontWeight: 700,
+                    color: "var(--color-text-1)",
+                  }}
                 >
                   {skill.name}
                 </h3>
@@ -55,20 +70,48 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
               </div>
             </div>
 
-            <div className="my-5 border-t" style={{ borderColor: "var(--color-border)", marginLeft: "24px", marginRight: "24px" }} />
+            <div
+              className="my-5 border-t"
+              style={{
+                borderColor: "var(--color-border)",
+                marginLeft: "24px",
+                marginRight: "24px",
+              }}
+            />
 
             <div className="px-6">
-              <div className="grid grid-cols-3 overflow-hidden rounded-[12px]" style={{ background: "var(--color-border)" }}>
+              <div
+                className="grid grid-cols-3 overflow-hidden rounded-[12px]"
+                style={{ background: "var(--color-border)" }}
+              >
                 {[
                   { value: `${skill.years}`, label: "Years Used" },
                   { value: skill.projects, label: "Projects" },
                   { value: skill.level, label: "Level" },
                 ].map((stat) => (
-                  <div key={stat.label} className="bg-[var(--color-surface)] px-3 py-4 text-center">
-                    <div style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", fontWeight: 700, color: "var(--color-text-1)" }}>
+                  <div
+                    key={stat.label}
+                    className="bg-[var(--color-surface)] px-3 py-4 text-center"
+                  >
+                    <div
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "1.3rem",
+                        fontWeight: 700,
+                        color: "var(--color-text-1)",
+                      }}
+                    >
                       {stat.value}
                     </div>
-                    <div style={{ marginTop: "4px", fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400, color: "var(--color-text-3)" }}>
+                    <div
+                      style={{
+                        marginTop: "4px",
+                        fontFamily: "var(--font-sans)",
+                        fontSize: "11px",
+                        fontWeight: 400,
+                        color: "var(--color-text-3)",
+                      }}
+                    >
                       {stat.label}
                     </div>
                   </div>
@@ -77,7 +120,16 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
             </div>
 
             <div className="px-6 pt-5">
-              <div className="mb-3" style={{ fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.1em", color: "var(--color-text-3)" }}>
+              <div
+                className="mb-3"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  color: "var(--color-text-3)",
+                }}
+              >
                 WHAT I BUILD WITH IT
               </div>
               <div className="flex flex-wrap gap-2">
@@ -101,7 +153,16 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
             </div>
 
             <div className="px-6 pt-4">
-              <div className="mb-3" style={{ fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.1em", color: "var(--color-text-3)" }}>
+              <div
+                className="mb-3"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  color: "var(--color-text-3)",
+                }}
+              >
                 USED IN PROJECTS
               </div>
               <div className="flex flex-wrap gap-2">
@@ -116,16 +177,18 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
                       borderColor: "var(--color-border)",
                       color: "var(--color-text-2)",
                       fontFamily: "var(--font-sans)",
-                      fontSize: "12px", 
+                      fontSize: "12px",
                       fontWeight: 500,
                     }}
                     onMouseEnter={(event) => {
                       event.currentTarget.style.color = "var(--color-text-1)";
-                      event.currentTarget.style.borderColor = "var(--color-border-hover)";
+                      event.currentTarget.style.borderColor =
+                        "var(--color-border-hover)";
                     }}
                     onMouseLeave={(event) => {
                       event.currentTarget.style.color = "var(--color-text-2)";
-                      event.currentTarget.style.borderColor = "var(--color-border)";
+                      event.currentTarget.style.borderColor =
+                        "var(--color-border)";
                     }}
                   >
                     <span>{projectName}</span>
@@ -141,7 +204,12 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 transition-colors"
-                style={{ color: "var(--color-text-3)", fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 400 }}
+                style={{
+                  color: "var(--color-text-3)",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "12px",
+                  fontWeight: 400,
+                }}
                 onMouseEnter={(event) => {
                   event.currentTarget.style.color = "var(--color-text-1)";
                 }}
@@ -167,8 +235,19 @@ export function SkillDetailPanel({ skill, onProjectClick }: SkillDetailPanelProp
               className="max-w-[300px] rounded-[12px] border border-dashed px-10 py-10 text-center"
               style={{ borderColor: "var(--color-border)" }}
             >
-              <MousePointerClick size={32} style={{ color: "var(--color-text-4)", margin: "0 auto" }} />
-              <p style={{ marginTop: "12px", fontFamily: "var(--font-sans)", fontSize: "14px", fontWeight: 400, color: "var(--color-text-3)" }}>
+              <MousePointerClick
+                size={32}
+                style={{ color: "var(--color-text-4)", margin: "0 auto" }}
+              />
+              <p
+                style={{
+                  marginTop: "12px",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "14px",
+                  fontWeight: 400,
+                  color: "var(--color-text-3)",
+                }}
+              >
                 Click any skill to explore
               </p>
             </div>

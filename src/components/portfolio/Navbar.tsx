@@ -1,6 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, User, Code2, GraduationCap, Trophy, Mail } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  User,
+  Code2,
+  GraduationCap,
+  Trophy,
+  Mail,
+} from "lucide-react";
 import { scrollToSection } from "@/lib/portfolio/terminalCommands";
 import { useAmbientPlayer } from "./AmbientPlayer";
 
@@ -31,7 +40,10 @@ export function Navbar({ active }: { active: string }) {
   useEffect(() => {
     if (!dropdownOpen) return;
     const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         setDropdownOpen(false);
       }
     };
@@ -48,7 +60,7 @@ export function Navbar({ active }: { active: string }) {
 
   const isLinkActive = (id: string) => active === id;
   const isDropdownItemActive = DROPDOWN_ITEMS.some(
-    (item) => "id" in item && isLinkActive(item.id as string)
+    (item) => "id" in item && isLinkActive(item.id as string),
   );
 
   return (
@@ -93,7 +105,10 @@ export function Navbar({ active }: { active: string }) {
         </button>
 
         {/* ── CENTER: Pill Navigation ── */}
-        <div className="hidden md:flex items-center" style={{ position: "relative" }}>
+        <div
+          className="hidden md:flex items-center"
+          style={{ position: "relative" }}
+        >
           <div
             style={{
               background: "var(--color-surface)",
@@ -115,8 +130,12 @@ export function Navbar({ active }: { active: string }) {
                   fontFamily: "'Inter', sans-serif",
                   fontWeight: 500,
                   fontSize: 13,
-                  color: isLinkActive(link.id) ? "#f0f0f0" : "var(--color-text-3)",
-                  background: isLinkActive(link.id) ? "var(--color-surface-2)" : "transparent",
+                  color: isLinkActive(link.id)
+                    ? "#f0f0f0"
+                    : "var(--color-text-3)",
+                  background: isLinkActive(link.id)
+                    ? "var(--color-surface-2)"
+                    : "transparent",
                   border: isLinkActive(link.id)
                     ? "1px solid var(--color-border)"
                     : "1px solid transparent",
@@ -306,7 +325,9 @@ export function Navbar({ active }: { active: string }) {
           <div style={{ position: "relative" }}>
             <button
               onClick={toggle}
-              aria-label={playing ? "Pause ambient music" : "Play ambient music"}
+              aria-label={
+                playing ? "Pause ambient music" : "Play ambient music"
+              }
               onMouseEnter={() => setEqTooltip(true)}
               onMouseLeave={() => setEqTooltip(false)}
               style={{
@@ -323,7 +344,8 @@ export function Navbar({ active }: { active: string }) {
                 transition: "border-color 0.15s ease",
               }}
               onMouseOver={(e) =>
-                (e.currentTarget.style.borderColor = "var(--color-border-hover)")
+                (e.currentTarget.style.borderColor =
+                  "var(--color-border-hover)")
               }
               onMouseOut={(e) =>
                 (e.currentTarget.style.borderColor = "var(--color-border)")
@@ -463,7 +485,11 @@ export function Navbar({ active }: { active: string }) {
                 ...DROPDOWN_ITEMS.filter((item) => !("divider" in item)),
               ].map((item) => {
                 if ("divider" in item) return null;
-                const link = item as { id: string; label: string; hasAiDot?: boolean };
+                const link = item as {
+                  id: string;
+                  label: string;
+                  hasAiDot?: boolean;
+                };
                 return (
                   <button
                     key={link.id}

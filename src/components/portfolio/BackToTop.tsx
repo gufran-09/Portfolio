@@ -30,8 +30,12 @@ export function BackToTop() {
             border: "1px solid var(--color-border)",
             color: "var(--color-text-2)",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-2)")}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.color = "var(--color-text-1)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.color = "var(--color-text-2)")
+          }
           aria-label="Back to top"
         >
           <ChevronUp size={16} />

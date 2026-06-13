@@ -17,6 +17,7 @@ import { Terminal } from "@/components/portfolio/Terminal";
 import { BackToTop } from "@/components/portfolio/BackToTop";
 import { useActiveSection } from "@/lib/portfolio/useActiveSection";
 import { IDENTITY } from "@/lib/portfolio/data";
+import AnimatedBackground from "@/components/portfolio/animated-background";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,25 +39,31 @@ export const Route = createFileRoute("/")({
 function Index() {
   const active = useActiveSection();
   return (
-    <div className="dark min-h-screen" style={{ background: "var(--color-bg)", color: "var(--color-text-1)" }}>
-      <CustomCursor />
-      <ReadingProgress />
-      <Navbar active={active} />
-      <main>
-        <Hero />
-        <About />
-        <Methodology />
-        <Projects />
-        <Experience />
-        <Education />
-        <Achievements />
-        <CodingJourney />
-        <AskAI />
-        <Contact />
-      </main>
-      <Footer />
-      <BackToTop />
-      <Terminal />
+    <div
+      className="dark min-h-screen relative"
+      style={{ color: "var(--color-text-1)" }}
+    >
+      <AnimatedBackground />
+      <div className="canvas-overlay-mode relative z-10">
+        <CustomCursor />
+        <ReadingProgress />
+        <Navbar active={active} />
+        <main>
+          <Hero />
+          <About />
+          <Methodology />
+          <Projects />
+          <Experience />
+          <Education />
+          <Achievements />
+          <CodingJourney />
+          <AskAI />
+          <Contact />
+        </main>
+        <Footer />
+        <BackToTop />
+        <Terminal />
+      </div>
     </div>
   );
 }

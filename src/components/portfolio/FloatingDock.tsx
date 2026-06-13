@@ -1,4 +1,11 @@
-import { AnimatePresence, motion, useAnimation, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useAnimation,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 type FloatingDockItem = {
@@ -11,7 +18,10 @@ type FloatingDockProps = {
   desktopClassName?: string;
 };
 
-export const FloatingDock = ({ items, desktopClassName }: FloatingDockProps) => {
+export const FloatingDock = ({
+  items,
+  desktopClassName,
+}: FloatingDockProps) => {
   return <FloatingDockDesktop items={items} className={desktopClassName} />;
 };
 
@@ -70,7 +80,10 @@ const FloatingDockDesktop = ({
         ))}
       </motion.div>
       {showHint && (
-        <div className="z-10 absolute t-0 w-full h-full pointer-events-none" onMouseEnter={() => setShowHint(false)}>
+        <div
+          className="z-10 absolute t-0 w-full h-full pointer-events-none"
+          onMouseEnter={() => setShowHint(false)}
+        >
           <div className="relative w-full h-full flex items-center justify-center">
             <motion.div
               className="w-5 h-5 border-2 left-[50%] top-0 border-foreground rounded-full"
@@ -103,13 +116,37 @@ function IconContainer({
 
   const widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
   const heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  const widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-  const heightTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
+  const widthTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  );
+  const heightTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [20, 40, 20],
+  );
 
-  const width = useSpring(widthTransform, { mass: 0.1, stiffness: 150, damping: 12 });
-  const height = useSpring(heightTransform, { mass: 0.1, stiffness: 150, damping: 12 });
-  const widthIcon = useSpring(widthTransformIcon, { mass: 0.1, stiffness: 150, damping: 12 });
-  const heightIcon = useSpring(heightTransformIcon, { mass: 0.1, stiffness: 150, damping: 12 });
+  const width = useSpring(widthTransform, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
+  const height = useSpring(heightTransform, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
+  const widthIcon = useSpring(widthTransformIcon, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
+  const heightIcon = useSpring(heightTransformIcon, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
 
   const [hovered, setHovered] = useState(false);
 
@@ -133,7 +170,10 @@ function IconContainer({
           </motion.div>
         )}
       </AnimatePresence>
-      <motion.div style={{ width: widthIcon, height: heightIcon }} className="flex items-center justify-center">
+      <motion.div
+        style={{ width: widthIcon, height: heightIcon }}
+        className="flex items-center justify-center"
+      >
         {icon}
       </motion.div>
     </motion.div>

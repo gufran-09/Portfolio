@@ -13,7 +13,13 @@ export function DeveloperCharacter() {
       >
         <defs>
           <filter id="char-shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="6" stdDeviation="10" floodColor="#000" floodOpacity="0.35" />
+            <feDropShadow
+              dx="0"
+              dy="6"
+              stdDeviation="10"
+              floodColor="#000"
+              floodOpacity="0.35"
+            />
           </filter>
           <linearGradient id="screen-glow" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#6366f1" stopOpacity="0.35" />
@@ -95,14 +101,23 @@ export function DeveloperCharacter() {
             fill="url(#jacket-lapel)"
           />
           {/* Lapel fold lines */}
-          <path d="M115,275 L108,318" stroke="#2d2d4a" strokeWidth="0.8" fill="none" opacity="0.6" />
-          <path d="M185,275 L192,318" stroke="#2d2d4a" strokeWidth="0.8" fill="none" opacity="0.6" />
+          <path
+            d="M115,275 L108,318"
+            stroke="#2d2d4a"
+            strokeWidth="0.8"
+            fill="none"
+            opacity="0.6"
+          />
+          <path
+            d="M185,275 L192,318"
+            stroke="#2d2d4a"
+            strokeWidth="0.8"
+            fill="none"
+            opacity="0.6"
+          />
 
           {/* Hoodie visible inside jacket — V-neck area */}
-          <path
-            d="M132,272 L150,310 L168,272 Z"
-            fill="url(#hoodie-inner)"
-          />
+          <path d="M132,272 L150,310 L168,272 Z" fill="url(#hoodie-inner)" />
           {/* Hoodie collar/hood visible behind neck */}
           <path
             d="M122,265 Q130,255 150,252 Q170,255 178,265 Q175,270 170,272 L130,272 Q125,270 122,265 Z"
@@ -124,19 +139,53 @@ export function DeveloperCharacter() {
           <circle cx="157" cy="295" r="0.6" fill="#a0a0a0" opacity="0.25" />
 
           {/* Jacket button */}
-          <circle cx="150" cy="345" r="3" fill="#2a2a45" stroke="#3a3a5a" strokeWidth="0.5" />
-          <circle cx="150" cy="375" r="3" fill="#2a2a45" stroke="#3a3a5a" strokeWidth="0.5" />
+          <circle
+            cx="150"
+            cy="345"
+            r="3"
+            fill="#2a2a45"
+            stroke="#3a3a5a"
+            strokeWidth="0.5"
+          />
+          <circle
+            cx="150"
+            cy="375"
+            r="3"
+            fill="#2a2a45"
+            stroke="#3a3a5a"
+            strokeWidth="0.5"
+          />
 
           {/* Jacket pocket lines */}
-          <path d="M105,370 Q110,372 125,372" stroke="#2a2a45" strokeWidth="1" fill="none" opacity="0.5" />
-          <path d="M195,370 Q190,372 175,372" stroke="#2a2a45" strokeWidth="1" fill="none" opacity="0.5" />
+          <path
+            d="M105,370 Q110,372 125,372"
+            stroke="#2a2a45"
+            strokeWidth="1"
+            fill="none"
+            opacity="0.5"
+          />
+          <path
+            d="M195,370 Q190,372 175,372"
+            stroke="#2a2a45"
+            strokeWidth="1"
+            fill="none"
+            opacity="0.5"
+          />
         </g>
 
         {/* ══════════════════════════════════════════
             Layer 2: Neck
             ══════════════════════════════════════════ */}
         <rect x="137" y="248" width="26" height="18" rx="6" fill="#d4956a" />
-        <rect x="137" y="258" width="26" height="7" rx="3" fill="#c07850" opacity="0.25" />
+        <rect
+          x="137"
+          y="258"
+          width="26"
+          height="7"
+          rx="3"
+          fill="#c07850"
+          opacity="0.25"
+        />
 
         {/* ══════════════════════════════════════════
             Layer 3: Head
@@ -161,7 +210,13 @@ export function DeveloperCharacter() {
           <circle cx="132" cy="193" r="3.2" fill="#1a0f08" />
           <circle cx="134" cy="190" r="2" fill="#fff" opacity="0.85" />
           <circle cx="129" cy="195" r="0.8" fill="#fff" opacity="0.4" />
-          <path d="M117,186 Q130,179 144,186" stroke="#c07850" strokeWidth="0.8" fill="none" opacity="0.2" />
+          <path
+            d="M117,186 Q130,179 144,186"
+            stroke="#c07850"
+            strokeWidth="0.8"
+            fill="none"
+            opacity="0.2"
+          />
         </g>
         {/* Right eye */}
         <g>
@@ -170,26 +225,78 @@ export function DeveloperCharacter() {
           <circle cx="172" cy="193" r="3.2" fill="#1a0f08" />
           <circle cx="174" cy="190" r="2" fill="#fff" opacity="0.85" />
           <circle cx="169" cy="195" r="0.8" fill="#fff" opacity="0.4" />
-          <path d="M156,186 Q170,179 184,186" stroke="#c07850" strokeWidth="0.8" fill="none" opacity="0.2" />
+          <path
+            d="M156,186 Q170,179 184,186"
+            stroke="#c07850"
+            strokeWidth="0.8"
+            fill="none"
+            opacity="0.2"
+          />
         </g>
 
         {/* Eyebrows — slightly thick, well-groomed */}
-        <path d="M115,176 Q123,170 132,172 Q140,174 144,178" stroke="#1a1008" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-        <path d="M156,178 Q160,174 168,172 Q177,170 185,176" stroke="#1a1008" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+        <path
+          d="M115,176 Q123,170 132,172 Q140,174 144,178"
+          stroke="#1a1008"
+          strokeWidth="2.8"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path
+          d="M156,178 Q160,174 168,172 Q177,170 185,176"
+          stroke="#1a1008"
+          strokeWidth="2.8"
+          fill="none"
+          strokeLinecap="round"
+        />
 
         {/* Nose */}
-        <path d="M148,205 Q150,215 153,205" stroke="#c07850" strokeWidth="1.5" fill="none" opacity="0.45" strokeLinecap="round" />
-        <path d="M144,214 Q150,218 156,214" stroke="#c07850" strokeWidth="1" fill="none" opacity="0.25" strokeLinecap="round" />
+        <path
+          d="M148,205 Q150,215 153,205"
+          stroke="#c07850"
+          strokeWidth="1.5"
+          fill="none"
+          opacity="0.45"
+          strokeLinecap="round"
+        />
+        <path
+          d="M144,214 Q150,218 156,214"
+          stroke="#c07850"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.25"
+          strokeLinecap="round"
+        />
 
         {/* Mouth — confident smile */}
-        <path d="M136,230 Q143,240 150,241 Q157,240 164,230" stroke="#c07850" strokeWidth="2" fill="none" strokeLinecap="round" />
-        <ellipse cx="150" cy="237" rx="9" ry="3.5" fill="#c07850" opacity="0.25" />
+        <path
+          d="M136,230 Q143,240 150,241 Q157,240 164,230"
+          stroke="#c07850"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <ellipse
+          cx="150"
+          cy="237"
+          rx="9"
+          ry="3.5"
+          fill="#c07850"
+          opacity="0.25"
+        />
 
         {/* Ears */}
         <ellipse cx="90" cy="197" rx="8" ry="14" fill="#d4956a" />
         <ellipse cx="90" cy="197" rx="4" ry="8" fill="#c07850" opacity="0.25" />
         <ellipse cx="210" cy="197" rx="8" ry="14" fill="#d4956a" />
-        <ellipse cx="210" cy="197" rx="4" ry="8" fill="#c07850" opacity="0.25" />
+        <ellipse
+          cx="210"
+          cy="197"
+          rx="4"
+          ry="8"
+          fill="#c07850"
+          opacity="0.25"
+        />
 
         {/* ══════════════════════════════════════════
             Layer 5: HAIR — Modern Pompadour / Quiff
@@ -203,8 +310,20 @@ export function DeveloperCharacter() {
           fill="url(#hair-side)"
         />
         {/* Side fade texture — left */}
-        <path d="M90,180 Q91,190 90,198" stroke="#1a1008" strokeWidth="0.6" fill="none" opacity="0.4" />
-        <path d="M92,178 Q92,188 91,196" stroke="#1a1008" strokeWidth="0.5" fill="none" opacity="0.3" />
+        <path
+          d="M90,180 Q91,190 90,198"
+          stroke="#1a1008"
+          strokeWidth="0.6"
+          fill="none"
+          opacity="0.4"
+        />
+        <path
+          d="M92,178 Q92,188 91,196"
+          stroke="#1a1008"
+          strokeWidth="0.5"
+          fill="none"
+          opacity="0.3"
+        />
 
         {/* Side hair — short/faded, right */}
         <path
@@ -212,8 +331,20 @@ export function DeveloperCharacter() {
           fill="url(#hair-side)"
         />
         {/* Side fade texture — right */}
-        <path d="M210,180 Q209,190 210,198" stroke="#1a1008" strokeWidth="0.6" fill="none" opacity="0.4" />
-        <path d="M208,178 Q208,188 209,196" stroke="#1a1008" strokeWidth="0.5" fill="none" opacity="0.3" />
+        <path
+          d="M210,180 Q209,190 210,198"
+          stroke="#1a1008"
+          strokeWidth="0.6"
+          fill="none"
+          opacity="0.4"
+        />
+        <path
+          d="M208,178 Q208,188 209,196"
+          stroke="#1a1008"
+          strokeWidth="0.5"
+          fill="none"
+          opacity="0.3"
+        />
 
         {/* Main hair mass — pompadour base covering top of head */}
         <path
@@ -276,16 +407,64 @@ export function DeveloperCharacter() {
         />
 
         {/* Hair strand detail lines — swept back direction */}
-        <path d="M115,130 Q135,108 158,105" stroke="#3d2a16" strokeWidth="1" fill="none" opacity="0.45" />
-        <path d="M110,138 Q130,115 155,110" stroke="#2d1f0e" strokeWidth="0.8" fill="none" opacity="0.4" />
-        <path d="M120,122 Q140,102 165,100" stroke="#3d2a16" strokeWidth="0.7" fill="none" opacity="0.35" />
-        <path d="M108,145 Q128,120 150,115" stroke="#2d1f0e" strokeWidth="0.6" fill="none" opacity="0.3" />
-        <path d="M125,118 Q145,98 170,96" stroke="#3d2a16" strokeWidth="0.6" fill="none" opacity="0.3" />
-        <path d="M118,128 Q142,106 168,104" stroke="#2d1f0e" strokeWidth="0.5" fill="none" opacity="0.25" />
+        <path
+          d="M115,130 Q135,108 158,105"
+          stroke="#3d2a16"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.45"
+        />
+        <path
+          d="M110,138 Q130,115 155,110"
+          stroke="#2d1f0e"
+          strokeWidth="0.8"
+          fill="none"
+          opacity="0.4"
+        />
+        <path
+          d="M120,122 Q140,102 165,100"
+          stroke="#3d2a16"
+          strokeWidth="0.7"
+          fill="none"
+          opacity="0.35"
+        />
+        <path
+          d="M108,145 Q128,120 150,115"
+          stroke="#2d1f0e"
+          strokeWidth="0.6"
+          fill="none"
+          opacity="0.3"
+        />
+        <path
+          d="M125,118 Q145,98 170,96"
+          stroke="#3d2a16"
+          strokeWidth="0.6"
+          fill="none"
+          opacity="0.3"
+        />
+        <path
+          d="M118,128 Q142,106 168,104"
+          stroke="#2d1f0e"
+          strokeWidth="0.5"
+          fill="none"
+          opacity="0.25"
+        />
 
         {/* Right side swept strands */}
-        <path d="M190,115 Q195,125 198,140" stroke="#2d1f0e" strokeWidth="0.7" fill="none" opacity="0.3" />
-        <path d="M185,110 Q192,120 196,135" stroke="#1a1008" strokeWidth="0.6" fill="none" opacity="0.25" />
+        <path
+          d="M190,115 Q195,125 198,140"
+          stroke="#2d1f0e"
+          strokeWidth="0.7"
+          fill="none"
+          opacity="0.3"
+        />
+        <path
+          d="M185,110 Q192,120 196,135"
+          stroke="#1a1008"
+          strokeWidth="0.6"
+          fill="none"
+          opacity="0.25"
+        />
 
         {/* Hairline edge — natural, slightly irregular where hair meets forehead */}
         <path
@@ -301,13 +480,60 @@ export function DeveloperCharacter() {
             ══════════════════════════════════════════ */}
         <g>
           <rect x="55" y="380" width="82" height="52" rx="5" fill="#1e1e1e" />
-          <rect x="60" y="385" width="72" height="40" rx="3" fill="url(#screen-glow)" />
+          <rect
+            x="60"
+            y="385"
+            width="72"
+            height="40"
+            rx="3"
+            fill="url(#screen-glow)"
+          />
           {/* Code lines */}
-          <rect x="66" y="392" width="28" height="2" rx="1" fill="#6366f1" opacity="0.5" />
-          <rect x="66" y="398" width="42" height="2" rx="1" fill="#818cf8" opacity="0.3" />
-          <rect x="66" y="404" width="22" height="2" rx="1" fill="#6366f1" opacity="0.4" />
-          <rect x="66" y="410" width="36" height="2" rx="1" fill="#818cf8" opacity="0.25" />
-          <rect x="66" y="416" width="18" height="2" rx="1" fill="#6366f1" opacity="0.35" />
+          <rect
+            x="66"
+            y="392"
+            width="28"
+            height="2"
+            rx="1"
+            fill="#6366f1"
+            opacity="0.5"
+          />
+          <rect
+            x="66"
+            y="398"
+            width="42"
+            height="2"
+            rx="1"
+            fill="#818cf8"
+            opacity="0.3"
+          />
+          <rect
+            x="66"
+            y="404"
+            width="22"
+            height="2"
+            rx="1"
+            fill="#6366f1"
+            opacity="0.4"
+          />
+          <rect
+            x="66"
+            y="410"
+            width="36"
+            height="2"
+            rx="1"
+            fill="#818cf8"
+            opacity="0.25"
+          />
+          <rect
+            x="66"
+            y="416"
+            width="18"
+            height="2"
+            rx="1"
+            fill="#6366f1"
+            opacity="0.35"
+          />
           {/* Hinge */}
           <rect x="55" y="431" width="82" height="3" rx="1.5" fill="#161616" />
           {/* Keyboard */}
@@ -320,7 +546,14 @@ export function DeveloperCharacter() {
         {/* Left hand on laptop */}
         <g>
           <ellipse cx="82" cy="395" rx="13" ry="9" fill="#d4956a" />
-          <rect x="70" y="390" width="5.5" height="11" rx="2.8" fill="#d4956a" />
+          <rect
+            x="70"
+            y="390"
+            width="5.5"
+            height="11"
+            rx="2.8"
+            fill="#d4956a"
+          />
           <rect x="77" y="388" width="5" height="12" rx="2.5" fill="#d4956a" />
           <rect x="83" y="387" width="5" height="12" rx="2.5" fill="#d4956a" />
           <rect x="89" y="388" width="5" height="11" rx="2.5" fill="#d4956a" />
@@ -332,7 +565,15 @@ export function DeveloperCharacter() {
           <rect x="220" y="375" width="16" height="12" rx="5" fill="#d4956a" />
           {/* Thumb pointing up */}
           <rect x="223" y="350" width="8" height="22" rx="4" fill="#d4956a" />
-          <rect x="225" y="352" width="4" height="10" rx="2" fill="#dda07a" opacity="0.45" />
+          <rect
+            x="225"
+            y="352"
+            width="4"
+            height="10"
+            rx="2"
+            fill="#dda07a"
+            opacity="0.45"
+          />
           {/* Jacket cuff at wrist */}
           <rect x="218" y="425" width="18" height="6" rx="2" fill="#1a1a2e" />
           <rect x="62" y="425" width="18" height="6" rx="2" fill="#1a1a2e" />

@@ -13,7 +13,15 @@ const itemVariants = {
 
 export function Experience() {
   return (
-    <section id="experience" className="section bg-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
+    <section
+      id="experience"
+      className="section bg-section"
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        paddingBottom: "calc(128px + 3rem)",
+      }}
+    >
       <MarqueeTitle text="EXPERIENCE" direction="left" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
@@ -44,7 +52,10 @@ export function Experience() {
                 {/* Left column */}
                 <div className="md:col-span-1">
                   <h3 className="h3 mb-1">{exp.company}</h3>
-                  <p className="small mb-3" style={{ color: "var(--color-accent)" }}>
+                  <p
+                    className="small mb-3"
+                    style={{ color: "var(--color-accent)" }}
+                  >
                     {exp.role}
                   </p>
                   <p className="mono mb-3">{exp.date}</p>
@@ -71,7 +82,9 @@ export function Experience() {
                   <ul className="space-y-2 mb-4">
                     {exp.bullets.map((bullet, j) => (
                       <li key={j} className="body flex gap-3">
-                        <span style={{ color: "var(--color-border-hover)" }}>—</span>
+                        <span style={{ color: "var(--color-border-hover)" }}>
+                          —
+                        </span>
                         <span>{bullet}</span>
                       </li>
                     ))}

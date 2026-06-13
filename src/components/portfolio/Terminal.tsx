@@ -45,7 +45,10 @@ function MatrixRain({ onDone }: { onDone: () => void }) {
     };
   }, [onDone]);
   return (
-    <div className="font-mono text-[0.75rem] leading-tight" style={{ color: "#4ade80" }}>
+    <div
+      className="font-mono text-[0.75rem] leading-tight"
+      style={{ color: "#4ade80" }}
+    >
       {lines.map((l, i) => (
         <div key={i}>{l}</div>
       ))}
@@ -109,7 +112,10 @@ export function Terminal() {
     }
 
     if (result.scrollTo) {
-      setTimeout(() => scrollToSection(result.scrollTo!), result.scrollDelayMs ?? 400);
+      setTimeout(
+        () => scrollToSection(result.scrollTo!),
+        result.scrollDelayMs ?? 400,
+      );
     }
 
     setHistory((h) => [raw, ...h].slice(0, 20));
@@ -151,7 +157,10 @@ export function Terminal() {
             onClick={() => setOpen(true)}
             title="Open Terminal (press /)"
             className="fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-[10px] border transition-colors"
-            style={{ background: "var(--color-surface)", borderColor: "var(--color-border)" }}
+            style={{
+              background: "var(--color-surface)",
+              borderColor: "var(--color-border)",
+            }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "var(--color-surface-2)";
               e.currentTarget.style.borderColor = "var(--color-border-hover)";
@@ -194,8 +203,14 @@ export function Terminal() {
                 aria-label="Close terminal"
               />
               <span className="h-2 w-2 rounded-full bg-[#f59e0b]" />
-              <span className="h-2 w-2 rounded-full" style={{ background: "#4ade80" }} />
-              <span className="flex-1 text-center font-mono text-[0.72rem]" style={{ color: "#666666" }}>
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ background: "#4ade80" }}
+              />
+              <span
+                className="flex-1 text-center font-mono text-[0.72rem]"
+                style={{ color: "#666666" }}
+              >
                 gufran@portfolio ~ terminal
               </span>
               <button onClick={() => setOpen(false)} aria-label="Close">
@@ -217,8 +232,14 @@ export function Terminal() {
             </div>
 
             {/* Input */}
-            <div className="flex items-center gap-2 border-t px-3.5 py-2.5" style={{ borderColor: "#2a2a2a" }}>
-              <span className="font-mono text-[0.78rem]" style={{ color: "#6366f1" }}>
+            <div
+              className="flex items-center gap-2 border-t px-3.5 py-2.5"
+              style={{ borderColor: "#2a2a2a" }}
+            >
+              <span
+                className="font-mono text-[0.78rem]"
+                style={{ color: "#6366f1" }}
+              >
                 gufran@portfolio:~$
               </span>
               <input

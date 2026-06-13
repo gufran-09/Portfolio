@@ -233,8 +233,7 @@ export function Hero() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "var(--color-surface)";
-                e.currentTarget.style.borderColor =
-                  "var(--color-border-hover)";
+                e.currentTarget.style.borderColor = "var(--color-border-hover)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "transparent";

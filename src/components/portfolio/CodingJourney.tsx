@@ -64,7 +64,8 @@ const platforms = [
     borderColor: "rgba(47,141,70,0.3)",
     titleLine1: "GFG",
     titleLine2: "PROGRESS",
-    subtitle: "My public GeeksForGeeks profile rendered from the live stats card.",
+    subtitle:
+      "My public GeeksForGeeks profile rendered from the live stats card.",
     summary: "Live GFG profile card",
     cta: "VIEW ON GFG",
     href: `https://www.geeksforgeeks.org/user/${USERNAMES.gfg}`,
@@ -84,7 +85,13 @@ const platforms = [
   },
 ] as const;
 
-const leetcodeScale = ["#1a1a1a", "rgba(255,161,22,0.2)", "rgba(255,161,22,0.45)", "rgba(255,161,22,0.7)", "#FFA116"];
+const leetcodeScale = [
+  "#1a1a1a",
+  "rgba(255,161,22,0.2)",
+  "rgba(255,161,22,0.45)",
+  "rgba(255,161,22,0.7)",
+  "#FFA116",
+];
 
 function toNumber(value: unknown) {
   if (typeof value === "number") return value;
@@ -92,7 +99,9 @@ function toNumber(value: unknown) {
   return 0;
 }
 
-function calendarToWeeks(calendar?: Record<string, number | string>): ContributionDay[][] | null {
+function calendarToWeeks(
+  calendar?: Record<string, number | string>,
+): ContributionDay[][] | null {
   if (!calendar) return null;
 
   const today = new Date();
@@ -105,7 +114,8 @@ function calendarToWeeks(calendar?: Record<string, number | string>): Contributi
       date.setDate(start.getDate() + weekIndex * 7 + dayIndex);
       const key = Math.floor(date.getTime() / 1000).toString();
       const count = toNumber(calendar[key]);
-      const level = count === 0 ? 0 : count <= 2 ? 1 : count <= 4 ? 2 : count <= 7 ? 3 : 4;
+      const level =
+        count === 0 ? 0 : count <= 2 ? 1 : count <= 4 ? 2 : count <= 7 ? 3 : 4;
 
       return {
         date: date.toISOString().slice(0, 10),
@@ -116,17 +126,50 @@ function calendarToWeeks(calendar?: Record<string, number | string>): Contributi
   );
 }
 
-function StatCard({ number, label, sub, color }: { number: string; label: string; sub?: string; color: string }) {
+function StatCard({
+  number,
+  label,
+  sub,
+  color,
+}: {
+  number: string;
+  label: string;
+  sub?: string;
+  color: string;
+}) {
   return (
     <div className="coding-stat-card">
-      <div style={{ fontFamily: "var(--font-display)", fontSize: "1.8rem", fontWeight: 700, color }}>
+      <div
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "1.8rem",
+          fontWeight: 700,
+          color,
+        }}
+      >
         {number}
       </div>
-      <div style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 400, color: "var(--color-text-3)", marginTop: 4 }}>
+      <div
+        style={{
+          fontFamily: "var(--font-sans)",
+          fontSize: 12,
+          fontWeight: 400,
+          color: "var(--color-text-3)",
+          marginTop: 4,
+        }}
+      >
         {label}
       </div>
       {sub && (
-        <div style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 400, color, marginTop: 4 }}>
+        <div
+          style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: 11,
+            fontWeight: 400,
+            color,
+            marginTop: 4,
+          }}
+        >
           {sub}
         </div>
       )}
@@ -151,19 +194,37 @@ function GithubPanel({ stats }: { stats: GitHubStats | null }) {
       </div>
       {stats ? (
         <div className="coding-gfg-stats">
-          <StatCard number={String(stats.publicRepos)} label="Public Repositories" color="#f0f0f0" />
-          <StatCard number={String(stats.followers)} label="Followers" color="#f0f0f0" />
-          <StatCard number={String(stats.publicGists)} label="Public Gists" color="#f0f0f0" />
+          <StatCard
+            number={String(stats.publicRepos)}
+            label="Public Repositories"
+            color="#f0f0f0"
+          />
+          <StatCard
+            number={String(stats.followers)}
+            label="Followers"
+            color="#f0f0f0"
+          />
+          <StatCard
+            number={String(stats.publicGists)}
+            label="Public Gists"
+            color="#f0f0f0"
+          />
         </div>
       ) : (
-        <LiveNotice>GitHub public profile stats are loading. The graph above is rendered live from GitHub activity data.</LiveNotice>
+        <LiveNotice>
+          GitHub public profile stats are loading. The graph above is rendered
+          live from GitHub activity data.
+        </LiveNotice>
       )}
     </div>
   );
 }
 
 function LeetCodePanel({ stats }: { stats: LeetCodeStats | null }) {
-  const heatmapData = useMemo(() => calendarToWeeks(stats?.submissionCalendar), [stats]);
+  const heatmapData = useMemo(
+    () => calendarToWeeks(stats?.submissionCalendar),
+    [stats],
+  );
 
   return (
     <div className="coding-two-col">
@@ -180,9 +241,27 @@ function LeetCodePanel({ stats }: { stats: LeetCodeStats | null }) {
         )}
       </div>
       <div className="coding-stats-stack">
-        <StatCard number={stats?.totalSolved != null ? String(stats.totalSolved) : "Live"} label="Problems Solved" color="#FFA116" />
-        <StatCard number={stats?.acceptanceRate != null ? `${Math.round(stats.acceptanceRate)}%` : "Live"} label="Acceptance Rate" color="var(--color-text-1)" />
-        <StatCard number={stats?.ranking != null ? `#${stats.ranking}` : "Live"} label="Global Ranking" color="#FFA116" />
+        <StatCard
+          number={
+            stats?.totalSolved != null ? String(stats.totalSolved) : "Live"
+          }
+          label="Problems Solved"
+          color="#FFA116"
+        />
+        <StatCard
+          number={
+            stats?.acceptanceRate != null
+              ? `${Math.round(stats.acceptanceRate)}%`
+              : "Live"
+          }
+          label="Acceptance Rate"
+          color="var(--color-text-1)"
+        />
+        <StatCard
+          number={stats?.ranking != null ? `#${stats.ranking}` : "Live"}
+          label="Global Ranking"
+          color="#FFA116"
+        />
       </div>
     </div>
   );
@@ -194,10 +273,19 @@ function GfgPanel() {
       <img
         src={`https://geeks-for-geeks-stats-card.vercel.app/?username=${USERNAMES.gfg}`}
         alt={`${USERNAMES.gfg} GeeksForGeeks stats`}
-        style={{ width: "100%", maxWidth: 800, margin: "0 auto", display: "block", borderRadius: 8 }}
+        style={{
+          width: "100%",
+          maxWidth: 800,
+          margin: "0 auto",
+          display: "block",
+          borderRadius: 8,
+        }}
         loading="lazy"
       />
-      <LiveNotice>GeeksForGeeks does not expose a stable browser-readable JSON API, so this panel renders the live public stats card for the account.</LiveNotice>
+      <LiveNotice>
+        GeeksForGeeks does not expose a stable browser-readable JSON API, so
+        this panel renders the live public stats card for the account.
+      </LiveNotice>
     </div>
   );
 }
@@ -208,9 +296,17 @@ function CodolioPanel() {
       <div>
         <h3 className="coding-panel-title">Codolio Profile</h3>
         <p className="body" style={{ marginBottom: 20 }}>
-          Codolio aggregates verified coding platform data into one public profile. Their public docs describe the profile as the source of truth for connected platform stats, but they do not publish a browser embeddable stats API.
+          Codolio aggregates verified coding platform data into one public
+          profile. Their public docs describe the profile as the source of truth
+          for connected platform stats, but they do not publish a browser
+          embeddable stats API.
         </p>
-        <a href={`https://codolio.com/profile/${USERNAMES.codolio}`} target="_blank" rel="noreferrer" className="btn-secondary inline-flex items-center justify-center gap-2">
+        <a
+          href={`https://codolio.com/profile/${USERNAMES.codolio}`}
+          target="_blank"
+          rel="noreferrer"
+          className="btn-secondary inline-flex items-center justify-center gap-2"
+        >
           Open live Codolio profile
           <ExternalLink size={14} />
         </a>
@@ -227,8 +323,12 @@ function CodolioPanel() {
 export function CodingJourney() {
   const [activePlatform, setActivePlatform] = useState<PlatformId>("github");
   const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
-  const [leetcodeStats, setLeetcodeStats] = useState<LeetCodeStats | null>(null);
-  const active = platforms.find((platform) => platform.id === activePlatform) ?? platforms[0];
+  const [leetcodeStats, setLeetcodeStats] = useState<LeetCodeStats | null>(
+    null,
+  );
+  const active =
+    platforms.find((platform) => platform.id === activePlatform) ??
+    platforms[0];
 
   useEffect(() => {
     let cancelled = false;
@@ -285,7 +385,11 @@ export function CodingJourney() {
         </AnimatePresence>
         <p className="coding-journey-subtitle">{active.subtitle}</p>
 
-        <div className="coding-platform-switcher" role="tablist" aria-label="Coding platform">
+        <div
+          className="coding-platform-switcher"
+          role="tablist"
+          aria-label="Coding platform"
+        >
           {platforms.map((platform) => {
             const Icon = platform.icon;
             const isActive = activePlatform === platform.id;
@@ -302,9 +406,23 @@ export function CodingJourney() {
                 }}
                 onClick={() => setActivePlatform(platform.id)}
               >
-                {isActive && <motion.span layoutId="activeTab" className="coding-active-tab" />}
-                <Icon size={14} style={{ color: isActive ? platform.color : "currentColor", position: "relative", zIndex: 1 }} />
-                <span style={{ position: "relative", zIndex: 1 }}>{platform.label}</span>
+                {isActive && (
+                  <motion.span
+                    layoutId="activeTab"
+                    className="coding-active-tab"
+                  />
+                )}
+                <Icon
+                  size={14}
+                  style={{
+                    color: isActive ? platform.color : "currentColor",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                />
+                <span style={{ position: "relative", zIndex: 1 }}>
+                  {platform.label}
+                </span>
               </button>
             );
           })}
@@ -321,7 +439,9 @@ export function CodingJourney() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
             {activePlatform === "github" && <GithubPanel stats={githubStats} />}
-            {activePlatform === "leetcode" && <LeetCodePanel stats={leetcodeStats} />}
+            {activePlatform === "leetcode" && (
+              <LeetCodePanel stats={leetcodeStats} />
+            )}
             {activePlatform === "gfg" && <GfgPanel />}
             {activePlatform === "codolio" && <CodolioPanel />}
           </motion.div>

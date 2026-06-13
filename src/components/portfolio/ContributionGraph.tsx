@@ -13,7 +13,21 @@ type ContributionGraphProps = {
   showDayLabels?: boolean;
 };
 
-const months = ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
+const months = [
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+];
 const dayLabels = ["M", "", "W", "", "F", "", ""];
 
 function formatTooltip(day: ContributionDay) {
@@ -68,7 +82,11 @@ export function ContributionGraph({
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.25, delay: weekIndex * 0.01, ease: "easeOut" }}
+              transition={{
+                duration: 0.25,
+                delay: weekIndex * 0.01,
+                ease: "easeOut",
+              }}
             >
               {week.map((day) => (
                 <span

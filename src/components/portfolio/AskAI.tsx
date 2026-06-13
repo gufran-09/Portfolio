@@ -1,5 +1,11 @@
 import { motion } from "framer-motion";
-import { ArrowUp, ExternalLink, Github, Hand, MessageCircle } from "lucide-react";
+import {
+  ArrowUp,
+  ExternalLink,
+  Github,
+  Hand,
+  MessageCircle,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { IDENTITY, PROJECTS } from "@/lib/portfolio/data";
 import { MarqueeTitle } from "./MarqueeTitle";
@@ -74,7 +80,9 @@ RULES:
 
 export function AskAI() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [conversationHistory, setConversationHistory] = useState<AnthropicMessage[]>([]);
+  const [conversationHistory, setConversationHistory] = useState<
+    AnthropicMessage[]
+  >([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -82,7 +90,9 @@ export function AskAI() {
 
   useEffect(() => {
     if (!apiKey) {
-      console.warn("⚠️ VITE_ANTHROPIC_API_KEY not set. Gufran-AI will not function.");
+      console.warn(
+        "⚠️ VITE_ANTHROPIC_API_KEY not set. Gufran-AI will not function.",
+      );
     }
   }, [apiKey]);
 
@@ -96,7 +106,10 @@ export function AskAI() {
 
     setInput("");
     setIsLoading(true);
-    const nextMessages: ChatMessage[] = [...messages, { role: "user", content: userMessage }];
+    const nextMessages: ChatMessage[] = [
+      ...messages,
+      { role: "user", content: userMessage },
+    ];
     setMessages(nextMessages);
 
     try {
@@ -130,14 +143,21 @@ export function AskAI() {
       }
 
       const data = await response.json();
-      const aiReply = data.content?.[0]?.text ?? `I don't have that specific detail, but you can reach Gufran directly at ${IDENTITY.email}`;
-      const assistantMessage: ChatMessage = { role: "assistant", content: aiReply };
+      const aiReply =
+        data.content?.[0]?.text ??
+        `I don't have that specific detail, but you can reach Gufran directly at ${IDENTITY.email}`;
+      const assistantMessage: ChatMessage = {
+        role: "assistant",
+        content: aiReply,
+      };
       setMessages([...nextMessages, assistantMessage]);
       setConversationHistory([...nextHistory, assistantMessage].slice(-10));
     } catch {
       const fallback = `Sorry, I'm having trouble connecting right now. You can reach Gufran directly at ${IDENTITY.email}`;
       setMessages([...nextMessages, { role: "assistant", content: fallback }]);
-      setConversationHistory((history) => [...history, { role: "user", content: userMessage }].slice(-10));
+      setConversationHistory((history) =>
+        [...history, { role: "user", content: userMessage }].slice(-10),
+      );
     } finally {
       setIsLoading(false);
     }
@@ -160,16 +180,47 @@ export function AskAI() {
             viewport={{ once: true, margin: "-80px" }}
           >
             <div>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 400, color: "var(--color-text-3)" }}>
+              <div
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "1.1rem",
+                  fontWeight: 400,
+                  color: "var(--color-text-3)",
+                }}
+              >
                 Ask
               </div>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "3rem", fontWeight: 800, color: "var(--color-text-1)", lineHeight: 1.05 }}>
+              <div
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "3rem",
+                  fontWeight: 800,
+                  color: "var(--color-text-1)",
+                  lineHeight: 1.05,
+                }}
+              >
                 Gufran-<span style={{ color: "var(--color-accent)" }}>AI</span>
-                <sup style={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", fontWeight: 400, color: "var(--color-text-3)", verticalAlign: "super", marginLeft: 4 }}>
+                <sup
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.7rem",
+                    fontWeight: 400,
+                    color: "var(--color-text-3)",
+                    verticalAlign: "super",
+                    marginLeft: 4,
+                  }}
+                >
                   ™
                 </sup>
               </div>
-              <div style={{ height: 1, width: "100%", background: "var(--color-border)", margin: "20px 0" }} />
+              <div
+                style={{
+                  height: 1,
+                  width: "100%",
+                  background: "var(--color-border)",
+                  margin: "20px 0",
+                }}
+              />
             </div>
 
             <h2
@@ -182,30 +233,64 @@ export function AskAI() {
                 lineHeight: 1.25,
               }}
             >
-              <MessageCircle size={20} style={{ color: "var(--color-accent)", flexShrink: 0 }} />
+              <MessageCircle
+                size={20}
+                style={{ color: "var(--color-accent)", flexShrink: 0 }}
+              />
               Ask me anything about my work
             </h2>
 
             <p className="body" style={{ marginTop: 12, fontSize: 15 }}>
-              Curious about my projects, tech stack choices, or how I approach problems?
+              Curious about my projects, tech stack choices, or how I approach
+              problems?
             </p>
             <p className="body" style={{ marginTop: 8, fontSize: 15 }}>
-              Drop a question and Gufran-AI will answer based on my real experience, projects, and skills.
+              Drop a question and Gufran-AI will answer based on my real
+              experience, projects, and skills.
             </p>
 
             <div className="flex flex-col" style={{ gap: 12, marginTop: 28 }}>
               {features.map((feature) => (
-                <div key={feature} className="flex items-center" style={{ gap: 12 }}>
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--color-accent)", flexShrink: 0 }} />
-                  <span style={{ fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 400, color: "var(--color-text-2)" }}>
+                <div
+                  key={feature}
+                  className="flex items-center"
+                  style={{ gap: 12 }}
+                >
+                  <span
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: "var(--color-accent)",
+                      flexShrink: 0,
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: 14,
+                      fontWeight: 400,
+                      color: "var(--color-text-2)",
+                    }}
+                  >
                     {feature}
                   </span>
                 </div>
               ))}
             </div>
 
-            <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 400, color: "var(--color-text-3)", lineHeight: 1.65, marginTop: 32 }}>
-              Built using the Anthropic Claude API. Responses are generated based on my career context and may not be perfect.
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: 12,
+                fontWeight: 400,
+                color: "var(--color-text-3)",
+                lineHeight: 1.65,
+                marginTop: 32,
+              }}
+            >
+              Built using the Anthropic Claude API. Responses are generated
+              based on my career context and may not be perfect.
             </p>
             <a
               href="https://github.com/gufranahmed/gufran-ai"
@@ -254,11 +339,20 @@ export function AskAI() {
           >
             <div
               className="relative flex items-center justify-between"
-              style={{ height: 44, background: "var(--color-surface-2)", borderBottom: "1px solid var(--color-border)", padding: "0 16px" }}
+              style={{
+                height: 44,
+                background: "var(--color-surface-2)",
+                borderBottom: "1px solid var(--color-border)",
+                padding: "0 16px",
+              }}
             >
               <div className="flex items-center" style={{ gap: 6 }}>
                 {["#ff5f57", "#febc2e", "#28c840"].map((color) => (
-                  <span key={color} className="ask-ai-traffic-dot" style={{ background: color }} />
+                  <span
+                    key={color}
+                    className="ask-ai-traffic-dot"
+                    style={{ background: color }}
+                  />
                 ))}
               </div>
               <div
@@ -274,16 +368,36 @@ export function AskAI() {
               >
                 Gufran-AI
               </div>
-              <div className="flex items-center" style={{ gap: 6, fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 400, color: "var(--color-success)" }}>
+              <div
+                className="flex items-center"
+                style={{
+                  gap: 6,
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 11,
+                  fontWeight: 400,
+                  color: "var(--color-success)",
+                }}
+              >
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-success)]" style={{ animation: "pulse-ring 2s ease-out infinite" }} />
+                  <span
+                    className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-success)]"
+                    style={{ animation: "pulse-ring 2s ease-out infinite" }}
+                  />
                   <span className="relative h-1.5 w-1.5 rounded-full bg-[var(--color-success)]" />
                 </span>
                 Online
               </div>
             </div>
 
-            <div className="flex items-start" style={{ gap: 14, padding: 20, background: "var(--color-surface)", borderBottom: "1px solid var(--color-border)" }}>
+            <div
+              className="flex items-start"
+              style={{
+                gap: 14,
+                padding: 20,
+                background: "var(--color-surface)",
+                borderBottom: "1px solid var(--color-border)",
+              }}
+            >
               <div
                 className="flex items-center justify-center"
                 style={{
@@ -302,22 +416,67 @@ export function AskAI() {
                 GA
               </div>
               <div>
-                <div className="flex items-center" style={{ gap: 6, fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 600, color: "var(--color-text-1)" }}>
+                <div
+                  className="flex items-center"
+                  style={{
+                    gap: 6,
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "var(--color-text-1)",
+                  }}
+                >
                   <Hand size={14} style={{ color: "var(--color-accent)" }} />
                   Hi, I'm Gufran-AI,
                 </div>
-                <p style={{ fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 400, color: "var(--color-text-2)", lineHeight: 1.6, marginTop: 6 }}>
+                <p
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 13,
+                    fontWeight: 400,
+                    color: "var(--color-text-2)",
+                    lineHeight: 1.6,
+                    marginTop: 6,
+                  }}
+                >
                   I'm an AI assistant that knows everything about{" "}
-                  <strong style={{ fontWeight: 600, color: "var(--color-text-1)" }}>Gufran Ahmed (Full Stack Engineer).</strong>
+                  <strong
+                    style={{ fontWeight: 600, color: "var(--color-text-1)" }}
+                  >
+                    Gufran Ahmed (Full Stack Engineer).
+                  </strong>
                 </p>
-                <p style={{ fontFamily: "var(--font-sans)", fontSize: 13, fontWeight: 400, color: "var(--color-text-2)", lineHeight: 1.6, marginTop: 4 }}>
+                <p
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 13,
+                    fontWeight: 400,
+                    color: "var(--color-text-2)",
+                    lineHeight: 1.6,
+                    marginTop: 4,
+                  }}
+                >
                   Ask me about his career, skills, experience, or projects.
                 </p>
               </div>
             </div>
 
-            <div style={{ padding: "16px 20px", borderBottom: "1px solid var(--color-border)" }}>
-              <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, fontWeight: 600, color: "var(--color-text-3)", letterSpacing: "0.1em", marginBottom: 10 }}>
+            <div
+              style={{
+                padding: "16px 20px",
+                borderBottom: "1px solid var(--color-border)",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 10,
+                  fontWeight: 600,
+                  color: "var(--color-text-3)",
+                  letterSpacing: "0.1em",
+                  marginBottom: 10,
+                }}
+              >
                 EXAMPLE QUESTIONS
               </div>
               {exampleQuestions.map((question, index) => (
@@ -325,7 +484,9 @@ export function AskAI() {
                   key={question}
                   type="button"
                   className="ask-ai-question"
-                  style={{ marginBottom: index === exampleQuestions.length - 1 ? 0 : 8 }}
+                  style={{
+                    marginBottom: index === exampleQuestions.length - 1 ? 0 : 8,
+                  }}
                   onClick={() => submitQuestion(question)}
                   disabled={isLoading}
                 >
@@ -341,9 +502,15 @@ export function AskAI() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className={message.role === "user" ? "ask-ai-message-user" : "ask-ai-message-assistant"}
+                  className={
+                    message.role === "user"
+                      ? "ask-ai-message-user"
+                      : "ask-ai-message-assistant"
+                  }
                 >
-                  {message.role === "assistant" && <span className="ask-ai-tag">GA</span>}
+                  {message.role === "assistant" && (
+                    <span className="ask-ai-tag">GA</span>
+                  )}
                   {message.content}
                 </motion.div>
               ))}
@@ -356,14 +523,28 @@ export function AskAI() {
                   aria-label="Gufran-AI is typing"
                 >
                   <span className="ask-ai-typing-dot" />
-                  <span className="ask-ai-typing-dot" style={{ animationDelay: "0.15s" }} />
-                  <span className="ask-ai-typing-dot" style={{ animationDelay: "0.3s" }} />
+                  <span
+                    className="ask-ai-typing-dot"
+                    style={{ animationDelay: "0.15s" }}
+                  />
+                  <span
+                    className="ask-ai-typing-dot"
+                    style={{ animationDelay: "0.3s" }}
+                  />
                 </motion.div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="flex items-center" style={{ gap: 8, padding: "14px 16px", borderTop: "1px solid var(--color-border)", background: "var(--color-surface)" }}>
+            <div
+              className="flex items-center"
+              style={{
+                gap: 8,
+                padding: "14px 16px",
+                borderTop: "1px solid var(--color-border)",
+                background: "var(--color-surface)",
+              }}
+            >
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -385,7 +566,18 @@ export function AskAI() {
               </button>
             </div>
 
-            <div style={{ padding: "10px 16px", borderTop: "1px solid var(--color-border)", background: "var(--color-surface-2)", textAlign: "center", fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 400, color: "var(--color-text-3)" }}>
+            <div
+              style={{
+                padding: "10px 16px",
+                borderTop: "1px solid var(--color-border)",
+                background: "var(--color-surface-2)",
+                textAlign: "center",
+                fontFamily: "var(--font-sans)",
+                fontSize: 11,
+                fontWeight: 400,
+                color: "var(--color-text-3)",
+              }}
+            >
               Gufran-AI™ — Powered by real experience.
             </div>
           </motion.div>

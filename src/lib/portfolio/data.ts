@@ -237,7 +237,16 @@ export const EDUCATION = {
   date: "2024 — 2028",
   location: "Hyderabad",
   cgpa: "8.9 / 10",
-  coursework: ["DSA", "OS", "DBMS", "Networks", "Software Engineering", "ML", "Agile Methodologies", "System Design"],
+  coursework: [
+    "DSA",
+    "OS",
+    "DBMS",
+    "Networks",
+    "Software Engineering",
+    "ML",
+    "Agile Methodologies",
+    "System Design",
+  ],
 };
 
 export const CERTIFICATIONS = [

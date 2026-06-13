@@ -1,6 +1,11 @@
 export type SkillLevel = "Expert" | "Advanced" | "Proficient" | "Familiar";
 
-export type SkillCategory = "Frontend" | "Backend" | "Database" | "DevOps" | "Tools";
+export type SkillCategory =
+  | "Frontend"
+  | "Backend"
+  | "Database"
+  | "DevOps"
+  | "Tools";
 
 export type SkillItem = {
   name: string;
@@ -15,9 +20,18 @@ export type SkillItem = {
   docs: string;
 };
 
-export const SKILL_CATEGORIES: SkillCategory[] = ["Frontend", "Backend", "Database", "DevOps", "Tools"];
+export const SKILL_CATEGORIES: SkillCategory[] = [
+  "Frontend",
+  "Backend",
+  "Database",
+  "DevOps",
+  "Tools",
+];
 
-export const LEVEL_BADGE_STYLES: Record<SkillLevel, { background: string; color: string }> = {
+export const LEVEL_BADGE_STYLES: Record<
+  SkillLevel,
+  { background: string; color: string }
+> = {
   Expert: { background: "rgba(34,197,94,0.1)", color: "#22c55e" },
   Advanced: { background: "rgba(99,102,241,0.1)", color: "#818cf8" },
   Proficient: { background: "rgba(234,179,8,0.1)", color: "#eab308" },
@@ -34,7 +48,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "⚛",
       iconColor: "#61DAFB",
       iconBg: "rgba(97,218,251,0.08)",
-      useCases: ["Component Libraries", "SPAs & dashboards", "Performance optimization", "State management"],
+      useCases: [
+        "Component Libraries",
+        "SPAs & dashboards",
+        "Performance optimization",
+        "State management",
+      ],
       usedIn: ["DevFlow", "CodeSync", "AuraUI"],
       docs: "https://react.dev",
     },
@@ -58,7 +77,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "N",
       iconColor: "#f0f0f0",
       iconBg: "rgba(255,255,255,0.05)",
-      useCases: ["SSR & SSG", "Full-stack apps", "SEO optimization", "API routes"],
+      useCases: [
+        "SSR & SSG",
+        "Full-stack apps",
+        "SEO optimization",
+        "API routes",
+      ],
       usedIn: ["Taskly", "StockSense"],
       docs: "https://nextjs.org",
     },
@@ -70,7 +94,11 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "TW",
       iconColor: "#06B6D4",
       iconBg: "rgba(6,182,212,0.08)",
-      useCases: ["Rapid UI development", "Design systems", "Responsive layouts"],
+      useCases: [
+        "Rapid UI development",
+        "Design systems",
+        "Responsive layouts",
+      ],
       usedIn: ["DevFlow", "Taskly"],
       docs: "https://tailwindcss.com",
     },
@@ -82,7 +110,11 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "FM",
       iconColor: "#6366f1",
       iconBg: "rgba(99,102,241,0.1)",
-      useCases: ["Page transitions", "Micro-interactions", "Gesture animations"],
+      useCases: [
+        "Page transitions",
+        "Micro-interactions",
+        "Gesture animations",
+      ],
       usedIn: ["Portfolio", "AuraUI"],
       docs: "https://framer.com/motion",
     },
@@ -120,7 +152,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "NO",
       iconColor: "#68A063",
       iconBg: "rgba(104,160,99,0.1)",
-      useCases: ["REST APIs", "Real-time servers", "CLI tools", "Microservices"],
+      useCases: [
+        "REST APIs",
+        "Real-time servers",
+        "CLI tools",
+        "Microservices",
+      ],
       usedIn: ["DevFlow", "CodeSync", "StockSense"],
       docs: "https://nodejs.org",
     },
@@ -132,7 +169,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "PY",
       iconColor: "#FFD43B",
       iconBg: "rgba(255,212,59,0.08)",
-      useCases: ["FastAPI backends", "Data processing", "Automation scripts", "ML pipelines"],
+      useCases: [
+        "FastAPI backends",
+        "Data processing",
+        "Automation scripts",
+        "ML pipelines",
+      ],
       usedIn: ["StockSense", "ByteNotes"],
       docs: "https://python.org",
     },
@@ -144,7 +186,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "EX",
       iconColor: "#f0f0f0",
       iconBg: "rgba(255,255,255,0.05)",
-      useCases: ["REST API design", "Middleware", "Auth systems", "Rate limiting"],
+      useCases: [
+        "REST API design",
+        "Middleware",
+        "Auth systems",
+        "Rate limiting",
+      ],
       usedIn: ["DevFlow", "StockSense"],
       docs: "https://expressjs.com",
     },
@@ -170,7 +217,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "PG",
       iconColor: "#336791",
       iconBg: "rgba(51,103,145,0.1)",
-      useCases: ["Complex queries", "Migrations", "Performance tuning", "Full-text search"],
+      useCases: [
+        "Complex queries",
+        "Migrations",
+        "Performance tuning",
+        "Full-text search",
+      ],
       usedIn: ["DevFlow", "StockSense"],
       docs: "https://postgresql.org",
     },
@@ -220,7 +272,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "DO",
       iconColor: "#0DB7ED",
       iconBg: "rgba(13,183,237,0.08)",
-      useCases: ["Containerization", "Docker Compose", "Multi-stage builds", "Local dev parity"],
+      useCases: [
+        "Containerization",
+        "Docker Compose",
+        "Multi-stage builds",
+        "Local dev parity",
+      ],
       usedIn: ["DevFlow", "StockSense"],
       docs: "https://docs.docker.com",
     },
@@ -232,7 +289,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "AW",
       iconColor: "#FF9900",
       iconBg: "rgba(255,153,0,0.08)",
-      useCases: ["EC2 & S3", "Lambda functions", "CloudFront CDN", "RDS databases"],
+      useCases: [
+        "EC2 & S3",
+        "Lambda functions",
+        "CloudFront CDN",
+        "RDS databases",
+      ],
       usedIn: ["StockSense", "DevFlow"],
       docs: "https://aws.amazon.com/docs",
     },
@@ -244,7 +306,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "CI",
       iconColor: "#f0f0f0",
       iconBg: "rgba(255,255,255,0.05)",
-      useCases: ["GitHub Actions", "Automated testing", "Auto deployment", "Quality gates"],
+      useCases: [
+        "GitHub Actions",
+        "Automated testing",
+        "Auto deployment",
+        "Quality gates",
+      ],
       usedIn: ["AuraUI", "DevFlow"],
       docs: "https://docs.github.com/actions",
     },
@@ -258,7 +325,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "GT",
       iconColor: "#F05133",
       iconBg: "rgba(240,81,51,0.08)",
-      useCases: ["Version control", "Git flow", "Code review", "Open source contrib"],
+      useCases: [
+        "Version control",
+        "Git flow",
+        "Code review",
+        "Open source contrib",
+      ],
       usedIn: ["All projects"],
       docs: "https://git-scm.com/doc",
     },
@@ -270,7 +342,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "FG",
       iconColor: "#F24E1E",
       iconBg: "rgba(242,78,30,0.08)",
-      useCases: ["UI design", "Prototyping", "Design handoff", "Component design"],
+      useCases: [
+        "UI design",
+        "Prototyping",
+        "Design handoff",
+        "Component design",
+      ],
       usedIn: ["AuraUI", "Portfolio"],
       docs: "https://figma.com",
     },
@@ -282,7 +359,12 @@ export const SKILLS_DATA: Record<SkillCategory, SkillItem[]> = {
       icon: "PM",
       iconColor: "#FF6C37",
       iconBg: "rgba(255,108,55,0.08)",
-      useCases: ["API testing", "Collection docs", "Mock servers", "Automation"],
+      useCases: [
+        "API testing",
+        "Collection docs",
+        "Mock servers",
+        "Automation",
+      ],
       usedIn: ["DevFlow", "StockSense"],
       docs: "https://learning.postman.com",
     },

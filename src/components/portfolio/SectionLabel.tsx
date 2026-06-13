@@ -16,7 +16,10 @@ export function SectionLabel({
       className="mb-3 flex items-center gap-2 text-[0.75rem] font-semibold tracking-[0.15em]"
     >
       <span style={{ color: "var(--color-text-3)" }}>{number}</span>
-      <span className="h-px w-8" style={{ background: "var(--color-border)" }} />
+      <span
+        className="h-px w-8"
+        style={{ background: "var(--color-border)" }}
+      />
       <span style={{ color: "var(--color-text-3)" }}>{label}</span>
     </motion.div>
   );

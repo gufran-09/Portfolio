@@ -3,7 +3,10 @@ import { IDENTITY } from "@/lib/portfolio/data";
 
 export function Footer() {
   return (
-    <footer className="border-t py-12" style={{ borderColor: "var(--color-border)" }}>
+    <footer
+      className="border-t py-12"
+      style={{ borderColor: "var(--color-border)" }}
+    >
       <div className="container">
         <motion.div
           initial={{ opacity: 0 }}
@@ -25,8 +28,12 @@ export function Footer() {
               rel="noreferrer"
               className="small transition-colors"
               style={{ color: "var(--color-text-3)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--color-text-1)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--color-text-3)")
+              }
             >
               GitHub
             </a>
@@ -36,8 +43,12 @@ export function Footer() {
               rel="noreferrer"
               className="small transition-colors"
               style={{ color: "var(--color-text-3)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--color-text-1)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--color-text-3)")
+              }
             >
               LinkedIn
             </a>
@@ -47,8 +58,12 @@ export function Footer() {
               rel="noreferrer"
               className="small transition-colors"
               style={{ color: "var(--color-text-3)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--color-text-1)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--color-text-3)")
+              }
             >
               Twitter
             </a>

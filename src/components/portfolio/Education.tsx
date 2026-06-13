@@ -13,7 +13,15 @@ const itemVariants = {
 
 export function Education() {
   return (
-    <section id="education" className="section surface-section" style={{ position: "relative", overflow: "hidden", paddingBottom: "calc(128px + 3rem)" }}>
+    <section
+      id="education"
+      className="section surface-section"
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        paddingBottom: "calc(128px + 3rem)",
+      }}
+    >
       <MarqueeTitle text="EDUCATION" direction="right" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
@@ -28,11 +36,20 @@ export function Education() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {/* Left — Degree */}
-          <motion.div variants={itemVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="card">
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            className="card"
+          >
             <h3 className="h3 mb-2">{EDUCATION.degree}</h3>
             <p className="body mb-6">{EDUCATION.university}</p>
 
-            <div className="flex gap-4 mb-6 text-xs font-mono" style={{ color: "var(--color-text-3)" }}>
+            <div
+              className="flex gap-4 mb-6 text-xs font-mono"
+              style={{ color: "var(--color-text-3)" }}
+            >
               <span>{EDUCATION.date}</span>
               <span>•</span>
               <span>CGPA: {EDUCATION.cgpa}</span>
@@ -54,7 +71,10 @@ export function Education() {
 
           {/* Right — Certifications */}
           <motion.div
-            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.06 } } }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+            }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
@@ -67,7 +87,12 @@ export function Education() {
                 key={i}
                 variants={itemVariants}
                 className="flex items-start gap-4 py-4 border-b"
-                style={{ borderColor: i === CERTIFICATIONS.length - 1 ? "transparent" : "var(--color-border)" }}
+                style={{
+                  borderColor:
+                    i === CERTIFICATIONS.length - 1
+                      ? "transparent"
+                      : "var(--color-border)",
+                }}
               >
                 {/* Icon */}
                 <div
@@ -93,8 +118,12 @@ export function Education() {
                   href="#"
                   className="text-xs font-medium flex-shrink-0 transition-colors"
                   style={{ color: "var(--color-text-3)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-1)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-3)")}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--color-text-1)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "var(--color-text-3)")
+                  }
                 >
                   Verify →
                 </a>
