@@ -82,7 +82,7 @@ export function Methodology() {
           </div>
           <h2 className="methodology-title">How I engineer software</h2>
           <p className="methodology-subtitle">
-            An end-to-end SDLC and DevOps loop, refined across a decade of shipping
+            An end-to-end SDLC and DevOps loop, refined across a years of shipping
             production systems at scale.
           </p>
         </motion.div>

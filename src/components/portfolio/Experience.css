@@ -1,0 +1,264 @@
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* EXPERIENCE SECTION                                                           */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.experience-section {
+  position: relative;
+  background: var(--color-bg);
+  padding: var(--space-32) 0;
+  overflow: hidden;
+}
+
+/* Override container width for this section */
+.exp-container {
+  max-width: 860px !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.exp-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.exp-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--color-text-1);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+.exp-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-text-2);
+  line-height: 1.75;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+/* ── Timeline wrapper ── */
+.exp-timeline {
+  position: relative;
+  display: flex;
+  gap: 0;
+}
+
+/* Vertical spine line */
+.exp-spine {
+  position: absolute;
+  left: 20px;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: var(--color-border);
+  z-index: 0;
+}
+
+.exp-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  padding-left: 56px;
+}
+
+/* ── Each row: dot + card ── */
+.exp-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Dot */
+.exp-dot-wrap {
+  position: absolute;
+  left: -46px;
+  top: 1.6rem;
+  z-index: 1;
+}
+
+.exp-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: var(--color-surface-3);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px var(--color-bg);
+}
+
+/* ── Card ── */
+.exp-card {
+  flex: 1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.75rem 2rem 1.5rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.exp-card:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-surface-2);
+}
+
+/* Card top row */
+.exp-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+.exp-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Role title */
+.exp-role {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-1);
+  line-height: 1.3;
+}
+
+/* Company row */
+.exp-company-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.exp-company {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-accent-text);
+}
+
+.exp-dot-sep {
+  color: var(--color-text-3);
+  font-size: 0.75rem;
+}
+
+.exp-type,
+.exp-duration {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-text-3);
+}
+
+/* Badge */
+.exp-badge {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Divider */
+.exp-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 1.25rem 0;
+}
+
+/* Bullets */
+.exp-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+.exp-bullet {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-2);
+  line-height: 1.7;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.exp-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-text-3);
+}
+
+/* Tech tags */
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.exp-tag {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-3);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 3px 10px;
+  transition: all 0.15s ease;
+}
+
+.exp-tag:hover {
+  color: var(--color-text-2);
+  border-color: var(--color-border-hover);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .exp-cards {
+    padding-left: 40px;
+  }
+
+  .exp-spine {
+    left: 14px;
+  }
+
+  .exp-dot-wrap {
+    left: -30px;
+  }
+
+  .exp-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .exp-card {
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .exp-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
