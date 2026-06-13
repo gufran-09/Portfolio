@@ -7,7 +7,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="section bg-section relative w-full flex flex-col justify-center items-center pointer-events-none"
+      className="section bg-section relative w-full flex flex-col justify-center items-center pointer-events-auto"
       style={{ minHeight: "100vh", paddingBottom: "128px" }}
     >
       <MarqueeTitle text="TECH STACK" direction="right" />
@@ -28,7 +28,7 @@ export function Skills() {
             Hover over the 3D keycaps or press any keys on your keyboard to
             reveal details about my skills and experience.
           </p>
-          <div className="flex justify-center items-center gap-2 mt-4">
+          <div className="flex justify-center items-center gap-2 mt-8">
             <span
               className="pill animate-pulse"
               style={{

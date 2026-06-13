@@ -54,51 +54,6 @@ export function Hero() {
         }}
       />
 
-      {/* Concentric orbit rings */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute hidden md:block"
-        style={{
-          top: "50%",
-          left: "72%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 0,
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 1 }}
-        >
-          {/* Ring 1 */}
-          <div
-            style={{
-              position: "absolute",
-              width: 280,
-              height: 280,
-              borderRadius: "50%",
-              border: "1px solid rgba(255,255,255,0.04)",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-          {/* Ring 2 */}
-          <div
-            style={{
-              position: "absolute",
-              width: 420,
-              height: 420,
-              borderRadius: "50%",
-              border: "1px solid rgba(255,255,255,0.04)",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-        </motion.div>
-      </div>
-
       <div
         className="container relative w-full"
         style={{
@@ -113,7 +68,8 @@ export function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          style={{ display: "flex", flexDirection: "column", gap: 0 }}
+          className="flex flex-col items-center text-center md:items-start md:text-left w-full"
+          style={{ gap: 0 }}
         >
           {/* Row 1 — Greeting */}
           <motion.div variants={itemVariants}>
@@ -181,14 +137,21 @@ export function Hero() {
               width: 200,
               height: 1,
               background: "var(--color-border)",
-              margin: "20px 0",
+              marginTop: 20,
+              marginBottom: 20,
             }}
+            className="mx-auto md:mx-0"
           />
 
           {/* Row 5 — CTA buttons */}
           <motion.div
             variants={itemVariants}
-            style={{ display: "flex", alignItems: "center", gap: 12 }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+            }}
+            className="justify-center md:justify-start w-full"
           >
             {/* Hire Me pill button */}
             <button
@@ -243,7 +206,6 @@ export function Hero() {
               <Mail size={18} color="#f0f0f0" />
             </a>
           </motion.div>
-
           {/* Row 6 — Testimonial card */}
           <TestimonialCard />
         </motion.div>
@@ -259,13 +221,59 @@ export function Hero() {
             position: "relative",
           }}
         >
+          {/* Concentric orbit rings centered exactly behind avatar */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute hidden md:block"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 0,
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9, duration: 1 }}
+              style={{ position: "relative" }}
+            >
+              {/* Ring 1 */}
+              <div
+                style={{
+                  position: "absolute",
+                  width: 280,
+                  height: 280,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,0.04)",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+              {/* Ring 2 */}
+              <div
+                style={{
+                  position: "absolute",
+                  width: 420,
+                  height: 420,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,0.04)",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+            </motion.div>
+          </div>
+
           {/* Character */}
           <div
             style={{
               position: "relative",
               zIndex: 2,
               width: "100%",
-              maxWidth: 320,
+              maxWidth: 480, // Increased size from 320 to 480
               marginBottom: 0,
               display: "flex",
               justifyContent: "center",
@@ -274,7 +282,7 @@ export function Hero() {
             <DeveloperCharacter />
           </div>
 
-          {/* Floating Tech Icons */}
+          {/* Floating Tech Icons - Spaced Outward to Prevent Overlap */}
           <FloatingIcon
             label="⚛"
             bg="rgba(97,218,251,0.15)"
@@ -283,7 +291,7 @@ export function Hero() {
             size={44}
             fontSize="20px"
             top="12%"
-            left="8%"
+            left="-15%"
             floatY={[0, -10, 0]}
             floatDuration={3}
             entranceDelay={0.7}
@@ -296,7 +304,7 @@ export function Hero() {
             size={40}
             fontSize="16px"
             top="8%"
-            right="12%"
+            right="-12%"
             floatY={[0, -8, 0]}
             floatDuration={3.5}
             floatDelay={0.5}
@@ -311,7 +319,7 @@ export function Hero() {
             fontSize="12px"
             fontWeight={700}
             top="40%"
-            right="2%"
+            right="-18%"
             floatY={[0, -12, 0]}
             floatDuration={2.8}
             floatDelay={1}
@@ -326,7 +334,7 @@ export function Hero() {
             fontSize="13px"
             fontWeight={700}
             bottom="15%"
-            right="5%"
+            right="-10%"
             floatY={[0, -6, 0]}
             floatDuration={4}
             floatDelay={0.3}
@@ -340,7 +348,7 @@ export function Hero() {
             size={40}
             fontSize="18px"
             top="50%"
-            left="2%"
+            left="-20%"
             floatY={[0, -9, 0]}
             floatDuration={3.2}
             floatDelay={0.8}
@@ -355,7 +363,7 @@ export function Hero() {
             fontSize="11px"
             fontWeight={700}
             bottom="22%"
-            left="10%"
+            left="-12%"
             floatY={[0, -7, 0]}
             floatDuration={3.8}
             floatDelay={1.2}
@@ -401,6 +409,7 @@ export function Hero() {
             padding-top: 32px;
           }
           .hero-right-col {
+            position: relative !important;
             display: flex !important;
             order: -1;
             min-height: 280px !important;

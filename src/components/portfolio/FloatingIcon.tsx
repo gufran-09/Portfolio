@@ -16,6 +16,7 @@ interface FloatingIconProps {
   floatDuration?: number;
   floatDelay?: number;
   entranceDelay?: number;
+  className?: string;
 }
 
 export function FloatingIcon({
@@ -34,9 +35,11 @@ export function FloatingIcon({
   floatDuration = 3,
   floatDelay = 0,
   entranceDelay = 0,
+  className,
 }: FloatingIconProps) {
   return (
     <motion.div
+      className={className}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
