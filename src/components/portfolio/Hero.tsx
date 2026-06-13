@@ -248,17 +248,14 @@ export function Hero() {
           <TestimonialCard />
         </motion.div>
 
-        {/* ── Right Column — Character + Icons ── */}
+        {/* ── Right Column — Centered Avatar ── */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-          className="hero-right-col relative hidden md:flex"
+          className="hero-right-col absolute inset-0 flex items-center justify-center"
           style={{
-            alignItems: "flex-end",
-            justifyContent: "center",
             height: "100%",
-            minHeight: 500,
             position: "relative",
           }}
         >
@@ -267,9 +264,11 @@ export function Hero() {
             style={{
               position: "relative",
               zIndex: 2,
-              width: "65%",
-              maxWidth: 280,
-              marginBottom: 20,
+              width: "100%",
+              maxWidth: 320,
+              marginBottom: 0,
+              display: "flex",
+              justifyContent: "center",
             }}
           >
             <DeveloperCharacter />

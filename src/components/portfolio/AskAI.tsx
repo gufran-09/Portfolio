@@ -179,49 +179,86 @@ export function AskAI() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
           >
-            <div>
-              <div
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.1rem",
-                  fontWeight: 400,
-                  color: "var(--color-text-3)",
-                }}
-              >
-                Ask
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "3rem",
-                  fontWeight: 800,
-                  color: "var(--color-text-1)",
-                  lineHeight: 1.05,
-                }}
-              >
-                Gufran-<span style={{ color: "var(--color-accent)" }}>AI</span>
-                <sup
+            <div className="flex items-center justify-between gap-6">
+              <div>
+                <div
                   style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "0.7rem",
+                    fontFamily: "var(--font-display)",
+                    fontSize: "1.1rem",
                     fontWeight: 400,
                     color: "var(--color-text-3)",
-                    verticalAlign: "super",
-                    marginLeft: 4,
                   }}
                 >
-                  ™
-                </sup>
+                  Ask
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "3rem",
+                    fontWeight: 800,
+                    color: "var(--color-text-1)",
+                    lineHeight: 1.05,
+                  }}
+                >
+                  Gufran-<span style={{ color: "var(--color-accent)" }}>AI</span>
+                  <sup
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.7rem",
+                      fontWeight: 400,
+                      color: "var(--color-text-3)",
+                      verticalAlign: "super",
+                      marginLeft: 4,
+                    }}
+                  >
+                    ™
+                  </sup>
+                </div>
               </div>
               <div
                 style={{
-                  height: 1,
-                  width: "100%",
-                  background: "var(--color-border)",
-                  margin: "20px 0",
+                  width: 80,
+                  height: 80,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
                 }}
-              />
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "-5px",
+                    borderRadius: "50%",
+                    background: "radial-gradient(circle, rgba(0, 191, 255, 0.25) 0%, transparent 70%)",
+                    filter: "blur(4px)",
+                    animation: "pulse-ring 2.5s ease-out infinite",
+                  }}
+                />
+                <img
+                  src="/assets/avatar-ai.png"
+                  alt="Gufran AI Holographic Avatar"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    position: "relative",
+                    zIndex: 1,
+                    filter: "drop-shadow(0 0 10px rgba(0, 191, 255, 0.75))",
+                    animation: "character-float 4s ease-in-out infinite",
+                  }}
+                />
+              </div>
             </div>
+            <div
+              style={{
+                height: 1,
+                width: "100%",
+                background: "var(--color-border)",
+                margin: "20px 0",
+              }}
+            />
 
             <h2
               className="flex items-center gap-3"
@@ -399,21 +436,27 @@ export function AskAI() {
               }}
             >
               <div
-                className="flex items-center justify-center"
+                className="flex items-center justify-center relative overflow-hidden"
                 style={{
                   width: 40,
                   height: 40,
                   flexShrink: 0,
-                  background: "var(--color-accent-dim)",
-                  border: "1px solid var(--color-accent-border)",
+                  background: "rgba(0, 191, 255, 0.1)",
+                  border: "1px solid rgba(0, 191, 255, 0.35)",
                   borderRadius: "50%",
-                  fontFamily: "var(--font-sans)",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: "var(--color-accent)",
+                  boxShadow: "0 0 10px rgba(0, 191, 255, 0.25)",
                 }}
               >
-                GA
+                <img
+                  src="/assets/avatar-ai.png"
+                  alt="AI Avatar"
+                  style={{
+                    width: "120%",
+                    height: "120%",
+                    objectFit: "contain",
+                    marginTop: "-2px",
+                  }}
+                />
               </div>
               <div>
                 <div
@@ -509,7 +552,29 @@ export function AskAI() {
                   }
                 >
                   {message.role === "assistant" && (
-                    <span className="ask-ai-tag">GA</span>
+                    <span
+                      className="ask-ai-tag inline-flex items-center justify-center relative overflow-hidden align-middle"
+                      style={{
+                        width: 20,
+                        height: 20,
+                        background: "rgba(0, 191, 255, 0.1)",
+                        border: "1px solid rgba(0, 191, 255, 0.35)",
+                        borderRadius: "50%",
+                        marginRight: 6,
+                        verticalAlign: "text-bottom",
+                      }}
+                    >
+                      <img
+                        src="/assets/avatar-ai.png"
+                        alt="AI"
+                        style={{
+                          width: "140%",
+                          height: "140%",
+                          objectFit: "contain",
+                          marginTop: "-1px",
+                        }}
+                      />
+                    </span>
                   )}
                   {message.content}
                 </motion.div>
@@ -522,6 +587,29 @@ export function AskAI() {
                   className="ask-ai-message-assistant"
                   aria-label="Gufran-AI is typing"
                 >
+                  <span
+                    className="ask-ai-tag inline-flex items-center justify-center relative overflow-hidden align-middle"
+                    style={{
+                      width: 20,
+                      height: 20,
+                      background: "rgba(0, 191, 255, 0.1)",
+                      border: "1px solid rgba(0, 191, 255, 0.35)",
+                      borderRadius: "50%",
+                      marginRight: 6,
+                      verticalAlign: "text-bottom",
+                    }}
+                  >
+                    <img
+                      src="/assets/avatar-ai.png"
+                      alt="AI"
+                      style={{
+                        width: "140%",
+                        height: "140%",
+                        objectFit: "contain",
+                        marginTop: "-1px",
+                      }}
+                    />
+                  </span>
                   <span className="ask-ai-typing-dot" />
                   <span
                     className="ask-ai-typing-dot"

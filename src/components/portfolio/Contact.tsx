@@ -29,17 +29,17 @@ function ContactCharacter({ pose }: { pose: CharPose }) {
   const [rightPupil, setRightPupil] = useState({ x: 0, y: 0 });
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Eye centers in SVG coords (viewBox 0 0 120 120)
-  const LEFT_EYE = { x: 44, y: 52 };
-  const RIGHT_EYE = { x: 76, y: 52 };
-  const MAX_DIST = 4;
+  // Eye centers in SVG coords (viewBox 0 0 380 430)
+  const LEFT_EYE = { x: 110.3, y: 148.8 };
+  const RIGHT_EYE = { x: 161.5, y: 139.7 };
+  const MAX_DIST = 4.5;
 
   const updatePupils = useCallback((clientX: number, clientY: number) => {
     const svg = svgRef.current;
     if (!svg) return;
     const rect = svg.getBoundingClientRect();
-    const scaleX = 120 / rect.width;
-    const scaleY = 120 / rect.height;
+    const scaleX = 380 / rect.width;
+    const scaleY = 430 / rect.height;
     const svgX = (clientX - rect.left) * scaleX;
     const svgY = (clientY - rect.top) * scaleY;
 
@@ -47,7 +47,7 @@ function ContactCharacter({ pose }: { pose: CharPose }) {
       const dx = svgX - eye.x;
       const dy = svgY - eye.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const clamped = Math.min(MAX_DIST, dist / 10);
+      const clamped = Math.min(MAX_DIST, dist / 12);
       const angle = Math.atan2(dy, dx);
       return { x: Math.cos(angle) * clamped, y: Math.sin(angle) * clamped };
     };
@@ -89,177 +89,92 @@ function ContactCharacter({ pose }: { pose: CharPose }) {
     >
       <svg
         ref={svgRef}
-        viewBox="0 0 120 120"
-        width="120"
-        height="120"
+        viewBox="0 0 380 430"
+        width="160"
+        height="181"
         xmlns="http://www.w3.org/2000/svg"
         style={{ overflow: "visible" }}
       >
-        {/* Shoulders */}
-        <path
-          d="M10 115 Q10 90 30 85 L45 82 L60 80 L75 82 L90 85 Q110 90 110 115 Z"
-          fill="var(--color-surface-2)"
-        />
-        {/* Hoodie collar */}
-        <path
-          d="M45 82 Q60 88 75 82"
-          fill="none"
-          stroke="#222"
-          strokeWidth="2"
-        />
+        <style>{`
+          @keyframes char-wave-sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(2.5deg); }
+          }
+        `}</style>
+        <defs>
+          {/* Shadows */}
+          <filter id="char-shadow-contact" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#000" floodOpacity="0.4" />
+          </filter>
 
-        {/* Neck */}
-        <rect x="54" y="68" width="12" height="14" rx="4" fill="#c8956c" />
+          {/* Eye Gradients */}
+          <radialGradient id="iris-grad-contact" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#6e4224" />
+            <stop offset="80%" stopColor="#2c170b" />
+          </radialGradient>
+        </defs>
 
-        {/* Head */}
-        <ellipse cx="60" cy="52" rx="28" ry="30" fill="#c8956c" />
-
-        {/* Ears */}
-        <ellipse cx="32" cy="52" rx="5" ry="7" fill="#c8956c" />
-        <ellipse cx="32" cy="52" rx="3" ry="5" fill="#b8855c" />
-        <ellipse cx="88" cy="52" rx="5" ry="7" fill="#c8956c" />
-        <ellipse cx="88" cy="52" rx="3" ry="5" fill="#b8855c" />
-
-        {/* Hair */}
-        <ellipse cx="60" cy="28" rx="28" ry="14" fill="#1a1008" />
-        <ellipse cx="34" cy="38" rx="8" ry="12" fill="#1a1008" />
-        <ellipse cx="86" cy="38" rx="8" ry="12" fill="#1a1008" />
-        <path
-          d="M50 24 Q55 16 60 22"
-          stroke="#241508"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <path
-          d="M60 22 Q65 14 70 21"
-          stroke="#241508"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-        />
-
-        {/* Eyebrows */}
-        <path
-          d="M36 44 Q44 41 50 43"
-          stroke="#1a1008"
-          strokeWidth="2"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <path
-          d="M70 43 Q76 41 84 44"
-          stroke="#1a1008"
-          strokeWidth="2"
-          fill="none"
-          strokeLinecap="round"
-        />
-
-        {/* Eye whites */}
-        <circle cx={LEFT_EYE.x} cy={LEFT_EYE.y} r="8" fill="white" />
-        <circle cx={RIGHT_EYE.x} cy={RIGHT_EYE.y} r="8" fill="white" />
-
-        {/* Pupils — tracking */}
-        <circle
-          cx={LEFT_EYE.x + leftPupil.x}
-          cy={LEFT_EYE.y + leftPupil.y}
-          r="3.5"
-          fill="#1a1a1a"
-        />
-        <circle
-          cx={RIGHT_EYE.x + rightPupil.x}
-          cy={RIGHT_EYE.y + rightPupil.y}
-          r="3.5"
-          fill="#1a1a1a"
-        />
-        {/* Pupil shine */}
-        <circle
-          cx={LEFT_EYE.x + leftPupil.x + 1}
-          cy={LEFT_EYE.y + leftPupil.y - 1}
-          r="1"
-          fill="rgba(255,255,255,0.7)"
-        />
-        <circle
-          cx={RIGHT_EYE.x + rightPupil.x + 1}
-          cy={RIGHT_EYE.y + rightPupil.y - 1}
-          r="1"
-          fill="rgba(255,255,255,0.7)"
-        />
-
-        {/* Nose */}
-        <path
-          d="M57 57 Q60 61 63 57"
-          stroke="#b8855c"
-          strokeWidth="1.5"
-          fill="none"
-          strokeLinecap="round"
-        />
-
-        {/* Expression by pose */}
-        {pose === "default" && (
-          <path
-            d="M52 65 Q60 70 68 65"
-            stroke="#a07050"
-            strokeWidth="1.5"
-            fill="none"
-            strokeLinecap="round"
+        <g
+          filter="url(#char-shadow-contact)"
+          style={{
+            transformOrigin: "190px 430px",
+            animation: pose === "wave" ? "char-wave-sway 0.5s ease-in-out infinite" : "none",
+          }}
+        >
+          {/* Waving 3D Character image */}
+          <image
+            href="/assets/avatar-contact-cropped.png"
+            x="0"
+            y="0"
+            width="380"
+            height="430"
           />
-        )}
-        {pose === "thumbsup" && (
-          <>
-            {/* Big smile */}
-            <path
-              d="M50 64 Q60 72 70 64"
-              stroke="#a07050"
-              strokeWidth="2"
-              fill="none"
-              strokeLinecap="round"
-            />
-            {/* Thumbs up arm */}
-            <path
-              d="M95 95 Q105 80 100 70 Q98 65 94 68 Q90 62 86 66 L88 80 Z"
-              fill="#c8956c"
-            />
-            <rect
-              x="84"
-              y="60"
-              width="10"
-              height="14"
-              rx="5"
-              fill="#c8956c"
-              transform="rotate(-15 89 67)"
-            />
-          </>
-        )}
-        {pose === "wave" && (
-          <>
-            <path
-              d="M50 64 Q60 72 70 64"
-              stroke="#a07050"
-              strokeWidth="2"
-              fill="none"
-              strokeLinecap="round"
-            />
-            {/* Waving arm */}
-            <path
-              d="M90 90 Q105 75 108 60"
-              stroke="#c8956c"
-              strokeWidth="10"
-              fill="none"
-              strokeLinecap="round"
-              style={{ animation: "char-wave 0.4s ease-in-out 3" }}
-            />
-            {/* Hand */}
-            <ellipse
-              cx="108"
-              cy="58"
-              rx="8"
-              ry="6"
-              fill="#c8956c"
-              transform="rotate(-20 108 58)"
-            />
-          </>
-        )}
+
+          {/* Eyes White Base Overlay to hide original pupils */}
+          <ellipse cx={LEFT_EYE.x} cy={LEFT_EYE.y} rx="10.5" ry="8.5" fill="white" />
+          <ellipse cx={RIGHT_EYE.x} cy={RIGHT_EYE.y} rx="10.5" ry="8.5" fill="white" />
+
+          {/* Tracking Pupils */}
+          {/* Left Eye */}
+          <circle
+            cx={LEFT_EYE.x + leftPupil.x}
+            cy={LEFT_EYE.y + leftPupil.y}
+            r="6.2"
+            fill="url(#iris-grad-contact)"
+          />
+          <circle
+            cx={LEFT_EYE.x + leftPupil.x}
+            cy={LEFT_EYE.y + leftPupil.y}
+            r="3.2"
+            fill="#0c0c0f"
+          />
+          <circle
+            cx={LEFT_EYE.x + leftPupil.x + 1.2}
+            cy={LEFT_EYE.y + leftPupil.y - 1.2}
+            r="1.4"
+            fill="white"
+          />
+
+          {/* Right Eye */}
+          <circle
+            cx={RIGHT_EYE.x + rightPupil.x}
+            cy={RIGHT_EYE.y + rightPupil.y}
+            r="6.2"
+            fill="url(#iris-grad-contact)"
+          />
+          <circle
+            cx={RIGHT_EYE.x + rightPupil.x}
+            cy={RIGHT_EYE.y + rightPupil.y}
+            r="3.2"
+            fill="#0c0c0f"
+          />
+          <circle
+            cx={RIGHT_EYE.x + rightPupil.x + 1.2}
+            cy={RIGHT_EYE.y + rightPupil.y - 1.2}
+            r="1.4"
+            fill="white"
+          />
+        </g>
       </svg>
     </div>
   );
