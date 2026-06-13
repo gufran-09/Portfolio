@@ -1,187 +1,129 @@
 import { motion } from "framer-motion";
-import { Search, Layers, Code2, Rocket } from "lucide-react";
 import { MarqueeTitle } from "./MarqueeTitle";
 import "./Methodology.css";
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
-  },
-};
-
-const steps = [
+const phases = [
   {
-    num: "01",
-    Icon: Search,
-    title: "Discover",
-    desc: "Deep understanding before a single line of code.",
+    num: "PHASE 01",
+    title: "Plan & analyze",
+    desc: "Gather requirements, map constraints, and define success metrics with stakeholders.",
+    iconBg: "#2d2060",
+    iconColor: "#7c6ef5",
   },
   {
-    num: "02",
-    Icon: Layers,
+    num: "PHASE 02",
     title: "Design",
-    desc: "Architecture, API contracts, component hierarchy first.",
+    desc: "Architect system boundaries, API contracts, data models and failure modes.",
+    iconBg: "#0f3d2e",
+    iconColor: "#22c55e",
   },
   {
-    num: "03",
-    Icon: Code2,
-    title: "Build",
-    desc: "Typed, tested, documented. CI/CD from commit one.",
+    num: "PHASE 03",
+    title: "Develop",
+    desc: "Type safe code, code review and unit tests, with trunk-based development.",
+    iconBg: "#3d1a0f",
+    iconColor: "#f97316",
   },
   {
-    num: "04",
-    Icon: Rocket,
-    title: "Ship",
-    desc: "Deploy early, measure everything, iterate fast.",
+    num: "PHASE 04",
+    title: "Test & integrate",
+    desc: "Automated integration, regression and security testing inside a CI pipeline.",
+    iconBg: "#3d0f1a",
+    iconColor: "#ec4899",
+  },
+  {
+    num: "PHASE 05",
+    title: "Deploy",
+    desc: "Containerized, infrastructure as code releases with progressive rollouts.",
+    iconBg: "#0f2a3d",
+    iconColor: "#38bdf8",
+  },
+  {
+    num: "PHASE 06",
+    title: "Monitor & iterate",
+    desc: "Dashboards, alerting and on-call feedback close the loop into the next plan.",
+    iconBg: "#2a3d0f",
+    iconColor: "#a3e635",
   },
 ];
 
-export function Methodology() {
-  return (
-    <section
-      id="methodology"
-      className="methodology-section"
-    >
-      <MarqueeTitle text="HOW I WORK" direction="left" />
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="section-header"
-        >
-          <div className="section-label">03 / HOW I WORK</div>
-          <h2 className="h1">My development process.</h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.num}
-              className="step-card"
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.45, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ scale: 1.03 }}
-            >
-              <div className="step-number" style={{ color: "var(--color-text-4)" }}>
-                {step.num}
-              </div>
-              <step.Icon
-                size={24}
-                className="step-icon"
-              />
-              <h3 className="h3 mb-3">{step.title}</h3>
-              <p className="body">{step.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-import { Search, Layers, Code2, Rocket } from "lucide-react";
-import { MarqueeTitle } from "./MarqueeTitle";
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
+const containerVariants = {
+  hidden: {},
   visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
+    transition: { staggerChildren: 0.08 },
   },
 };
 
-const steps = [
-  {
-    num: "01",
-    Icon: Search,
-    title: "Discover",
-    desc: "Deep understanding before a single line of code.",
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
   },
-  {
-    num: "02",
-    Icon: Layers,
-    title: "Design",
-    desc: "Architecture, API contracts, component hierarchy first.",
-  },
-  {
-    num: "03",
-    Icon: Code2,
-    title: "Build",
-    desc: "Typed, tested, documented. CI/CD from commit one.",
-  },
-  {
-    num: "04",
-    Icon: Rocket,
-    title: "Ship",
-    desc: "Deploy early, measure everything, iterate fast.",
-  },
-];
+};
 
 export function Methodology() {
   return (
-    <section
-      id="methodology"
-      className="section bg-section"
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        paddingBottom: "calc(128px + 3rem)",
-      }}
-    >
+    <section id="methodology" className="methodology-section section-has-marquee">
       <MarqueeTitle text="HOW I WORK" direction="left" />
+
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          className="methodology-header"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16"
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="section-label">03 / HOW I WORK</div>
-          <h2 className="h1">My development process.</h2>
+          <div className="section-label" style={{ color: "var(--color-accent-text)", marginBottom: "0.75rem" }}>
+            03 / METHODOLOGY
+          </div>
+          <h2 className="methodology-title">How I engineer software</h2>
+          <p className="methodology-subtitle">
+            An end-to-end SDLC and DevOps loop, refined across a decade of shipping
+            production systems at scale.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
-          {steps.map((step, i) => (
+        {/* Cards grid */}
+        <motion.div
+          className="methodology-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {phases.map((phase) => (
             <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{
-                duration: 0.45,
-                delay: i * 0.06,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="py-12 px-10"
-              style={{
-                borderRight:
-                  i < steps.length - 1
-                    ? "1px solid var(--color-border)"
-                    : "none",
-              }}
+              key={phase.num}
+              className="phase-card"
+              variants={cardVariants}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
-              <div className="h1 mb-6" style={{ color: "var(--color-text-4)" }}>
-                {step.num}
+              {/* Colored square icon */}
+              <div
+                className="phase-icon-box"
+                style={{ background: phase.iconBg }}
+              >
+                <div
+                  className="phase-icon-dot"
+                  style={{ background: phase.iconColor }}
+                />
               </div>
-              <step.Icon
-                size={20}
-                style={{ color: "var(--color-accent)", marginBottom: "24px" }}
-              />
-              <h3 className="h3 mb-3">{step.title}</h3>
-              <p className="body">{step.desc}</p>
+
+              {/* Phase label */}
+              <div className="phase-label">{phase.num}</div>
+
+              {/* Title */}
+              <h3 className="phase-title">{phase.title}</h3>
+
+              {/* Description */}
+              <p className="phase-desc">{phase.desc}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,13 +1,47 @@
 import { motion } from "framer-motion";
-import { EXPERIENCE } from "@/lib/portfolio/data";
 import { MarqueeTitle } from "./MarqueeTitle";
+import "./Experience.css";
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
+const EXPERIENCES = [
+  {
+    title: "Software engineer & tech lead",
+    company: "Flyout Tours",
+    type: "Remote",
+    duration: "7 months",
+    current: true,
+    bullets: [
+      "Leading frontend architecture and development for the company's Next.js platform, owning technical decisions end-to-end.",
+      "Driving performance, SEO and rendering strategy through SSR, ISR and route-level optimisation.",
+      "Mentoring contributors and setting code quality, review and component-architecture standards for the team.",
+    ],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+  },
+  {
+    title: "Frontend developer",
+    company: "StreetOne Trading",
+    type: "Remote",
+    duration: "2 months",
+    current: false,
+    bullets: [
+      "Built and maintained responsive trading-platform UI components in React, focused on data-dense dashboards.",
+      "Translated design specs into pixel-accurate, accessible layouts with a glassmorphism-driven dark UI.",
+      "Fixed cross-browser layout and responsiveness issues across core trading views.",
+    ],
+    tech: ["React", "JavaScript", "CSS3", "Responsive design"],
+  },
+];
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -15,93 +49,116 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="section bg-section"
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        paddingBottom: "calc(128px + 3rem)",
-      }}
+      className="experience-section section-has-marquee"
     >
       <MarqueeTitle text="EXPERIENCE" direction="left" />
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+
+      <div className="container exp-container">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          className="exp-header"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="section-label">05 / EXPERIENCE</div>
-          <h2 className="h1 mb-16">Where I've worked.</h2>
+          <div
+            className="section-label"
+            style={{ color: "var(--color-accent-text)", marginBottom: "0.75rem" }}
+          >
+            02 / EXPERIENCE
+          </div>
+          <h2 className="exp-title">Where I've made an impact</h2>
+          <p className="exp-subtitle">
+            Remote roles leading and building production frontends across Next.js and React.
+          </p>
         </motion.div>
 
-        <div className="space-y-4">
-          {EXPERIENCE.map((exp, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{
-                duration: 0.45,
-                delay: i * 0.06,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="card p-8"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                {/* Left column */}
-                <div className="md:col-span-1">
-                  <h3 className="h3 mb-1">{exp.company}</h3>
-                  <p
-                    className="small mb-3"
-                    style={{ color: "var(--color-accent)" }}
-                  >
-                    {exp.role}
-                  </p>
-                  <p className="mono mb-3">{exp.date}</p>
-                  <span
-                    className="inline-block px-2 py-1 rounded-[4px] text-xs font-medium"
+        {/* Timeline */}
+        <div className="exp-timeline">
+          {/* Left spine */}
+          <div className="exp-spine" />
+
+          <motion.div
+            className="exp-cards"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            {EXPERIENCES.map((exp, i) => (
+              <div key={i} className="exp-row">
+                {/* Timeline dot */}
+                <div className="exp-dot-wrap">
+                  <div
+                    className="exp-dot"
                     style={{
-                      background: "var(--color-surface-2)",
-                      border: "1px solid var(--color-border)",
-                      color: "var(--color-text-3)",
+                      background: exp.current
+                        ? "var(--color-accent)"
+                        : "var(--color-surface-3)",
+                      borderColor: exp.current
+                        ? "var(--color-accent)"
+                        : "var(--color-border-hover)",
                     }}
-                  >
-                    {exp.location}
-                  </span>
+                  />
                 </div>
 
-                {/* Divider */}
-                <div
-                  className="hidden md:block"
-                  style={{ borderRight: "1px solid var(--color-border)" }}
-                />
+                {/* Card */}
+                <motion.div className="exp-card" variants={cardVariants}>
+                  {/* Card header row */}
+                  <div className="exp-card-top">
+                    <div className="exp-card-meta">
+                      <h3 className="exp-role">{exp.title}</h3>
+                      <div className="exp-company-row">
+                        <span className="exp-company">{exp.company}</span>
+                        <span className="exp-dot-sep">·</span>
+                        <span className="exp-type">{exp.type}</span>
+                        <span className="exp-dot-sep">·</span>
+                        <span className="exp-duration">{exp.duration}</span>
+                      </div>
+                    </div>
+                    <span
+                      className="exp-badge"
+                      style={{
+                        background: exp.current
+                          ? "transparent"
+                          : "var(--color-surface-3)",
+                        border: exp.current
+                          ? "1px solid var(--color-accent)"
+                          : "1px solid var(--color-border)",
+                        color: exp.current
+                          ? "var(--color-accent-text)"
+                          : "var(--color-text-3)",
+                      }}
+                    >
+                      {exp.current ? "CURRENT" : "PAST"}
+                    </span>
+                  </div>
 
-                {/* Right column */}
-                <div className="md:col-span-2">
-                  <ul className="space-y-2 mb-4">
-                    {exp.bullets.map((bullet, j) => (
-                      <li key={j} className="body flex gap-3">
-                        <span style={{ color: "var(--color-border-hover)" }}>
-                          —
-                        </span>
-                        <span>{bullet}</span>
+                  {/* Divider */}
+                  <div className="exp-divider" />
+
+                  {/* Bullets */}
+                  <ul className="exp-bullets">
+                    {exp.bullets.map((b, j) => (
+                      <li key={j} className="exp-bullet">
+                        {b}
                       </li>
                     ))}
                   </ul>
 
                   {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="exp-tags">
                     {exp.tech.map((t) => (
-                      <span key={t} className="pill">
+                      <span key={t} className="exp-tag">
                         {t}
                       </span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

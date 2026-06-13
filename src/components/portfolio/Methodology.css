@@ -1,0 +1,129 @@
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* METHODOLOGY SECTION                                                         */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+.methodology-section {
+  position: relative;
+  background: var(--color-bg);
+  padding: var(--space-32) 0;
+  overflow: hidden;
+}
+
+.methodology-section .container {
+  max-width: 1400px;
+  padding: 0 2rem;
+}
+
+/* ── Header ── */
+.methodology-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.methodology-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--color-text-1);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+.methodology-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-text-2);
+  line-height: 1.75;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ── Cards grid ── */
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ── Individual phase card ── */
+.phase-card {
+  background: var(--color-surface);
+  padding: 1.75rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: default;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.phase-card:hover {
+  background: var(--color-surface-2);
+}
+
+/* ── Colored square icon ── */
+.phase-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.phase-icon-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* ── Phase label ── */
+.phase-label {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-3);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Phase title ── */
+.phase-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-1);
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Phase description ── */
+.phase-desc {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-2);
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .methodology-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .methodology-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1px;
+  }
+}
