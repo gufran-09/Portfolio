@@ -892,7 +892,7 @@ export function About() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.45 }}
         >
-          <div className="section-label">01 / ABOUT</div>
+          <div className="section-label">02 / ABOUT</div>
           <h2 className="h1 mb-16">The person behind the code.</h2>
         </motion.div>
 

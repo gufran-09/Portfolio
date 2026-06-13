@@ -21,8 +21,12 @@ export function Skills() {
         >
           <div className="section-label">01 / TECH STACK</div>
           <h2 className="h1">My Tech Stack.</h2>
-          <p className="body max-w-xl mx-auto text-center" style={{ color: "var(--color-text-2)" }}>
-            Hover over the 3D keycaps or press any keys on your keyboard to reveal details about my skills and experience.
+          <p
+            className="body max-w-xl mx-auto text-center"
+            style={{ color: "var(--color-text-2)" }}
+          >
+            Hover over the 3D keycaps or press any keys on your keyboard to
+            reveal details about my skills and experience.
           </p>
           <div className="flex justify-center items-center gap-2 mt-4">
             <span

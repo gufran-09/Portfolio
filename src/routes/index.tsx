@@ -3,6 +3,7 @@ import { CustomCursor } from "@/components/portfolio/CustomCursor";
 import { ReadingProgress } from "@/components/portfolio/ReadingProgress";
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
+import { Skills } from "@/components/portfolio/Skills";
 import { About } from "@/components/portfolio/About";
 import { Methodology } from "@/components/portfolio/Methodology";
 import { Projects } from "@/components/portfolio/Projects";
@@ -50,6 +51,7 @@ function Index() {
         <Navbar active={active} />
         <main>
           <Hero />
+          <Skills />
           <About />
           <Methodology />
           <Projects />

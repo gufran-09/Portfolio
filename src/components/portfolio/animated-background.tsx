@@ -156,7 +156,8 @@ const AnimatedBackground = () => {
     gsap.set(kbd.position, heroState.position);
 
     // Section transitions matching page layout
-    createSectionTimeline("#about", "about", "hero");
+    createSectionTimeline("#skills", "skills", "hero");
+    createSectionTimeline("#about", "about", "skills", "top 70%");
     createSectionTimeline("#projects", "projects", "about", "top 70%");
     createSectionTimeline("#contact", "contact", "projects", "top 30%");
   };
@@ -337,7 +338,7 @@ const AnimatedBackground = () => {
       textMobileLight.visible = mLight;
     };
 
-    if (activeSection !== "about") {
+    if (activeSection !== "skills") {
       setVisibility(false, false, false, false);
     } else if (theme === "dark") {
       if (isMobile) {
@@ -398,8 +399,8 @@ const AnimatedBackground = () => {
     }
 
     const manageAnimations = async () => {
-      // Reset text if not in about section
-      if (activeSection !== "about") {
+      // Reset text if not in skills section
+      if (activeSection !== "skills") {
         splineApp.setVariable("heading", "");
         splineApp.setVariable("desc", "");
       }
