@@ -11,7 +11,7 @@ export function Skills() {
       style={{ minHeight: "100vh", paddingBottom: "128px" }}
     >
       <MarqueeTitle text="TECH STACK" direction="right" />
-      <div className="container relative z-10 text-center flex flex-col justify-center items-center h-full">
+      <div className="container relative z-10 text-center flex flex-col justify-start items-center h-full pt-12 md:pt-20">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -52,7 +52,13 @@ const AnimatedBackground = () => {
     if (!splineApp || selectedSkillRef.current?.name === e.target.name) return;
 
     if (e.target.name === "body" || e.target.name === "platform") {
-      if (selectedSkillRef.current) playReleaseSound();
+      if (selectedSkillRef.current) {
+        playReleaseSound();
+        const prevKeycap = splineApp.findObjectByName(selectedSkillRef.current.name);
+        if (prevKeycap) {
+          gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
+        }
+      }
       setSelectedSkill(null);
       selectedSkillRef.current = null;
       if (splineApp.getVariable("heading") && splineApp.getVariable("desc")) {
@@ -66,10 +72,20 @@ const AnimatedBackground = () => {
       ) {
         const skill = SKILLS[e.target.name as SkillNames];
         if (skill) {
-          if (selectedSkillRef.current) playReleaseSound();
+          if (selectedSkillRef.current) {
+            playReleaseSound();
+            const prevKeycap = splineApp.findObjectByName(selectedSkillRef.current.name);
+            if (prevKeycap) {
+              gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
+            }
+          }
           playPressSound();
           setSelectedSkill(skill);
           selectedSkillRef.current = skill;
+          const keycap = splineApp.findObjectByName(e.target.name);
+          if (keycap) {
+            gsap.to(keycap.position, { y: -10, duration: 0.1, overwrite: "auto" });
+          }
         }
       }
     }
@@ -91,6 +107,12 @@ const AnimatedBackground = () => {
     splineApp.addEventListener("keyUp", () => {
       if (!splineApp || isInputFocused()) return;
       playReleaseSound();
+      if (selectedSkillRef.current) {
+        const keycap = splineApp.findObjectByName(selectedSkillRef.current.name);
+        if (keycap) {
+          gsap.to(keycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
+        }
+      }
       splineApp.setVariable("heading", "");
       splineApp.setVariable("desc", "");
     });
@@ -98,11 +120,21 @@ const AnimatedBackground = () => {
       if (!splineApp || isInputFocused()) return;
       const skill = SKILLS[e.target.name as SkillNames];
       if (skill) {
+        if (selectedSkillRef.current && selectedSkillRef.current.name !== skill.name) {
+          const prevKeycap = splineApp.findObjectByName(selectedSkillRef.current.name);
+          if (prevKeycap) {
+            gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
+          }
+        }
         playPressSound();
         setSelectedSkill(skill);
         selectedSkillRef.current = skill;
         splineApp.setVariable("heading", skill.label);
         splineApp.setVariable("desc", skill.shortDescription);
+        const keycap = splineApp.findObjectByName(skill.name);
+        if (keycap) {
+          gsap.to(keycap.position, { y: -10, duration: 0.1, overwrite: "auto" });
+        }
       }
     });
     splineApp.addEventListener("mouseHover", handleMouseHover);
@@ -454,6 +486,8 @@ const AnimatedBackground = () => {
     updateKeyboardTransform();
   }, [splineApp, isLoading, activeSection]);
 
+  const isOverlayActive = activeSection !== "hero" && activeSection !== "skills";
+
   return (
     <Suspense fallback={null}>
       <div
@@ -468,6 +502,16 @@ const AnimatedBackground = () => {
             bypassLoading();
           }}
           scene="/assets/skills-keyboard.spline"
+        />
+        {/* Dynamic backdrop overlay to blur and dim the keyboard under text sections */}
+        <div
+          className="absolute inset-0 transition-all duration-700 ease-in-out pointer-events-none"
+          style={{
+            background: isOverlayActive ? "rgba(15, 15, 15, 0.85)" : "rgba(15, 15, 15, 0)",
+            backdropFilter: isOverlayActive ? "blur(12px)" : "blur(0px)",
+            WebkitBackdropFilter: isOverlayActive ? "blur(12px)" : "blur(0px)",
+            zIndex: 1,
+          }}
         />
       </div>
     </Suspense>
