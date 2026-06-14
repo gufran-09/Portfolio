@@ -32,119 +32,48 @@ export function runCommand(raw: string): CommandResult {
 
   if (input === "clear") return { clear: true };
 
-  if (input.startsWith("goto ")) {
-    const target = input.slice(5).trim();
-    const map: Record<string, string> = {
-      home: "home",
-      about: "about",
-      projects: "projects",
-      experience: "experience",
-      education: "education",
-      achievements: "achievements",
-      askai: "ask-ai",
-      ai: "ask-ai",
-      "ask-ai": "ask-ai",
-      methodology: "methodology",
-      contact: "contact",
-    };
-    if (map[target]) {
-      return {
-        lines: [{ text: `✓ Navigating to ${target}...`, color: "success" }],
-        scrollTo: map[target],
-      };
-    }
-    return { lines: [{ text: `Unknown section: ${target}`, color: "error" }] };
-  }
-
   switch (input) {
-    case "whoami":
+    case "about":
       return {
-        lines: [
-          { text: `${IDENTITY.name} — ${IDENTITY.role}`, color: "brand" },
-          { text: `${IDENTITY.location} | 3+ years exp` },
-          { text: `React · Node.js · Java · TypeScript`, color: "muted" },
-        ],
+        lines: [{ text: "Navigating to About section...", color: "brand" }],
+        scrollTo: "about",
       };
-    case "experience": {
-      const top = EXPERIENCE[0];
+    case "skills":
       return {
-        lines: [
-          { text: `Current: ${top.role}`, color: "brand" },
-          { text: `${top.company} · ${top.date}`, color: "muted" },
-        ],
+        lines: [{ text: "Navigating to Skills section...", color: "brand" }],
+        scrollTo: "skills",
       };
-    }
-    case "social":
+    case "experience":
       return {
-        lines: [
-          { text: `GitHub:   ${IDENTITY.github}` },
-          { text: `LinkedIn: ${IDENTITY.linkedin}` },
-          { text: `Email:    ${IDENTITY.email}` },
-        ],
+        lines: [{ text: "Navigating to Experience section...", color: "brand" }],
+        scrollTo: "experience",
       };
-    case "status":
+    case "projects":
       return {
-        lines: [
-          {
-            text: "✓ Available for work — Response time: 24hr",
-            color: "success",
-          },
-        ],
+        lines: [{ text: "Navigating to Projects section...", color: "brand" }],
+        scrollTo: "projects",
       };
-    case "streak":
+    case "contact":
       return {
-        lines: [
-          { text: "🔥 342 day coding streak on Codolio", color: "brand" },
-          { text: "📊 1000+ problems solved on LeetCode" },
-        ],
-      };
-    case "joke":
-      return {
-        lines: [{ text: JOKES[Math.floor(Math.random() * JOKES.length)] }],
-      };
-    case "coffee":
-      return {
-        lines: [
-          { text: "☕ Brewing... Gufran runs on 3 cups/day." },
-          { text: "Current caffeine level: ████████░░ 80%", color: "brand" },
-        ],
-      };
-    case "matrix":
-      return {
-        matrix: true,
-        lines: [{ text: "Entering the matrix...", color: "brand" }],
-      };
-    case "hire":
-      return {
-        lines: [
-          { text: "📧 Redirecting to contact section...", color: "brand" },
-        ],
+        lines: [{ text: "Navigating to Contact section...", color: "brand" }],
         scrollTo: "contact",
       };
-    case "askai":
-    case "ai":
+    case "secret":
       return {
-        lines: [{ text: "🤖 Opening Gufran-AI...", color: "brand" }],
-        scrollTo: "ask-ai",
-        scrollDelayMs: 800,
+        matrix: true,
+        lines: [{ text: "🤫 Entering the Matrix...", color: "success" }],
       };
     case "help":
       return {
         lines: [
-          { text: "Available commands:", color: "brand" },
-          { text: "  goto <section>   Navigate to a section" },
-          { text: "  whoami           About me" },
-          { text: "  experience       Current role" },
-          { text: "  social           My social links" },
-          { text: "  status           Availability" },
-          { text: "  streak           Coding streak stats" },
-          { text: "  joke             Random dev joke" },
-          { text: "  coffee           Caffeine level" },
-          { text: "  matrix           Enter the matrix" },
-          { text: "  hire             Jump to contact" },
-          { text: "  askai / ai       Open Gufran-AI" },
-          { text: "  clear            Clear terminal" },
-          { text: "  help             Show this list" },
+          { text: "Available commands:", color: "default" },
+          { text: "  - about: Learn about me" },
+          { text: "  - skills: View my technical skills" },
+          { text: "  - experience: See my work experience" },
+          { text: "  - projects: View my projects" },
+          { text: "  - contact: Get my contact details" },
+          { text: "  - clear: Clear the terminal" },
+          { text: "  - secret: Try to find my secret Easter eggs!" },
         ],
       };
     default:

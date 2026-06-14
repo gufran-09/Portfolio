@@ -8,17 +8,16 @@ import {
 } from "@/lib/portfolio/terminalCommands";
 
 const WELCOME: Line[] = [
-  { text: "Welcome to Gufran's portfolio terminal v1.0", color: "brand" },
-  { text: "Type 'help' to see available commands.", color: "muted" },
+  { text: "Welcome to Gufran Ahmed's portfolio terminal. Type 'help' for available commands.", color: "default" },
 ];
 
 const colorMap = {
-  brand: "#6366f1",
-  muted: "#666666",
+  brand: "#7c3aed",
+  muted: "#a1a1aa",
   error: "#f87171",
   success: "#4ade80",
-  command: "#f0f0f0",
-  default: "#a0a0a0",
+  command: "#60a5fa", // Cyan/blue for '$ command'
+  default: "#e4e4e7",
 } as const;
 
 function MatrixRain({ onDone }: { onDone: () => void }) {
@@ -95,7 +94,7 @@ export function Terminal() {
     const raw = input;
     if (!raw.trim()) return;
     const promptLine: Line = {
-      text: `alex@portfolio:~$ ${raw}`,
+      text: `$ ${raw}`,
       color: "command",
     };
     const result = runCommand(raw);
@@ -156,22 +155,15 @@ export function Terminal() {
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => setOpen(true)}
             title="Open Terminal (press /)"
-            className="fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-[10px] border transition-colors"
+            className="fixed bottom-6 right-6 z-40 grid h-14 w-14 place-items-center rounded-full shadow-2xl transition-transform hover:scale-105 active:scale-95"
             style={{
-              background: "var(--color-surface)",
-              borderColor: "var(--color-border)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--color-surface-2)";
-              e.currentTarget.style.borderColor = "var(--color-border-hover)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--color-surface)";
-              e.currentTarget.style.borderColor = "var(--color-border)";
+              background: "#7c3aed",
+              color: "#ffffff",
+              boxShadow: "0 10px 25px -5px rgba(124, 58, 237, 0.4)",
             }}
             aria-label="Open Terminal"
           >
-            <TerminalIcon size={18} style={{ color: "#6366f1" }} />
+            <span className="font-mono text-xl font-bold">{`>_`}</span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -183,48 +175,39 @@ export function Terminal() {
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, x: 40, y: 40 }}
             transition={{ type: "spring", damping: 22, stiffness: 240 }}
-            className="fixed bottom-6 right-6 z-50 flex w-[min(360px,90vw)] flex-col overflow-hidden rounded-xl border"
+            className="fixed bottom-6 right-6 z-50 flex w-[min(480px,90vw)] flex-col overflow-hidden rounded-xl border"
             style={{
-              height: 280,
-              background: "rgba(15,15,15,0.97)",
-              borderColor: "#2a2a2a",
-              backdropFilter: "blur(20px)",
+              height: 380,
+              background: "#121212",
+              borderColor: "rgba(255,255,255,0.06)",
+              boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.7)",
             }}
           >
             {/* Header */}
             <div
-              className="flex items-center gap-2 border-b px-3.5 py-2.5"
-              style={{ background: "#1e1e1e", borderColor: "#2a2a2a" }}
+              className="flex items-center justify-between px-4 py-3"
+              style={{ background: "#7c3aed" }}
             >
-              <button
-                onClick={() => setOpen(false)}
-                className="h-2 w-2 rounded-full"
-                style={{ background: "#f87171" }}
-                aria-label="Close terminal"
-              />
-              <span className="h-2 w-2 rounded-full bg-[#f59e0b]" />
-              <span
-                className="h-2 w-2 rounded-full"
-                style={{ background: "#4ade80" }}
-              />
-              <span
-                className="flex-1 text-center font-mono text-[0.72rem]"
-                style={{ color: "#666666" }}
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-white text-sm font-semibold">{`>_ Terminal`}</span>
+              </div>
+              <button 
+                onClick={() => setOpen(false)} 
+                aria-label="Close"
+                className="text-white opacity-80 hover:opacity-100 transition-opacity"
               >
-                gufran@portfolio ~ terminal
-              </span>
-              <button onClick={() => setOpen(false)} aria-label="Close">
-                <X size={12} style={{ color: "#666666" }} />
+                <X size={16} />
               </button>
             </div>
 
             {/* Body */}
             <div
               ref={bodyRef}
-              className="flex-1 overflow-y-auto p-3.5 font-mono text-[0.78rem] leading-[1.7]"
+              className="flex-grow overflow-y-auto p-4 font-mono text-[0.88rem] leading-[1.6] select-text terminal-body-scrollbar"
+              style={{ color: "#e4e4e7" }}
             >
               {lines.map((l, i) => (
-                <div key={i} style={{ color: colorMap[l.color || "default"] }}>
+                <div key={i} style={{ color: colorMap[l.color || "default"], marginBottom: 6, whiteSpace: "pre-wrap" }}>
                   {l.text}
                 </div>
               ))}
@@ -233,26 +216,44 @@ export function Terminal() {
 
             {/* Input */}
             <div
-              className="flex items-center gap-2 border-t px-3.5 py-2.5"
-              style={{ borderColor: "#2a2a2a" }}
+              className="flex items-center gap-2 border-t px-4 py-3"
+              style={{ borderColor: "rgba(255,255,255,0.06)", background: "#121212" }}
             >
               <span
-                className="font-mono text-[0.78rem]"
-                style={{ color: "#6366f1" }}
+                className="font-mono text-[1rem] font-bold"
+                style={{ color: "#7c3aed" }}
               >
-                gufran@portfolio:~$
+                {`>`}
               </span>
               <input
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onKeyDown}
-                className="flex-1 bg-transparent font-mono text-[0.78rem] outline-none"
-                style={{ color: "#f0f0f0" }}
+                placeholder="Type a command..."
+                className="flex-grow bg-transparent font-mono text-[0.88rem] outline-none border-none placeholder-zinc-600"
+                style={{ color: "#ffffff" }}
                 spellCheck={false}
                 autoComplete="off"
               />
             </div>
+            
+            {/* Custom Scrollbar Styles */}
+            <style>{`
+              .terminal-body-scrollbar::-webkit-scrollbar {
+                width: 6px;
+              }
+              .terminal-body-scrollbar::-webkit-scrollbar-track {
+                background: #121212;
+              }
+              .terminal-body-scrollbar::-webkit-scrollbar-thumb {
+                background: #7c3aed;
+                border-radius: 3px;
+              }
+              .terminal-body-scrollbar::-webkit-scrollbar-thumb:hover {
+                background: #6d28d9;
+              }
+            `}</style>
           </motion.div>
         )}
       </AnimatePresence>
