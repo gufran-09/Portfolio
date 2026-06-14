@@ -7,8 +7,8 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="section surface-section relative w-full flex flex-col justify-center items-center pointer-events-auto"
-      style={{ minHeight: "100vh", paddingBottom: "128px" }}
+      className="section surface-section relative w-full flex flex-col justify-start items-center pointer-events-none"
+      style={{ minHeight: "100vh", paddingBottom: "128px", paddingTop: "120px" }}
     >
       <MarqueeTitle text="TECH STACK" direction="right" />
       <div className="container relative z-10 text-center flex flex-col justify-start items-center h-full pt-12 md:pt-20">

@@ -26,6 +26,44 @@ export type CommandResult = {
   matrix?: boolean;
 };
 
+/* ── Red Pill typewriter sequence ─────────────────────────────────────── */
+export const RED_PILL_SEQUENCE: Line[] = [
+  { text: "$ whoami --verbose", color: "command" },
+  { text: `  user:     ${IDENTITY.name}`, color: "default" },
+  { text: `  role:     ${IDENTITY.role}`, color: "default" },
+  { text: "  stack:    React · Next.js · TypeScript · Node.js · Spring Boot", color: "default" },
+  { text: "  db:       PostgreSQL · MongoDB · Redis", color: "default" },
+  { text: "  infra:    Docker · Kubernetes · AWS · GitHub Actions", color: "default" },
+  { text: "", color: "default" },
+  { text: "$ uptime", color: "command" },
+  { text: "  up 3+ years, 0 mass outages, mass caffeine consumed", color: "success" },
+  { text: "  load avg: 1.00 (projects) / 0.85 (leetcode) / 0.42 (sleep)", color: "muted" },
+  { text: "", color: "default" },
+  { text: "$ cat /etc/philosophy", color: "command" },
+  { text: '  "Reality is just well-typed state." 🔴', color: "error" },
+  { text: "", color: "default" },
+  { text: '💡 Try "projects" to see what I\'ve built.', color: "brand" },
+];
+
+/* ── Blue Pill typewriter sequence ────────────────────────────────────── */
+export const BLUE_PILL_SEQUENCE: Line[] = [
+  { text: "$ git log --oneline -5", color: "command" },
+  { text: "  a1b2c3d  fix: mass assign undefined to production db (oops)", color: "muted" },
+  { text: "  e4f5g6h  feat: add dark mode (the only mode)", color: "muted" },
+  { text: '  i7j8k9l  refactor: rename "utils" to "utils2" to "helpers"', color: "muted" },
+  { text: "  m0n1o2p  chore: mass delete node_modules, pray, reinstall", color: "muted" },
+  { text: '  q3r4s5t  docs: update README ("it works on my machine")', color: "muted" },
+  { text: "", color: "default" },
+  { text: "$ git revert HEAD~5..HEAD --no-commit", color: "command" },
+  { text: "  Initiating rollback...", color: "default" },
+  { text: "  ████████████████████░░░░ 78%", color: "success" },
+  { text: "  ████████████████████████ 100%", color: "success" },
+  { text: "", color: "default" },
+  { text: '  ✓ No rollback needed. You\'re already running main. 🔵', color: "success" },
+  { text: "", color: "default" },
+  { text: '💡 Try "about" to learn more about the developer behind the code.', color: "brand" },
+];
+
 export function runCommand(raw: string): CommandResult {
   const input = raw.trim().toLowerCase();
   if (!input) return { lines: [] };
@@ -61,7 +99,7 @@ export function runCommand(raw: string): CommandResult {
     case "secret":
       return {
         matrix: true,
-        lines: [{ text: "🤫 Entering the Matrix...", color: "success" }],
+        lines: [{ text: "🐇 Entering the Matrix...", color: "success" }],
       };
     case "help":
       return {

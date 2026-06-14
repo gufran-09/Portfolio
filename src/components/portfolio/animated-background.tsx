@@ -116,6 +116,18 @@ const AnimatedBackground = () => {
       splineApp.setVariable("heading", "");
       splineApp.setVariable("desc", "");
     });
+
+    splineApp.addEventListener("mouseUp", () => {
+      if (!splineApp || isInputFocused()) return;
+      playReleaseSound();
+      if (selectedSkillRef.current) {
+        const keycap = splineApp.findObjectByName(selectedSkillRef.current.name);
+        if (keycap) {
+          gsap.to(keycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
+        }
+      }
+    });
+
     splineApp.addEventListener("keyDown", (e) => {
       if (!splineApp || isInputFocused()) return;
       const skill = SKILLS[e.target.name as SkillNames];
@@ -137,6 +149,29 @@ const AnimatedBackground = () => {
         }
       }
     });
+
+    splineApp.addEventListener("mouseDown", (e) => {
+      if (!splineApp || isInputFocused()) return;
+      const skill = SKILLS[e.target.name as SkillNames];
+      if (skill) {
+        if (selectedSkillRef.current && selectedSkillRef.current.name !== skill.name) {
+          const prevKeycap = splineApp.findObjectByName(selectedSkillRef.current.name);
+          if (prevKeycap) {
+            gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
+          }
+        }
+        playPressSound();
+        setSelectedSkill(skill);
+        selectedSkillRef.current = skill;
+        splineApp.setVariable("heading", skill.label);
+        splineApp.setVariable("desc", skill.shortDescription);
+        const keycap = splineApp.findObjectByName(skill.name);
+        if (keycap) {
+          gsap.to(keycap.position, { y: -10, duration: 0.1, overwrite: "auto" });
+        }
+      }
+    });
+
     splineApp.addEventListener("mouseHover", handleMouseHover);
   };
 
@@ -501,7 +536,7 @@ const AnimatedBackground = () => {
             setSplineApp(app);
             bypassLoading();
           }}
-          scene="/assets/skills-keyboard.spline"
+          scene="/assets/skills-keyboard.splinecode"
         />
         {/* Dynamic backdrop overlay to blur and dim the keyboard under text sections */}
         <div

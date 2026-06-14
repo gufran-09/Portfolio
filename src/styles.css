@@ -2,13 +2,13 @@
 @source "../src";
 @import "tw-animate-css";
 
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Playfair+Display:wght@400;600;700&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Sora", system-ui, sans-serif;
+  --font-display: "Playfair Display", system-ui, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: 6px;
@@ -36,11 +36,11 @@
   --color-text-4: #404040;
 
   /* Accent - indigo, unchanged */
-  --color-accent: #6366f1;
-  --color-accent-hover: #5558e8;
-  --color-accent-dim: rgba(99, 102, 241, 0.1);
-  --color-accent-border: rgba(99, 102, 241, 0.25);
-  --color-accent-text: #818cf8;
+  --color-accent: #0d9488; /* teal-600 */
+  --color-accent-hover: #0f766e; /* teal-700 */
+  --color-accent-dim: rgba(13, 148, 136, 0.1);
+  --color-accent-border: rgba(13, 148, 136, 0.25);
+  --color-accent-text: #e0f2f1;
 
   /* Status */
   --color-success: #22c55e;
@@ -111,7 +111,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-border-hover);
+    background: var(--color-accent);
     border-radius: 3px;
   }
 
@@ -153,14 +153,6 @@
   font-weight: 600;
   color: var(--color-text-1);
   line-height: 1.3;
-}
-
-.h3 {
-  font-family: var(--font-sans);
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-text-1);
-  line-height: 1.4;
 }
 
 .body {
@@ -664,7 +656,7 @@
 }
 
 .ask-ai-question:hover:not(:disabled) {
-  border-color: var(--color-border-hover);
+  border-color: var(--color-accent);
   color: var(--color-text-1);
   background: var(--color-surface-3);
 }
