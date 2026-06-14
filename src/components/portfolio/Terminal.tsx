@@ -66,10 +66,9 @@ export function Terminal() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    bodyRef.current?.scrollTo({
-      top: bodyRef.current.scrollHeight,
-      behavior: "smooth",
-    });
+    if (bodyRef.current) {
+      bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+    }
   }, [lines, matrix]);
 
   useEffect(() => {
