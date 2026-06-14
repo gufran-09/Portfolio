@@ -333,10 +333,12 @@ function generateGfgCalendar(totalSolved: number, maxStreak: number, userName: s
 
 function GfgPanel({
   stats,
+  calendar: fetchedCalendar,
   loading,
   error,
 }: {
   stats: GfgStats | null;
+  calendar: Record<string, number | string> | null;
   loading: boolean;
   error: boolean;
 }) {
@@ -344,8 +346,9 @@ function GfgPanel({
 
   const calendar = useMemo(() => {
     if (!stats) return undefined;
+    if (fetchedCalendar) return fetchedCalendar;
     return generateGfgCalendar(stats.totalProblemsSolved, stats.maxStreak || 0, stats.userName);
-  }, [stats]);
+  }, [stats, fetchedCalendar]);
 
   if (loading) {
     return (
@@ -619,6 +622,7 @@ export function CodingJourney() {
     null,
   );
   const [gfgStats, setGfgStats] = useState<GfgStats | null>(null);
+  const [gfgCalendar, setGfgCalendar] = useState<Record<string, number | string> | null>(null);
   const [gfgLoading, setGfgLoading] = useState(true);
   const [gfgError, setGfgError] = useState(false);
   const active =
@@ -657,6 +661,8 @@ export function CodingJourney() {
 
     setGfgLoading(true);
     setGfgError(false);
+    
+    // Fetch profile stats
     fetch(`https://gfg-stats.tashif.codes/${USERNAMES.gfg}/profile`)
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data) => {
@@ -684,6 +690,28 @@ export function CodingJourney() {
           setGfgError(true);
           setGfgLoading(false);
         }
+      });
+
+    // Fetch heatmap contributions
+    fetch(`https://gfg-stats.tashif.codes/${USERNAMES.gfg}/heatmap`)
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data) => {
+        if (!cancelled && data?.heatmap && Array.isArray(data.heatmap)) {
+          const mappedRecord: Record<string, number> = {};
+          data.heatmap.forEach((item: { date: string; count: number }) => {
+            if (item.date) {
+              const [y, m, d] = item.date.split("-").map(Number);
+              const utcMidnight = Date.UTC(y, m - 1, d);
+              const unixKey = Math.floor(utcMidnight / 1000).toString();
+              mappedRecord[unixKey] = item.count;
+            }
+          });
+          setGfgCalendar(mappedRecord);
+        }
+      })
+      .catch(() => {
+        // Fallback to generated calendar if heatmap API fails
+        if (!cancelled) setGfgCalendar(null);
       });
 
     return () => {
@@ -769,7 +797,7 @@ export function CodingJourney() {
               <LeetCodePanel stats={leetcodeStats} />
             )}
             {activePlatform === "gfg" && (
-              <GfgPanel stats={gfgStats} loading={gfgLoading} error={gfgError} />
+              <GfgPanel stats={gfgStats} calendar={gfgCalendar} loading={gfgLoading} error={gfgError} />
             )}
             {activePlatform === "codolio" && <CodolioPanel />}
           </motion.div>
