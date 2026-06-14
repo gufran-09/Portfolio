@@ -2,6 +2,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Activity, Code2, ExternalLink, Github, Zap } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { ContributionGraph, type ContributionDay } from "./ContributionGraph";
+import { GitHubContributionGraph } from "./GitHubContributionGraph";
+import { LeetCodeContributionGraph } from "./LeetCodeContributionGraph";
 
 const USERNAMES = {
   github: "gufran-09", // Replace with your GitHub username.
@@ -182,38 +184,37 @@ function LiveNotice({ children }: { children: string }) {
 }
 
 function GithubPanel({ stats }: { stats: GitHubStats | null }) {
+  const [liveTotal, setLiveTotal] = useState<number | null>(null);
+
   return (
     <div>
-      <div className="coding-live-card">
-        <img
-          src={`https://github-readme-activity-graph.vercel.app/graph?username=${USERNAMES.github}&bg_color=161616&color=f0f0f0&line=6366f1&point=818cf8&hide_border=true&theme=github-compact`}
-          alt={`${USERNAMES.github} GitHub activity graph`}
-          style={{ width: "100%", borderRadius: 8, display: "block" }}
-          loading="lazy"
-        />
-      </div>
+      {/* Real GitHub contribution graph — live data */}
+      <GitHubContributionGraph
+        username={USERNAMES.github}
+        onTotalResolved={setLiveTotal}
+      />
+
       {stats ? (
-        <div className="coding-gfg-stats">
+        <div className="coding-gfg-stats" style={{ marginTop: 24 }}>
           <StatCard
             number={String(stats.publicRepos)}
             label="Public Repositories"
-            color="#f0f0f0"
+            color="#818cf8"
           />
           <StatCard
             number={String(stats.followers)}
             label="Followers"
-            color="#f0f0f0"
+            color="#818cf8"
           />
           <StatCard
-            number={String(stats.publicGists)}
-            label="Public Gists"
-            color="#f0f0f0"
+            number={liveTotal !== null ? liveTotal.toLocaleString() : "—"}
+            label="Total Contributions"
+            color="#818cf8"
           />
         </div>
       ) : (
         <LiveNotice>
-          GitHub public profile stats are loading. The graph above is rendered
-          live from GitHub activity data.
+          GitHub contribution data is loading live from the GitHub API.
         </LiveNotice>
       )}
     </div>
@@ -221,30 +222,17 @@ function GithubPanel({ stats }: { stats: GitHubStats | null }) {
 }
 
 function LeetCodePanel({ stats }: { stats: LeetCodeStats | null }) {
-  const heatmapData = useMemo(
-    () => calendarToWeeks(stats?.submissionCalendar),
-    [stats],
-  );
-
   return (
-    <div className="coding-two-col">
-      <div>
-        {heatmapData ? (
-          <ContributionGraph data={heatmapData} colorScale={leetcodeScale} />
-        ) : (
-          <img
-            src={`https://leetcard.jacoblin.cool/${USERNAMES.leetcode}?theme=dark&font=JetBrains+Mono&ext=heatmap&border=0&radius=8`}
-            alt={`${USERNAMES.leetcode} LeetCode profile card`}
-            style={{ width: "100%", borderRadius: 8, display: "block" }}
-            loading="lazy"
-          />
-        )}
-      </div>
-      <div className="coding-stats-stack">
+    <div>
+      {/* LeetCode submission graph – same premium style as GitHub graph */}
+      <LeetCodeContributionGraph
+        calendar={stats?.submissionCalendar}
+        loading={stats === null}
+      />
+
+      <div className="coding-gfg-stats" style={{ marginTop: 24 }}>
         <StatCard
-          number={
-            stats?.totalSolved != null ? String(stats.totalSolved) : "Live"
-          }
+          number={stats?.totalSolved != null ? String(stats.totalSolved) : "—"}
           label="Problems Solved"
           color="#FFA116"
         />
@@ -252,13 +240,13 @@ function LeetCodePanel({ stats }: { stats: LeetCodeStats | null }) {
           number={
             stats?.acceptanceRate != null
               ? `${Math.round(stats.acceptanceRate)}%`
-              : "Live"
+              : "—"
           }
           label="Acceptance Rate"
           color="var(--color-text-1)"
         />
         <StatCard
-          number={stats?.ranking != null ? `#${stats.ranking}` : "Live"}
+          number={stats?.ranking != null ? `#${stats.ranking.toLocaleString()}` : "—"}
           label="Global Ranking"
           color="#FFA116"
         />
