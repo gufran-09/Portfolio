@@ -576,8 +576,8 @@ function GfgPanel({
           color={GFG_GREEN}
         />
         <StatCard
-          number={stats.maxStreak ? String(stats.maxStreak) : "0"}
-          label="Max Streak"
+          number={stats.instituteRank ? `#${stats.instituteRank.toLocaleString()}` : "—"}
+          label="Institute Rank"
           color={GFG_GREEN}
         />
       </div>
