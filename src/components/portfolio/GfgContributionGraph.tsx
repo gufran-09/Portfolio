@@ -268,12 +268,12 @@ export function GfgContributionGraph({
               <div style={{ display: "flex", flexDirection: "column", gap: GAP, width: 20, flexShrink: 0 }}>
                 {["", "Mon", "", "Wed", "", "Fri", ""].map((label, i) => (
                   <div
-                     key={i}
-                     style={{
-                       height: CELL, display: "flex", alignItems: "center",
-                       fontFamily: "var(--font-sans)", fontSize: 10,
-                       color: "rgba(74,222,128,0.7)",
-                     }}
+                    key={i}
+                    style={{
+                      height: CELL, display: "flex", alignItems: "center",
+                      fontFamily: "var(--font-sans)", fontSize: 10,
+                      color: "rgba(74,222,128,0.7)",
+                    }}
                   >
                     {label}
                   </div>

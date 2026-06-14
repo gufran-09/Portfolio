@@ -202,7 +202,7 @@ export function Terminal() {
             {/* Body */}
             <div
               ref={bodyRef}
-              className="flex-grow overflow-y-auto p-4 font-mono text-[0.88rem] leading-[1.6] select-text terminal-body-scrollbar"
+              className="flex-grow min-h-0 overflow-y-auto p-4 font-mono text-[0.88rem] leading-[1.6] select-text terminal-body-scrollbar"
               style={{ color: "#e4e4e7" }}
             >
               {lines.map((l, i) => (

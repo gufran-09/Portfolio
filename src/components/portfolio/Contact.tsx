@@ -30,8 +30,8 @@ function ContactCharacter({ pose }: { pose: CharPose }) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   // Eye centers in SVG coords (viewBox 0 0 380 430)
-  const LEFT_EYE = { x: 110.3, y: 148.8 };
-  const RIGHT_EYE = { x: 161.5, y: 139.7 };
+  const LEFT_EYE = { x: 130.9, y: 138.7 };
+  const RIGHT_EYE = { x: 170.5, y: 138.7 };
   const MAX_DIST = 4.5;
 
   const updatePupils = useCallback((clientX: number, clientY: number) => {
@@ -90,8 +90,8 @@ function ContactCharacter({ pose }: { pose: CharPose }) {
       <svg
         ref={svgRef}
         viewBox="0 0 380 430"
-        width="160"
-        height="181"
+        width="240"
+        height="272"
         xmlns="http://www.w3.org/2000/svg"
         style={{ overflow: "visible" }}
       >
