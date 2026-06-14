@@ -7,7 +7,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="section bg-section relative w-full flex flex-col justify-center items-center pointer-events-auto"
+      className="section surface-section relative w-full flex flex-col justify-center items-center pointer-events-auto"
       style={{ minHeight: "100vh", paddingBottom: "128px" }}
     >
       <MarqueeTitle text="TECH STACK" direction="right" />

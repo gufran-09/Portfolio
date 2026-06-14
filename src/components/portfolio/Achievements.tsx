@@ -21,7 +21,7 @@ const iconMap: Record<string, any> = {
 
 export function Achievements() {
   return (
-    <section id="achievements" className="section bg-section">
+    <section id="achievements" className="section surface-section">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

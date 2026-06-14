@@ -20,7 +20,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="section surface-section"
+      className="section bg-section"
       style={{
         position: "relative",
         overflow: "hidden",

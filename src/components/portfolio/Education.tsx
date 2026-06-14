@@ -15,7 +15,7 @@ export function Education() {
   return (
     <section
       id="education"
-      className="section surface-section"
+      className="section bg-section"
       style={{
         position: "relative",
         overflow: "hidden",
