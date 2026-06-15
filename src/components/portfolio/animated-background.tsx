@@ -35,6 +35,19 @@ const AnimatedBackground = () => {
 
   const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
   const [activeSection, setActiveSection] = useState<Section>("hero");
+  const activeSectionRef = useRef<Section>("hero");
+
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
+
+  const playPress = () => {
+    if (activeSectionRef.current === "skills") playPressSound();
+  };
+
+  const playRelease = () => {
+    if (activeSectionRef.current === "skills") playReleaseSound();
+  };
 
   // Animation controllers refs
   const bongoAnimationRef = useRef<{ start: () => void; stop: () => void }>(
@@ -53,7 +66,7 @@ const AnimatedBackground = () => {
 
     if (e.target.name === "body" || e.target.name === "platform") {
       if (selectedSkillRef.current) {
-        playReleaseSound();
+        playRelease();
         const prevKeycap = splineApp.findObjectByName(selectedSkillRef.current.name);
         if (prevKeycap) {
           gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
@@ -73,13 +86,13 @@ const AnimatedBackground = () => {
         const skill = SKILLS[e.target.name as SkillNames];
         if (skill) {
           if (selectedSkillRef.current) {
-            playReleaseSound();
+            playRelease();
             const prevKeycap = splineApp.findObjectByName(selectedSkillRef.current.name);
             if (prevKeycap) {
               gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
             }
           }
-          playPressSound();
+          playPress();
           setSelectedSkill(skill);
           selectedSkillRef.current = skill;
           const keycap = splineApp.findObjectByName(e.target.name);
@@ -106,7 +119,7 @@ const AnimatedBackground = () => {
 
     splineApp.addEventListener("keyUp", () => {
       if (!splineApp || isInputFocused()) return;
-      playReleaseSound();
+      playRelease();
       if (selectedSkillRef.current) {
         const keycap = splineApp.findObjectByName(selectedSkillRef.current.name);
         if (keycap) {
@@ -119,7 +132,7 @@ const AnimatedBackground = () => {
 
     splineApp.addEventListener("mouseUp", () => {
       if (!splineApp || isInputFocused()) return;
-      playReleaseSound();
+      playRelease();
       if (selectedSkillRef.current) {
         const keycap = splineApp.findObjectByName(selectedSkillRef.current.name);
         if (keycap) {
@@ -138,7 +151,7 @@ const AnimatedBackground = () => {
             gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
           }
         }
-        playPressSound();
+        playPress();
         setSelectedSkill(skill);
         selectedSkillRef.current = skill;
         splineApp.setVariable("heading", skill.label);
@@ -160,7 +173,7 @@ const AnimatedBackground = () => {
             gsap.to(prevKeycap.position, { y: 0, duration: 0.15, overwrite: "auto" });
           }
         }
-        playPressSound();
+        playPress();
         setSelectedSkill(skill);
         selectedSkillRef.current = skill;
         splineApp.setVariable("heading", skill.label);
