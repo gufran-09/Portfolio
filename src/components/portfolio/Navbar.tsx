@@ -9,18 +9,19 @@ import {
   GraduationCap,
   Trophy,
   Mail,
+  BarChart2,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/portfolio/terminalCommands";
 import { useAmbientPlayer } from "./AmbientPlayer";
 
 const PRIMARY_LINKS = [
+  { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "ask-ai", label: "Gufran AI", hasAiDot: true },
 ];
 
 const DROPDOWN_ITEMS = [
-  { id: "about", label: "About", Icon: User },
-  { id: "projects", label: "Projects", Icon: Code2 },
   { id: "education", label: "Education", Icon: GraduationCap },
   { divider: true } as const,
   { id: "achievements", label: "Achievements", Icon: Trophy },
@@ -70,9 +71,9 @@ export function Navbar({ active }: { active: string }) {
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        height: 56,
-        borderBottom: "1px solid var(--color-border)",
-        background: "rgba(10,10,10,0.8)",
+        height: 64,
+        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        background: "rgba(8, 8, 10, 0.75)",
         backdropFilter: "blur(20px)",
       }}
     >
@@ -82,245 +83,263 @@ export function Navbar({ active }: { active: string }) {
           onClick={() => scrollToSection("home")}
           aria-label="Home"
           style={{
-            width: 30,
-            height: 30,
-            background: "#6366f1",
-            color: "#ffffff",
-            borderRadius: 7,
-            border: "none",
+            width: 32,
+            height: 32,
+            background: "rgba(139, 92, 246, 0.1)",
+            border: "1px solid rgba(139, 92, 246, 0.35)",
+            boxShadow: "0 0 12px rgba(139, 92, 246, 0.15)",
+            color: "#e9d5ff",
+            borderRadius: 8,
             fontFamily: "'Sora', sans-serif",
             fontWeight: 700,
-            fontSize: 13,
+            fontSize: 12,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
             flexShrink: 0,
-            transition: "opacity 0.15s ease",
+            transition: "all 0.2s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "rgba(139, 92, 246, 0.18)";
+            e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.5)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "rgba(139, 92, 246, 0.1)";
+            e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.35)";
+          }}
         >
           GA
         </button>
 
-        {/* ── CENTER: Pill Navigation ── */}
+        {/* ── CENTER: Navigation Links ── */}
         <div
-          className="hidden md:flex items-center"
+          className="hidden md:flex items-center gap-8"
           style={{ position: "relative" }}
         >
-          <div
-            style={{
-              background: "var(--color-surface)",
-              border: "1px solid var(--color-border)",
-              borderRadius: 100,
-              padding: 4,
-              display: "inline-flex",
-              gap: 2,
-              alignItems: "center",
-            }}
-          >
-            {PRIMARY_LINKS.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                style={{
-                  padding: "7px 18px",
-                  borderRadius: 100,
-                  fontFamily: "'Inter', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 13,
-                  color: isLinkActive(link.id)
-                    ? "#f0f0f0"
-                    : "var(--color-text-3)",
-                  background: isLinkActive(link.id)
-                    ? "var(--color-surface-2)"
-                    : "transparent",
-                  border: isLinkActive(link.id)
-                    ? "1px solid var(--color-border)"
-                    : "1px solid transparent",
-                  cursor: "pointer",
-                  transition: "all 0.15s ease",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 0,
-                }}
-                onMouseEnter={(e) => {
-                  if (!isLinkActive(link.id)) {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-                    e.currentTarget.style.color = "#f0f0f0";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isLinkActive(link.id)) {
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "var(--color-text-3)";
-                  }
-                }}
-              >
-                {link.hasAiDot && (
-                  <span
-                    style={{
-                      width: 5,
-                      height: 5,
-                      borderRadius: "50%",
-                      background: "#6366f1",
-                      marginRight: 6,
-                      flexShrink: 0,
-                    }}
-                  />
-                )}
-                {link.label}
-              </button>
-            ))}
-
-            {/* View More with Dropdown */}
-            <div ref={dropdownRef} style={{ position: "relative" }}>
-              <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                style={{
-                  padding: "7px 18px",
-                  borderRadius: 100,
-                  fontFamily: "'Inter', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 13,
-                  color:
-                    dropdownOpen || isDropdownItemActive
-                      ? "#f0f0f0"
-                      : "var(--color-text-3)",
-                  background:
-                    dropdownOpen || isDropdownItemActive
-                      ? "var(--color-surface-2)"
-                      : "transparent",
-                  border:
-                    dropdownOpen || isDropdownItemActive
-                      ? "1px solid var(--color-border)"
-                      : "1px solid transparent",
-                  cursor: "pointer",
-                  transition: "all 0.15s ease",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                }}
-                onMouseEnter={(e) => {
-                  if (!dropdownOpen && !isDropdownItemActive) {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-                    e.currentTarget.style.color = "#f0f0f0";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!dropdownOpen && !isDropdownItemActive) {
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.color = "var(--color-text-3)";
-                  }
-                }}
-              >
-                View More
-                <ChevronDown
-                  size={14}
+          {PRIMARY_LINKS.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
+              style={{
+                position: "relative",
+                padding: "8px 4px",
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: isLinkActive(link.id) ? 600 : 500,
+                fontSize: 14,
+                color: isLinkActive(link.id)
+                  ? "#ffffff"
+                  : "var(--color-text-3)",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+              onMouseEnter={(e) => {
+                if (!isLinkActive(link.id)) {
+                  e.currentTarget.style.color = "#ffffff";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isLinkActive(link.id)) {
+                  e.currentTarget.style.color = "var(--color-text-3)";
+                }
+              }}
+            >
+              {link.hasAiDot && (
+                <span
                   style={{
-                    transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
-                    transition: "transform 0.2s ease",
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: "#10b981",
+                    boxShadow: "0 0 10px #10b981, 0 0 20px rgba(16, 185, 129, 0.4)",
+                    marginRight: 8,
+                    flexShrink: 0,
                   }}
                 />
-              </button>
+              )}
+              {link.label}
 
-              {/* Dropdown Menu */}
-              <AnimatePresence>
-                {dropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.96 }}
-                    transition={{ duration: 0.15 }}
-                    style={{
-                      position: "absolute",
-                      top: "calc(100% + 8px)",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      background: "var(--color-surface)",
-                      border: "1px solid var(--color-border)",
-                      borderRadius: 12,
-                      padding: 6,
-                      minWidth: 180,
-                      boxShadow: "0 16px 40px rgba(0,0,0,0.4)",
-                      zIndex: 100,
-                    }}
-                  >
-                    {DROPDOWN_ITEMS.map((item, idx) => {
-                      if ("divider" in item) {
-                        return (
-                          <div
-                            key={`divider-${idx}`}
-                            style={{
-                              height: 1,
-                              background: "var(--color-border)",
-                              margin: "4px 8px",
-                            }}
-                          />
-                        );
-                      }
-                      const { id, label, Icon } = item as {
-                        id: string;
-                        label: string;
-                        Icon: typeof User;
-                      };
+              {/* Active Dot indicator below the link */}
+              {isLinkActive(link.id) && (
+                <motion.span
+                  layoutId="nav-active-dot"
+                  style={{
+                    position: "absolute",
+                    bottom: -8,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: 4,
+                    height: 4,
+                    borderRadius: "50%",
+                    background: "rgba(163, 163, 253, 0.8)",
+                    boxShadow: "0 0 8px rgba(163, 163, 253, 0.8), 0 0 16px rgba(163, 163, 253, 0.4)",
+                  }}
+                />
+              )}
+            </button>
+          ))}
+
+          {/* View More with Dropdown */}
+          <div ref={dropdownRef} style={{ position: "relative" }}>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              style={{
+                position: "relative",
+                padding: "8px 4px",
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 500,
+                fontSize: 14,
+                color: dropdownOpen || isDropdownItemActive
+                  ? "#ffffff"
+                  : "var(--color-text-3)",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+              }}
+              onMouseEnter={(e) => {
+                if (!dropdownOpen && !isDropdownItemActive) {
+                  e.currentTarget.style.color = "#ffffff";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!dropdownOpen && !isDropdownItemActive) {
+                  e.currentTarget.style.color = "var(--color-text-3)";
+                }
+              }}
+            >
+              More
+              <ChevronDown
+                size={14}
+                style={{
+                  transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.2s ease",
+                  opacity: 0.7,
+                }}
+              />
+
+              {/* Active Dot indicator below More if dropdown item active */}
+              {isDropdownItemActive && (
+                <motion.span
+                  layoutId="nav-active-dot"
+                  style={{
+                    position: "absolute",
+                    bottom: -8,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: 4,
+                    height: 4,
+                    borderRadius: "50%",
+                    background: "rgba(163, 163, 253, 0.8)",
+                    boxShadow: "0 0 8px rgba(163, 163, 253, 0.8)",
+                  }}
+                />
+              )}
+            </button>
+
+            {/* Dropdown Menu */}
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                  transition={{ duration: 0.15 }}
+                  style={{
+                    position: "absolute",
+                    top: "calc(100% + 12px)",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    background: "rgba(15, 15, 20, 0.95)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    borderRadius: 12,
+                    padding: 6,
+                    minWidth: 180,
+                    boxShadow: "0 16px 40px rgba(0,0,0,0.4)",
+                    zIndex: 100,
+                    backdropFilter: "blur(10px)",
+                  }}
+                >
+                  {DROPDOWN_ITEMS.map((item, idx) => {
+                    if ("divider" in item) {
                       return (
-                        <button
-                          key={id}
-                          onClick={() => {
-                            scrollToSection(id);
-                            setDropdownOpen(false);
-                          }}
+                        <div
+                          key={`divider-${idx}`}
                           style={{
-                            width: "100%",
-                            padding: "9px 14px",
-                            borderRadius: 8,
-                            fontFamily: "'Inter', sans-serif",
-                            fontWeight: 500,
-                            fontSize: 13,
-                            color: isLinkActive(id)
-                              ? "var(--color-text-1)"
-                              : "var(--color-text-2)",
-                            background: isLinkActive(id)
-                              ? "var(--color-surface-2)"
-                              : "transparent",
-                            border: "none",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 10,
-                            cursor: "pointer",
-                            transition: "all 0.15s ease",
-                            textAlign: "left",
+                            height: 1,
+                            background: "rgba(255, 255, 255, 0.08)",
+                            margin: "4px 8px",
                           }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background =
-                              "var(--color-surface-2)";
-                            e.currentTarget.style.color = "var(--color-text-1)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background = isLinkActive(id)
-                              ? "var(--color-surface-2)"
-                              : "transparent";
-                            e.currentTarget.style.color = isLinkActive(id)
-                              ? "var(--color-text-1)"
-                              : "var(--color-text-2)";
-                          }}
-                        >
-                          <Icon size={14} style={{ opacity: 0.7 }} />
-                          {label}
-                        </button>
+                        />
                       );
-                    })}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                    }
+                    const { id, label, Icon } = item as {
+                      id: string;
+                      label: string;
+                      Icon: typeof User;
+                    };
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => {
+                          scrollToSection(id);
+                          setDropdownOpen(false);
+                        }}
+                        style={{
+                          width: "100%",
+                          padding: "9px 14px",
+                          borderRadius: 8,
+                          fontFamily: "'Inter', sans-serif",
+                          fontWeight: 500,
+                          fontSize: 13,
+                          color: isLinkActive(id)
+                            ? "#ffffff"
+                            : "var(--color-text-2)",
+                          background: isLinkActive(id)
+                            ? "rgba(255, 255, 255, 0.05)"
+                            : "transparent",
+                          border: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 10,
+                          cursor: "pointer",
+                          transition: "all 0.15s ease",
+                          textAlign: "left",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(255, 255, 255, 0.08)";
+                          e.currentTarget.style.color = "#ffffff";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = isLinkActive(id)
+                            ? "rgba(255, 255, 255, 0.05)"
+                            : "transparent";
+                          e.currentTarget.style.color = isLinkActive(id)
+                            ? "#ffffff"
+                            : "var(--color-text-2)";
+                        }}
+                      >
+                        <Icon size={14} style={{ opacity: 0.7 }} />
+                        {label}
+                      </button>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 
         {/* ── RIGHT: Equalizer + Hire Me ── */}
-        <div className="flex items-center" style={{ gap: 12 }}>
+        <div className="flex items-center" style={{ gap: 20 }}>
           {/* Volume Equalizer */}
           <div style={{ position: "relative" }}>
             <button
@@ -331,52 +350,60 @@ export function Navbar({ active }: { active: string }) {
               onMouseEnter={() => setEqTooltip(true)}
               onMouseLeave={() => setEqTooltip(false)}
               style={{
-                width: 36,
-                height: 36,
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-border)",
-                borderRadius: 8,
+                background: "transparent",
+                border: "none",
+                width: 32,
+                height: 32,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 2,
                 cursor: "pointer",
-                transition: "border-color 0.15s ease",
+                transition: "color 0.15s ease",
+                color: "var(--color-text-2)",
               }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.borderColor =
-                  "var(--color-border-hover)")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.borderColor = "var(--color-border)")
-              }
+              onMouseOver={(e) => (e.currentTarget.style.color = "#ffffff")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "var(--color-text-2)")}
             >
-              <div
-                className={playing ? "is-playing" : ""}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-end",
-                  gap: 2,
-                  height: 20,
-                }}
-              >
-                {BAR_HEIGHTS_STATIC.map((h, i) => (
-                  <span
-                    key={i}
-                    className={`eq-bar-${i}`}
-                    style={{
-                      width: 2.5,
-                      borderRadius: 2,
-                      height: h,
-                      background: playing ? "#f0f0f0" : "var(--color-text-3)",
-                      transition: "background 0.3s",
-                      animation: playing
-                        ? `eq${i + 1} ${[0.5, 0.7, 0.4, 0.6, 0.8][i]}s ease-in-out infinite`
-                        : "none",
-                    }}
-                  />
-                ))}
-              </div>
+              {playing ? (
+                <div
+                  className="is-playing"
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    gap: 2,
+                    height: 14,
+                  }}
+                >
+                  {[1, 2, 3].map((_, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        width: 2.5,
+                        borderRadius: 2,
+                        height: [6, 12, 16][i],
+                        background: "#f0f0f0",
+                        animation: `eq${i + 1} ${[0.5, 0.7, 0.4][i]}s ease-in-out infinite alternate`,
+                      }}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ opacity: 0.8 }}
+                >
+                  <line x1="18" y1="20" x2="18" y2="4"></line>
+                  <line x1="12" y1="20" x2="12" y2="9"></line>
+                  <line x1="6" y1="20" x2="6" y2="15"></line>
+                </svg>
+              )}
             </button>
             {/* Tooltip */}
             <AnimatePresence>
@@ -415,21 +442,28 @@ export function Navbar({ active }: { active: string }) {
             onClick={() => scrollToSection("contact")}
             className="hidden sm:block"
             style={{
-              background: "#f0f0f0",
-              color: "#0a0a0a",
-              borderRadius: 8,
-              padding: "8px 20px",
+              background: "linear-gradient(135deg, #a5b4fc 0%, #60a5fa 100%)",
+              color: "#0a0a0c",
+              borderRadius: 10,
+              padding: "9px 22px",
               fontFamily: "'Inter', sans-serif",
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: 13,
               border: "none",
               cursor: "pointer",
-              transition: "background 0.15s ease",
+              boxShadow: "0 0 16px rgba(129, 140, 248, 0.35)",
+              transition: "all 0.2s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#d4d4d4")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#f0f0f0")}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = "0 0 24px rgba(129, 140, 248, 0.55)";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "0 0 16px rgba(129, 140, 248, 0.35)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
           >
-            Hire Me
+            Hire me
           </button>
 
           {/* Mobile menu toggle */}

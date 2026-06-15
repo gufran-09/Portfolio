@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { EDUCATION, CERTIFICATIONS } from "@/lib/portfolio/data";
+import { EDUCATION } from "@/lib/portfolio/data";
 import { MarqueeTitle } from "./MarqueeTitle";
 
 const itemVariants = {
@@ -34,8 +34,8 @@ export function Education() {
           <h2 className="h1 mb-16">Academic background.</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Left — Degrees */}
+        <div className="max-w-3xl mx-auto">
+          {/* Degrees */}
           <motion.div
             variants={{
               hidden: { opacity: 0 },
@@ -75,68 +75,6 @@ export function Education() {
                     </div>
                   </>
                 )}
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Right — Certifications */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            className="space-y-0"
-          >
-            <h3 className="h3 mb-6">Certifications</h3>
-
-            {CERTIFICATIONS.map((cert, i) => (
-              <motion.div
-                key={i}
-                variants={itemVariants}
-                className="flex items-start gap-4 py-4 border-b"
-                style={{
-                  borderColor:
-                    i === CERTIFICATIONS.length - 1
-                      ? "transparent"
-                      : "var(--color-border)",
-                }}
-              >
-                {/* Icon */}
-                <div
-                  className="h-10 w-10 rounded-lg flex items-center justify-center flex-shrink-0 font-display font-bold text-xs"
-                  style={{
-                    background: "var(--color-surface-2)",
-                    border: "1px solid var(--color-border)",
-                    color: "var(--color-text-2)",
-                  }}
-                >
-                  {cert.initials}
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h4 className="h3 mb-1">{cert.name}</h4>
-                  <p className="small mb-1">{cert.issuer}</p>
-                  <p className="mono">{cert.year}</p>
-                </div>
-
-                {/* Verify link */}
-                <a
-                  href="#"
-                  className="text-xs font-medium flex-shrink-0 transition-colors"
-                  style={{ color: "var(--color-text-3)" }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "var(--color-text-1)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "var(--color-text-3)")
-                  }
-                >
-                  Verify →
-                </a>
               </motion.div>
             ))}
           </motion.div>
