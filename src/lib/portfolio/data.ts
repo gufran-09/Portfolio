@@ -251,20 +251,20 @@ export const EDUCATION = [
   },
   {
     degree: "Intermediate (Class 12)",
-    university: "State Board of Intermediate Education",
+    university: "Sri Chaintanya College",
     initials: "INT",
     date: "2022 — 2024",
     location: "Hyderabad",
-    cgpa: "9.5 / 10",
+    cgpa: "9.45 / 10",
     coursework: ["Mathematics", "Physics", "Chemistry"],
   },
   {
     degree: "Secondary School (Class 10)",
-    university: "Board of Secondary Education",
+    university: "Sri Chaitanya School",
     initials: "SSC",
     date: "2021 — 2022",
     location: "Hyderabad",
-    cgpa: "9.8 / 10",
+    cgpa: "9.3 / 10",
     coursework: ["Mathematics", "Science", "Social Studies"],
   }
 ];
