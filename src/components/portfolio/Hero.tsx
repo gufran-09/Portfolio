@@ -1,10 +1,11 @@
-import { motion } from "framer-motion";
-import { ChevronDown, Mail } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { scrollToSection } from "@/lib/portfolio/terminalCommands";
 import { useEffect, useState } from "react";
 import { DeveloperCharacter } from "./DeveloperCharacter";
 import { FloatingIcon } from "./FloatingIcon";
 import { TestimonialCard } from "./TestimonialCard";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,6 +29,31 @@ const itemVariants = {
 
 export function Hero() {
   const [showScroll, setShowScroll] = useState(true);
+  const { scrollY } = useScroll();
+
+  // Scroll transforms for avatar (scale down, rotate slightly, fade out)
+  const avatarScale = useTransform(scrollY, [0, 500], [1, 0.78]);
+  const avatarRotate = useTransform(scrollY, [0, 500], [0, -8]);
+  const avatarOpacity = useTransform(scrollY, [0, 500], [1, 0.45]);
+
+  // Scroll transforms for floating icons (dispersing outward)
+  const iconReactX = useTransform(scrollY, [0, 500], [0, -90]);
+  const iconReactY = useTransform(scrollY, [0, 500], [0, -70]);
+
+  const iconNodeX = useTransform(scrollY, [0, 500], [0, 90]);
+  const iconNodeY = useTransform(scrollY, [0, 500], [0, -70]);
+
+  const iconTSX = useTransform(scrollY, [0, 500], [0, 110]);
+  const iconTSY = useTransform(scrollY, [0, 500], [0, 20]);
+
+  const iconPyX = useTransform(scrollY, [0, 500], [0, 90]);
+  const iconPyY = useTransform(scrollY, [0, 500], [0, 90]);
+
+  const iconDockerX = useTransform(scrollY, [0, 500], [0, -110]);
+  const iconDockerY = useTransform(scrollY, [0, 500], [0, 0]);
+
+  const iconAWSX = useTransform(scrollY, [0, 500], [0, -90]);
+  const iconAWSY = useTransform(scrollY, [0, 500], [0, 70]);
 
   useEffect(() => {
     const onScroll = () => setShowScroll(window.scrollY < 80);
@@ -154,57 +180,65 @@ export function Hero() {
             className="justify-center md:justify-start w-full"
           >
             {/* Hire Me pill button */}
-            <button
-              onClick={() => scrollToSection("contact")}
-              style={{
-                background: "#f0f0f0",
-                color: "#0a0a0a",
-                borderRadius: 100,
-                padding: "12px 28px",
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 600,
-                fontSize: 14,
-                border: "none",
-                cursor: "pointer",
-                transition: "background 0.15s ease",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "#d4d4d4")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = "#f0f0f0")
-              }
-            >
-              Hire Me
-            </button>
+            <Magnetic>
+              <button
+                onClick={() => scrollToSection("contact")}
+                style={{
+                  background: "#f0f0f0",
+                  color: "#0a0a0a",
+                  borderRadius: 100,
+                  padding: "12px 28px",
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "background 0.15s ease",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "#d4d4d4")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "#f0f0f0")
+                }
+              >
+                Hire Me
+              </button>
+            </Magnetic>
 
-            {/* Mail icon button */}
-            <a
-              href="mailto:gufranahmed0921@gmail.com"
-              style={{
-                width: 46,
-                height: 46,
-                borderRadius: "50%",
-                background: "transparent",
-                border: "1px solid var(--color-border)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-                textDecoration: "none",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "var(--color-surface)";
-                e.currentTarget.style.borderColor = "var(--color-border-hover)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "var(--color-border)";
-              }}
-            >
-              <Mail size={18} color="#f0f0f0" />
-            </a>
+            {/* Resume download button */}
+            <Magnetic>
+              <a
+                href="/assets/Resume.pdf"
+                download="Gufran_Ahmed_Resume.pdf"
+                style={{
+                  padding: "12px 28px",
+                  borderRadius: 100,
+                  border: "1px solid var(--color-border)",
+                  background: "transparent",
+                  color: "#f0f0f0",
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease",
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--color-surface)";
+                  e.currentTarget.style.borderColor = "var(--color-border-hover)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.borderColor = "var(--color-border)";
+                }}
+              >
+                Resume
+              </a>
+            </Magnetic>
           </motion.div>
           {/* Row 6 — Testimonial card */}
           <TestimonialCard />
@@ -279,7 +313,18 @@ export function Hero() {
               justifyContent: "center",
             }}
           >
-            <DeveloperCharacter />
+            <motion.div
+              style={{
+                scale: avatarScale,
+                rotate: avatarRotate,
+                opacity: avatarOpacity,
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <DeveloperCharacter />
+            </motion.div>
           </div>
 
           {/* Floating Tech Icons - Spaced Outward to Prevent Overlap */}
@@ -295,6 +340,8 @@ export function Hero() {
             floatY={[0, -10, 0]}
             floatDuration={3}
             entranceDelay={0.7}
+            x={iconReactX}
+            y={iconReactY}
           />
           <FloatingIcon
             label="N"
@@ -309,6 +356,8 @@ export function Hero() {
             floatDuration={3.5}
             floatDelay={0.5}
             entranceDelay={0.8}
+            x={iconNodeX}
+            y={iconNodeY}
           />
           <FloatingIcon
             label="TS"
@@ -324,6 +373,8 @@ export function Hero() {
             floatDuration={2.8}
             floatDelay={1}
             entranceDelay={0.9}
+            x={iconTSX}
+            y={iconTSY}
           />
           <FloatingIcon
             label="Py"
@@ -339,6 +390,8 @@ export function Hero() {
             floatDuration={4}
             floatDelay={0.3}
             entranceDelay={1.0}
+            x={iconPyX}
+            y={iconPyY}
           />
           <FloatingIcon
             label="🐳"
@@ -353,6 +406,8 @@ export function Hero() {
             floatDuration={3.2}
             floatDelay={0.8}
             entranceDelay={1.1}
+            x={iconDockerX}
+            y={iconDockerY}
           />
           <FloatingIcon
             label="AW"
@@ -368,6 +423,8 @@ export function Hero() {
             floatDuration={3.8}
             floatDelay={1.2}
             entranceDelay={1.2}
+            x={iconAWSX}
+            y={iconAWSY}
           />
         </motion.div>
       </div>

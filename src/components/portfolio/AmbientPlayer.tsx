@@ -13,6 +13,7 @@ export function useAmbientPlayer() {
   const [playing, setPlaying] = useState(false);
   const ctxRef = useRef<AudioContext | null>(null);
   const masterRef = useRef<GainNode | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
   const nodesRef = useRef<{
     oscs: OscillatorNode[];
     intervals: number[];
@@ -32,6 +33,7 @@ export function useAmbientPlayer() {
     });
     n.intervals.forEach((i) => clearInterval(i));
     nodesRef.current = { oscs: [], intervals: [] };
+    analyserRef.current = null;
     if (masterRef.current && ctxRef.current) {
       masterRef.current.gain.linearRampToValueAtTime(
         0,
@@ -54,6 +56,12 @@ export function useAmbientPlayer() {
     master.connect(ctx.destination);
     master.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.6);
     masterRef.current = master;
+
+    // Set up Analyser Node for sound reactivity
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 32;
+    master.connect(analyser);
+    analyserRef.current = analyser;
 
     // Reverb impulse
     const conv = ctx.createConvolver();
@@ -113,7 +121,19 @@ export function useAmbientPlayer() {
     setPlaying(true);
   };
 
+  const getAmplitude = () => {
+    const analyser = analyserRef.current;
+    if (!analyser || !playing) return 0;
+    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(dataArray);
+    let sum = 0;
+    for (let i = 0; i < dataArray.length; i++) {
+      sum += dataArray[i];
+    }
+    return sum / dataArray.length / 255;
+  };
+
   useEffect(() => () => stop(), []);
 
-  return { playing, toggle: () => (playing ? stop() : start()) };
+  return { playing, toggle: () => (playing ? stop() : start()), getAmplitude };
 }

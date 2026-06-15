@@ -620,6 +620,20 @@ export function ProjectCard({ project, isMobile }: ProjectCardProps) {
         onMouseMove={handleMouseMove}
         onClick={() => window.open(project.liveUrl, "_blank")}
       >
+        {/* Spotlight Reveal Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "inherit",
+            background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, ${project.accentColor}12, transparent 80%)`,
+            pointerEvents: "none",
+            opacity: hover ? 1 : 0,
+            transition: "opacity 0.3s ease",
+            zIndex: 4,
+          }}
+        />
+
         <div
           style={{
             position: "absolute",

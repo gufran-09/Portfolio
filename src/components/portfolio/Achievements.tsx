@@ -21,6 +21,15 @@ const iconMap: Record<string, any> = {
 };
 
 export function Achievements() {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    el.style.setProperty("--mouse-x", `${x}px`);
+    el.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
     <section id="achievements" className="section surface-section" style={{ padding: "var(--space-32) 0" }}>
       <div className="container">
@@ -55,6 +64,7 @@ export function Achievements() {
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ delay: i * 0.06 }}
                 className={`ach-card ${accentClass} ${isFeatured ? "featured" : ""}`}
+                onMouseMove={handleMouseMove}
               >
                 {/* Background faded icon for featured card */}
                 {isFeatured && (

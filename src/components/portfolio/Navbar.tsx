@@ -12,7 +12,7 @@ import {
   BarChart2,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/portfolio/terminalCommands";
-import { useAmbientPlayer } from "./AmbientPlayer";
+import { Magnetic } from "../ui/Magnetic";
 
 const PRIMARY_LINKS = [
   { id: "about", label: "About" },
@@ -30,11 +30,16 @@ const DROPDOWN_ITEMS = [
 
 const BAR_HEIGHTS_STATIC = [5, 10, 7, 14, 6];
 
-export function Navbar({ active }: { active: string }) {
+interface NavbarProps {
+  active: string;
+  playing: boolean;
+  toggle: () => void;
+}
+
+export function Navbar({ active, playing, toggle }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [eqTooltip, setEqTooltip] = useState(false);
-  const { playing, toggle } = useAmbientPlayer();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on outside click or Escape
@@ -438,33 +443,35 @@ export function Navbar({ active }: { active: string }) {
           </div>
 
           {/* Hire Me button */}
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="hidden sm:block"
-            style={{
-              background: "linear-gradient(135deg, #a5b4fc 0%, #60a5fa 100%)",
-              color: "#0a0a0c",
-              borderRadius: 10,
-              padding: "9px 22px",
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 700,
-              fontSize: 13,
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "0 0 16px rgba(129, 140, 248, 0.35)",
-              transition: "all 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 24px rgba(129, 140, 248, 0.55)";
-              e.currentTarget.style.transform = "translateY(-1px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 16px rgba(129, 140, 248, 0.35)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            Hire me
-          </button>
+          <Magnetic>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="hidden sm:block"
+              style={{
+                background: "linear-gradient(135deg, #a5b4fc 0%, #60a5fa 100%)",
+                color: "#0a0a0c",
+                borderRadius: 10,
+                padding: "9px 22px",
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 700,
+                fontSize: 13,
+                border: "none",
+                cursor: "pointer",
+                boxShadow: "0 0 16px rgba(129, 140, 248, 0.35)",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 24px rgba(129, 140, 248, 0.55)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 16px rgba(129, 140, 248, 0.35)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              Hire me
+            </button>
+          </Magnetic>
 
           {/* Mobile menu toggle */}
           <button

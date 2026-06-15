@@ -4,6 +4,7 @@ import { projectsData } from "./projectsData";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectDetailPanel } from "./ProjectDetailPanel";
 import { MarqueeTitle } from "./MarqueeTitle";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 export function Projects() {
   const [isMobile, setIsMobile] = useState(false);
@@ -105,9 +106,11 @@ export function Projects() {
           >
             Want to see more?
           </p>
-          <Link to="/project" className="btn btn-secondary" data-cursor="VIEW">
-            View All Projects
-          </Link>
+          <Magnetic>
+            <Link to="/project" className="btn btn-secondary" data-cursor="VIEW">
+              View All Projects
+            </Link>
+          </Magnetic>
         </div>
       </div>
     </section>

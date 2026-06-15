@@ -17,6 +17,8 @@ interface FloatingIconProps {
   floatDelay?: number;
   entranceDelay?: number;
   className?: string;
+  x?: any;
+  y?: any;
 }
 
 export function FloatingIcon({
@@ -36,6 +38,8 @@ export function FloatingIcon({
   floatDelay = 0,
   entranceDelay = 0,
   className,
+  x,
+  y,
 }: FloatingIconProps) {
   return (
     <motion.div
@@ -69,6 +73,8 @@ export function FloatingIcon({
         color,
         zIndex: 3,
         pointerEvents: "none" as const,
+        x,
+        y,
       }}
     >
       <motion.div
@@ -90,3 +96,4 @@ export function FloatingIcon({
     </motion.div>
   );
 }
+

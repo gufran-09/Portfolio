@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { MarqueeTitle } from "./MarqueeTitle";
+import { useEffect, useRef, useState } from "react";
 import "./Methodology.css";
 
 const phases = [
@@ -64,6 +65,49 @@ const cardVariants = {
 };
 
 export function Methodology() {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [pathD, setPathD] = useState("");
+
+  const { scrollYProgress } = useScroll({
+    target: gridRef,
+    offset: ["start 85%", "start 35%"],
+  });
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  const updatePath = () => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const gridRect = grid.getBoundingClientRect();
+    const iconBoxes = grid.querySelectorAll(".phase-icon-box");
+    if (iconBoxes.length === 0) return;
+
+    const points = Array.from(iconBoxes).map((box) => {
+      const rect = box.getBoundingClientRect();
+      return {
+        x: rect.left - gridRect.left + rect.width / 2,
+        y: rect.top - gridRect.top + rect.height / 2,
+      };
+    });
+
+    if (points.length < 2) return;
+
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 1; i < points.length; i++) {
+      d += ` L ${points[i].x} ${points[i].y}`;
+    }
+    setPathD(d);
+  };
+
+  useEffect(() => {
+    updatePath();
+    const timer = setTimeout(updatePath, 200);
+    window.addEventListener("resize", updatePath);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", updatePath);
+    };
+  }, []);
+
   return (
     <section id="methodology" className="methodology-section section-has-marquee">
       <MarqueeTitle text="HOW I WORK" direction="left" />
@@ -89,7 +133,8 @@ export function Methodology() {
 
         {/* Cards grid */}
         <motion.div
-          className="methodology-grid"
+          ref={gridRef}
+          className="methodology-grid relative"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -123,8 +168,31 @@ export function Methodology() {
               <p className="phase-desc">{phase.desc}</p>
             </motion.div>
           ))}
+
+          {/* SVG Connecting Timeline */}
+          {pathD && (
+            <svg className="methodology-line-svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="methodology-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#7c6ef5" />
+                  <stop offset="50%" stopColor="#ec4899" />
+                  <stop offset="100%" stopColor="#38bdf8" />
+                </linearGradient>
+              </defs>
+              <motion.path
+                d={pathD}
+                fill="none"
+                stroke="url(#methodology-gradient)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ pathLength }}
+              />
+            </svg>
+          )}
         </motion.div>
       </div>
     </section>
   );
 }
+

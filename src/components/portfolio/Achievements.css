@@ -49,6 +49,27 @@
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
+/* Spotlight reveal overlay */
+.ach-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    320px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(var(--ach-accent-rgb), 0.09),
+    transparent 80%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.ach-card:hover::before {
+  opacity: 1;
+}
+
 /* Lift on hover & colored border/glow */
 .ach-card:hover {
   transform: translateY(-4px);

@@ -9,6 +9,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { IDENTITY } from "@/lib/portfolio/data";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -439,30 +440,32 @@ export function Contact() {
               />
             </motion.div>
 
-            <motion.button
-              variants={itemVariants}
-              type="submit"
-              disabled={loading || success}
-              className="btn-accent w-full mt-6 flex items-center justify-center gap-2"
-              onMouseEnter={() => {
-                if (!loading && !success) setPose("thumbsup");
-              }}
-              onMouseLeave={() => {
-                if (!success) setPose("default");
-              }}
-            >
-              {success ? (
-                <>
-                  <CheckCircle size={16} /> Message sent!
-                </>
-              ) : loading ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" /> Sending...
-                </>
-              ) : (
-                "Send Message →"
-              )}
-            </motion.button>
+            <Magnetic>
+              <motion.button
+                variants={itemVariants}
+                type="submit"
+                disabled={loading || success}
+                className="btn-accent w-full mt-6 flex items-center justify-center gap-2"
+                onMouseEnter={() => {
+                  if (!loading && !success) setPose("thumbsup");
+                }}
+                onMouseLeave={() => {
+                  if (!success) setPose("default");
+                }}
+              >
+                {success ? (
+                  <>
+                    <CheckCircle size={16} /> Message sent!
+                  </>
+                ) : loading ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" /> Sending...
+                  </>
+                ) : (
+                  "Send Message →"
+                )}
+              </motion.button>
+            </Magnetic>
           </motion.form>
         </div>
       </div>
