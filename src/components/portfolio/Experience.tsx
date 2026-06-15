@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MarqueeTitle } from "./MarqueeTitle";
+import { Briefcase, Code2, Terminal } from "lucide-react";
 import "./Experience.css";
 
 const EXPERIENCES = [
@@ -9,6 +10,7 @@ const EXPERIENCES = [
     type: "Remote",
     duration: "7 months",
     current: true,
+    icon: Code2,
     bullets: [
       "Leading frontend architecture and development for the company's Next.js platform, owning technical decisions end-to-end.",
       "Driving performance, SEO and rendering strategy through SSR, ISR and route-level optimisation.",
@@ -22,6 +24,7 @@ const EXPERIENCES = [
     type: "Remote",
     duration: "2 months",
     current: false,
+    icon: Terminal,
     bullets: [
       "Built and maintained responsive trading-platform UI components in React, focused on data-dense dashboards.",
       "Translated design specs into pixel-accurate, accessible layouts with a glassmorphism-driven dark UI.",
@@ -86,54 +89,35 @@ export function Experience() {
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
-            {EXPERIENCES.map((exp, i) => (
-              <div key={i} className="exp-row">
-                {/* Timeline dot */}
-                <div className="exp-dot-wrap">
-                  <div
-                    className="exp-dot"
-                    style={{
-                      background: exp.current
-                        ? "var(--color-accent)"
-                        : "var(--color-surface-3)",
-                      borderColor: exp.current
-                        ? "var(--color-accent)"
-                        : "var(--color-border-hover)",
-                    }}
-                  />
-                </div>
-
-                {/* Card */}
-                <motion.div className="exp-card" variants={cardVariants}>
-                  {/* Card header row */}
-                  <div className="exp-card-top">
-                    <div className="exp-card-meta">
-                      <h3 className="exp-role">{exp.title}</h3>
-                      <div className="exp-company-row">
-                        <span className="exp-company">{exp.company}</span>
-                        <span className="exp-dot-sep">·</span>
-                        <span className="exp-type">{exp.type}</span>
-                        <span className="exp-dot-sep">·</span>
-                        <span className="exp-duration">{exp.duration}</span>
-                      </div>
+            {EXPERIENCES.map((exp, i) => {
+              const Icon = exp.icon || Briefcase;
+              return (
+                <div key={i} className="exp-row">
+                  {/* Timeline icon chip */}
+                  <div className="exp-dot-wrap">
+                    <div className={`exp-icon-chip ${exp.current ? "current" : ""}`}>
+                      <Icon size={20} strokeWidth={2} />
                     </div>
-                    <span
-                      className="exp-badge"
-                      style={{
-                        background: exp.current
-                          ? "transparent"
-                          : "var(--color-surface-3)",
-                        border: exp.current
-                          ? "1px solid var(--color-accent)"
-                          : "1px solid var(--color-border)",
-                        color: exp.current
-                          ? "var(--color-accent-text)"
-                          : "var(--color-text-3)",
-                      }}
-                    >
-                      {exp.current ? "CURRENT" : "PAST"}
-                    </span>
                   </div>
+
+                  {/* Card */}
+                  <motion.div className={`exp-card ${exp.current ? "exp-card-current" : "exp-card-past"}`} variants={cardVariants}>
+                    {/* Card header row */}
+                    <div className="exp-card-top">
+                      <div className="exp-card-meta">
+                        <h3 className="exp-role">{exp.title}</h3>
+                        <div className="exp-company-row">
+                          <span className="exp-company">{exp.company}</span>
+                          <span className="exp-dot-sep">·</span>
+                          <span className="exp-type">{exp.type}</span>
+                          <span className="exp-dot-sep">·</span>
+                          <span className="exp-duration">{exp.duration}</span>
+                        </div>
+                      </div>
+                      <span className={`exp-badge ${exp.current ? "exp-badge-current" : "exp-badge-past"}`}>
+                        {exp.current ? "CURRENT" : "PAST"}
+                      </span>
+                    </div>
 
                   {/* Divider */}
                   <div className="exp-divider" />
@@ -157,7 +141,8 @@ export function Experience() {
                   </div>
                 </motion.div>
               </div>
-            ))}
+            )
+          )}
           </motion.div>
         </div>
       </div>

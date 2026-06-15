@@ -35,38 +35,48 @@ export function Education() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {/* Left — Degree */}
+          {/* Left — Degrees */}
           <motion.div
-            variants={itemVariants}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+            }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            className="card"
+            className="space-y-6 flex flex-col gap-6"
           >
-            <h3 className="h3 mb-2">{EDUCATION.degree}</h3>
-            <p className="body mb-6">{EDUCATION.university}</p>
+            {EDUCATION.map((edu, idx) => (
+              <motion.div key={idx} variants={itemVariants} className="card">
+                <h3 className="h3 mb-2">{edu.degree}</h3>
+                <p className="body mb-6">{edu.university}</p>
 
-            <div
-              className="flex gap-4 mb-6 text-xs font-mono"
-              style={{ color: "var(--color-text-3)" }}
-            >
-              <span>{EDUCATION.date}</span>
-              <span>•</span>
-              <span>CGPA: {EDUCATION.cgpa}</span>
-            </div>
+                <div
+                  className="flex gap-4 mb-6 text-xs font-mono"
+                  style={{ color: "var(--color-text-3)" }}
+                >
+                  <span>{edu.date}</span>
+                  <span>•</span>
+                  <span>{edu.cgpa.includes('/') || edu.cgpa.includes('%') ? `Score: ${edu.cgpa}` : edu.cgpa}</span>
+                </div>
 
-            <div className="divider mb-6" />
-
-            <div>
-              <p className="small mb-3">Relevant Coursework</p>
-              <div className="flex flex-wrap gap-1.5">
-                {EDUCATION.coursework.map((course) => (
-                  <span key={course} className="pill">
-                    {course}
-                  </span>
-                ))}
-              </div>
-            </div>
+                {edu.coursework && edu.coursework.length > 0 && (
+                  <>
+                    <div className="divider mb-6" />
+                    <div>
+                      <p className="small mb-3">Key Subjects</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {edu.coursework.map((course) => (
+                          <span key={course} className="pill">
+                            {course}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Right — Certifications */}

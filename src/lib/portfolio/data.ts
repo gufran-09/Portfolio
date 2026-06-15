@@ -230,24 +230,44 @@ export const EXPERIENCE = [
   },
 ];
 
-export const EDUCATION = {
-  degree: "B.Tech in Computer Science",
-  university: "Vardhaman College of Engineering",
-  initials: "VMEG",
-  date: "2024 — 2028",
-  location: "Hyderabad",
-  cgpa: "8.9 / 10",
-  coursework: [
-    "DSA",
-    "OS",
-    "DBMS",
-    "Networks",
-    "Software Engineering",
-    "ML",
-    "Agile Methodologies",
-    "System Design",
-  ],
-};
+export const EDUCATION = [
+  {
+    degree: "B.Tech in Computer Science",
+    university: "Vardhaman College of Engineering",
+    initials: "VMEG",
+    date: "2024 — 2028",
+    location: "Hyderabad",
+    cgpa: "8.9 / 10",
+    coursework: [
+      "DSA",
+      "OS",
+      "DBMS",
+      "Networks",
+      "Software Engineering",
+      "ML",
+      "Agile Methodologies",
+      "System Design",
+    ],
+  },
+  {
+    degree: "Intermediate (Class 12)",
+    university: "State Board of Intermediate Education",
+    initials: "INT",
+    date: "2022 — 2024",
+    location: "Hyderabad",
+    cgpa: "9.5 / 10",
+    coursework: ["Mathematics", "Physics", "Chemistry"],
+  },
+  {
+    degree: "Secondary School (Class 10)",
+    university: "Board of Secondary Education",
+    initials: "SSC",
+    date: "2021 — 2022",
+    location: "Hyderabad",
+    cgpa: "9.8 / 10",
+    coursework: ["Mathematics", "Science", "Social Studies"],
+  }
+];
 
 export const CERTIFICATIONS = [
   {

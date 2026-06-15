@@ -53,11 +53,12 @@
 /* Vertical spine line */
 .exp-spine {
   position: absolute;
-  left: 20px;
+  left: 24px;
   top: 12px;
   bottom: 12px;
-  width: 1px;
-  background: var(--color-border);
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-accent) 0%, var(--color-border) 100%);
+  opacity: 0.5;
   z-index: 0;
 }
 
@@ -77,35 +78,70 @@
   gap: 0;
 }
 
-/* Dot */
+/* Dot/Chip */
 .exp-dot-wrap {
   position: absolute;
-  left: -46px;
-  top: 1.6rem;
+  left: -54px;
+  top: 1.4rem;
   z-index: 1;
 }
 
-.exp-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 2px solid;
-  background: var(--color-surface-3);
+.exp-icon-chip {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   flex-shrink: 0;
-  box-shadow: 0 0 0 4px var(--color-bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  color: var(--color-text-2);
+  transition: all 0.3s ease;
+}
+
+.exp-icon-chip.current {
+  background: linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.05) 100%);
+  border-color: rgba(16,185,129,0.4);
+  color: #10b981;
+  box-shadow: 0 0 20px rgba(16,185,129,0.2), inset 0 0 10px rgba(16,185,129,0.1);
 }
 
 /* ── Card ── */
 .exp-card {
   flex: 1;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: 14px;
   padding: 1.75rem 2rem 1.5rem;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.exp-card:hover {
+/* Current Role specific styling (gradient border) */
+.exp-card-current {
+  background: linear-gradient(135deg, rgba(20,25,22,0.95) 0%, rgba(15,20,18,0.85) 100%);
+  border: 1px solid rgba(16,185,129,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(16,185,129,0.1) inset;
+  transform: scale(1.02);
+  transform-origin: left center;
+}
+
+.exp-card-current:hover {
+  border-color: rgba(16,185,129,0.6);
+  box-shadow: 0 12px 40px rgba(16,185,129,0.15), 0 0 0 1px rgba(16,185,129,0.2) inset;
+}
+
+/* Past Role specific styling (quieter) */
+.exp-card-past {
+  border: 1px solid var(--color-border);
+  opacity: 0.8;
+  transform: scale(0.98);
+  transform-origin: left center;
+}
+
+.exp-card-past:hover {
+  opacity: 1;
   border-color: var(--color-border-hover);
   background: var(--color-surface-2);
 }
@@ -172,6 +208,29 @@
   border-radius: 6px;
   flex-shrink: 0;
   white-space: nowrap;
+}
+
+.exp-badge-current {
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.4);
+  color: #10b981;
+  box-shadow: 0 0 12px rgba(16,185,129,0.3);
+  animation: pulse-glow 2s infinite alternate;
+}
+
+.exp-badge-past {
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-3);
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 8px rgba(16,185,129,0.2);
+  }
+  100% {
+    box-shadow: 0 0 16px rgba(16,185,129,0.5);
+  }
 }
 
 /* Divider */
@@ -246,12 +305,16 @@
   }
 
   .exp-dot-wrap {
-    left: -30px;
+    left: -38px;
   }
 
-  .exp-dot {
-    width: 14px;
-    height: 14px;
+  .exp-icon-chip {
+    width: 32px;
+    height: 32px;
+  }
+  .exp-icon-chip svg {
+    width: 16px;
+    height: 16px;
   }
 
   .exp-card {

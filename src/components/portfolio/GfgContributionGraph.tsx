@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 // ─── GFG green color scale ──────────────────────────────────────────────────
 export const GFG_SCALE = [
@@ -130,6 +131,11 @@ export function GfgContributionGraph({
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const CELL = 13;
   const GAP = 3;
@@ -161,30 +167,33 @@ export function GfgContributionGraph({
   return (
     <>
       {/* Tooltip */}
-      <div
-        ref={tooltipRef}
-        style={{
-          position: "fixed",
-          left: tooltipPos.x,
-          top: tooltipPos.y,
-          pointerEvents: "none",
-          zIndex: 9999,
-          opacity: tooltipVisible && hoveredDay ? 1 : 0,
-          transition: "opacity 0.1s ease",
-          background: "rgba(5,15,8,0.96)",
-          border: "1px solid rgba(47,141,70,0.35)",
-          borderRadius: 8,
-          padding: "7px 12px",
-          fontFamily: "var(--font-sans)",
-          fontSize: 12,
-          fontWeight: 500,
-          color: "#e8f5e9",
-          whiteSpace: "nowrap",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.7)",
-        }}
-      >
-        {tooltipText}
-      </div>
+      {mounted && typeof document !== "undefined" && createPortal(
+        <div
+          ref={tooltipRef}
+          style={{
+            position: "fixed",
+            left: tooltipPos.x,
+            top: tooltipPos.y,
+            pointerEvents: "none",
+            zIndex: 9999,
+            opacity: tooltipVisible && hoveredDay ? 1 : 0,
+            transition: "opacity 0.1s ease",
+            background: "rgba(5,15,8,0.96)",
+            border: "1px solid rgba(47,141,70,0.35)",
+            borderRadius: 8,
+            padding: "7px 12px",
+            fontFamily: "var(--font-sans)",
+            fontSize: 12,
+            fontWeight: 500,
+            color: "#e8f5e9",
+            whiteSpace: "nowrap",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.7)",
+          }}
+        >
+          {tooltipText}
+        </div>,
+        document.body
+      )}
 
       {/* Card */}
       <div

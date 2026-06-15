@@ -632,7 +632,7 @@ export function CodingJourney() {
   useEffect(() => {
     let cancelled = false;
 
-    fetch(`https://api.github.com/users/${USERNAMES.github}`)
+    fetch(`https://api.github.com/users/${USERNAMES.github}?t=${Date.now()}`)
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data) => {
         if (!cancelled) {
@@ -648,7 +648,7 @@ export function CodingJourney() {
         if (!cancelled) setGithubStats(null);
       });
 
-    fetch(`https://leetcode-stats.tashif.codes/${USERNAMES.leetcode}`)
+    fetch(`https://leetcode-stats.tashif.codes/${USERNAMES.leetcode}?t=${Date.now()}`)
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data) => {
         if (!cancelled && data?.status !== "error") {
@@ -663,7 +663,7 @@ export function CodingJourney() {
     setGfgError(false);
     
     // Fetch profile stats
-    fetch(`https://gfg-stats.tashif.codes/${USERNAMES.gfg}/profile`)
+    fetch(`https://gfg-stats.tashif.codes/${USERNAMES.gfg}/profile?t=${Date.now()}`)
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data) => {
         if (!cancelled) {
@@ -693,7 +693,7 @@ export function CodingJourney() {
       });
 
     // Fetch heatmap contributions
-    fetch(`https://gfg-stats.tashif.codes/${USERNAMES.gfg}/heatmap`)
+    fetch(`https://gfg-stats.tashif.codes/${USERNAMES.gfg}/heatmap?t=${Date.now()}`)
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data) => {
         if (!cancelled && data?.heatmap && Array.isArray(data.heatmap)) {

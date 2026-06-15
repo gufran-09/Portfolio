@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 // ─── Color scale: dark bg → vivid purple ─────────────────────────────────────
 export const GITHUB_SCALE = [
@@ -110,6 +111,11 @@ export function GitHubContributionGraph({
   const [weeks, setWeeks] = useState<ContribDay[][] | null>(null);
   const [totalContributions, setTotalContributions] = useState<number>(0);
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Fetch real data from the public contributions proxy
   useEffect(() => {
@@ -118,7 +124,7 @@ export function GitHubContributionGraph({
     setWeeks(null);
 
     // Fetch all years so we can compute the real all-time total
-    fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=all`)
+    fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=all&t=${Date.now()}`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json() as Promise<ApiResponse>;
@@ -199,30 +205,33 @@ export function GitHubContributionGraph({
   return (
     <>
       {/* Fixed tooltip */}
-      <div
-        ref={tooltipRef}
-        style={{
-          position: "fixed",
-          left: tooltipPos.x,
-          top: tooltipPos.y,
-          pointerEvents: "none",
-          zIndex: 9999,
-          opacity: tooltipVisible && hoveredDay ? 1 : 0,
-          transition: "opacity 0.1s ease",
-          background: "rgba(13,17,23,0.96)",
-          border: "1px solid rgba(129,140,248,0.35)",
-          borderRadius: 8,
-          padding: "7px 12px",
-          fontFamily: "var(--font-sans)",
-          fontSize: 12,
-          fontWeight: 500,
-          color: "#e2e8f0",
-          whiteSpace: "nowrap",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.6)",
-        }}
-      >
-        {tooltipText}
-      </div>
+      {mounted && typeof document !== "undefined" && createPortal(
+        <div
+          ref={tooltipRef}
+          style={{
+            position: "fixed",
+            left: tooltipPos.x,
+            top: tooltipPos.y,
+            pointerEvents: "none",
+            zIndex: 9999,
+            opacity: tooltipVisible && hoveredDay ? 1 : 0,
+            transition: "opacity 0.1s ease",
+            background: "rgba(13,17,23,0.96)",
+            border: "1px solid rgba(129,140,248,0.35)",
+            borderRadius: 8,
+            padding: "7px 12px",
+            fontFamily: "var(--font-sans)",
+            fontSize: 12,
+            fontWeight: 500,
+            color: "#e2e8f0",
+            whiteSpace: "nowrap",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.6)",
+          }}
+        >
+          {tooltipText}
+        </div>,
+        document.body
+      )}
 
       {/* Graph card */}
       <div
