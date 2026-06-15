@@ -592,42 +592,7 @@
 /* MARQUEE TITLE — decorative background text                                  */
 /* ─────────────────────────────────────────────────────────────────────────── */
 
-.marquee-wrapper {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: translateY(35%);
-  overflow: hidden;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-  line-height: 1;
-}
 
-/* The text span inside the track */
-.marquee-span {
-  font-family: "Sora", sans-serif;
-  font-weight: 800;
-  font-size: clamp(5rem, 12vw, 9rem);
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.07);
-  padding-right: 2rem;
-  line-height: 1;
-}
-
-/* Bullet separator — faint indigo dot, filled (no stroke) */
-.marquee-span::after {
-  content: none;
-  /* bullets are inline in the text string */
-}
-
-/* Extra bottom padding for sections with a marquee strip */
-.section-has-marquee {
-  padding-bottom: calc(128px + 3rem) !important;
-}
 
 .ask-ai-traffic-dot {
   width: 10px;
@@ -1199,25 +1164,6 @@
   }
 }
 
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes marquee-right {
-  from {
-    transform: translateX(-50%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
 
 /* ─────────────────────────────────────────────────────────────────────────── */
 /* 3D SPLINE CANVAS AND OVERLAY POINTER EVENTS */

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { MarqueeTitle } from "./MarqueeTitle";
+import { SectionWatermark } from "./SectionWatermark";
 
 export function Skills() {
   return (
@@ -10,7 +10,7 @@ export function Skills() {
       className="section surface-section relative w-full flex flex-col justify-start items-center pointer-events-none"
       style={{ minHeight: "100vh", paddingBottom: "128px", paddingTop: "120px" }}
     >
-      <MarqueeTitle text="TECH STACK" direction="right" />
+      <SectionWatermark text="SKILLS" />
       <div className="container relative z-10 text-center flex flex-col justify-start items-center h-full pt-12 md:pt-20">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

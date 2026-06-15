@@ -1,7 +1,7 @@
 import { motion, type Variants } from "framer-motion";
 import { Zap, Code2, Layers, Heart } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { MarqueeTitle } from "./MarqueeTitle";
+import { SectionWatermark } from "./SectionWatermark";
 
 // ─── Animation variants ──────────────────────────────────────────────────────
 const containerVariants: Variants = {
@@ -344,10 +344,10 @@ export function About() {
       style={{
         position: "relative",
         overflow: "hidden",
-        paddingBottom: "calc(128px + 3rem)",
+        paddingBottom: "128px",
       }}
     >
-      <MarqueeTitle text="ABOUT ME" direction="left" />
+      <SectionWatermark text="ABOUT" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
