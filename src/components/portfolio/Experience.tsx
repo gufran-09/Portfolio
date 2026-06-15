@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { MarqueeTitle } from "./MarqueeTitle";
-import { Briefcase, Code2, Terminal } from "lucide-react";
 import "./Experience.css";
 
 const EXPERIENCES = [
@@ -10,13 +9,8 @@ const EXPERIENCES = [
     type: "Remote",
     duration: "7 months",
     current: true,
-    icon: Code2,
-    bullets: [
-      "Leading frontend architecture and development for the company's Next.js platform, owning technical decisions end-to-end.",
-      "Driving performance, SEO and rendering strategy through SSR, ISR and route-level optimisation.",
-      "Mentoring contributors and setting code quality, review and component-architecture standards for the team.",
-    ],
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    description: "Leading frontend architecture for the Next.js platform, driving SSR/ISR performance and mentoring contributors.",
+    tech: ["Next.js", "TypeScript"],
   },
   {
     title: "Frontend developer",
@@ -24,13 +18,8 @@ const EXPERIENCES = [
     type: "Remote",
     duration: "2 months",
     current: false,
-    icon: Terminal,
-    bullets: [
-      "Built and maintained responsive trading-platform UI components in React, focused on data-dense dashboards.",
-      "Translated design specs into pixel-accurate, accessible layouts with a glassmorphism-driven dark UI.",
-      "Fixed cross-browser layout and responsiveness issues across core trading views.",
-    ],
-    tech: ["React", "JavaScript", "CSS3", "Responsive design"],
+    description: "Built responsive trading-platform UI components in React for data-dense dashboards.",
+    tech: ["React", "JavaScript"],
   },
 ];
 
@@ -67,14 +56,11 @@ export function Experience() {
         >
           <div
             className="section-label"
-            style={{ color: "var(--color-accent-text)", marginBottom: "0.75rem" }}
+            style={{ color: "var(--color-text-3)", marginBottom: "0.75rem" }}
           >
             02 / EXPERIENCE
           </div>
           <h2 className="exp-title">Where I've made an impact</h2>
-          <p className="exp-subtitle">
-            Remote roles leading and building production frontends across Next.js and React.
-          </p>
         </motion.div>
 
         {/* Timeline */}
@@ -83,69 +69,62 @@ export function Experience() {
           <div className="exp-spine" />
 
           <motion.div
-            className="exp-cards"
+            className="exp-list"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
           >
             {EXPERIENCES.map((exp, i) => {
-              const Icon = exp.icon || Briefcase;
+              // Top card gets purple chip, bottom gets blue chip
+              const chipColorClass = exp.current ? "purple" : "blue";
+
               return (
                 <div key={i} className="exp-row">
-                  {/* Timeline icon chip */}
+                  {/* Timeline Chip */}
                   <div className="exp-dot-wrap">
-                    <div className={`exp-icon-chip ${exp.current ? "current" : ""}`}>
-                      <Icon size={20} strokeWidth={2} />
+                    <div className={`exp-chip ${chipColorClass}`}>
+                      <div className="exp-chip-inner" />
                     </div>
                   </div>
 
                   {/* Card */}
-                  <motion.div className={`exp-card ${exp.current ? "exp-card-current" : "exp-card-past"}`} variants={cardVariants}>
+                  <motion.div
+                    className={`exp-card ${exp.current ? "exp-card-current" : "exp-card-past"}`}
+                    variants={cardVariants}
+                  >
                     {/* Card header row */}
-                    <div className="exp-card-top">
-                      <div className="exp-card-meta">
-                        <h3 className="exp-role">{exp.title}</h3>
-                        <div className="exp-company-row">
-                          <span className="exp-company">{exp.company}</span>
-                          <span className="exp-dot-sep">·</span>
-                          <span className="exp-type">{exp.type}</span>
-                          <span className="exp-dot-sep">·</span>
-                          <span className="exp-duration">{exp.duration}</span>
-                        </div>
-                      </div>
-                      <span className={`exp-badge ${exp.current ? "exp-badge-current" : "exp-badge-past"}`}>
+                    <div className="exp-card-header">
+                      <h3 className="exp-card-title">{exp.title}</h3>
+                      <span className={`exp-badge-${exp.current ? "current" : "past"}`}>
                         {exp.current ? "CURRENT" : "PAST"}
                       </span>
                     </div>
 
-                  {/* Divider */}
-                  <div className="exp-divider" />
+                    <p className="exp-card-subtitle">
+                      <span className="exp-company-highlight">{exp.company}</span> · {exp.type} · {exp.duration}
+                    </p>
 
-                  {/* Bullets */}
-                  <ul className="exp-bullets">
-                    {exp.bullets.map((b, j) => (
-                      <li key={j} className="exp-bullet">
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+                    <p className="exp-card-desc">
+                      {exp.description}
+                    </p>
 
-                  {/* Tech tags */}
-                  <div className="exp-tags">
-                    {exp.tech.map((t) => (
-                      <span key={t} className="exp-tag">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            )
-          )}
+                    {/* Tech tag pills */}
+                    <div className="exp-pills">
+                      {exp.tech.map((t) => (
+                        <span key={t} className="exp-pill">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })}
           </motion.div>
         </div>
       </div>
     </section>
   );
 }
+
