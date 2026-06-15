@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { EDUCATION } from "@/lib/portfolio/data";
-import { MarqueeTitle } from "./MarqueeTitle";
+import { SectionWatermark } from "./SectionWatermark";
 import "./Education.css";
 
 const itemVariants = {
@@ -22,10 +22,10 @@ export function Education() {
       style={{
         position: "relative",
         overflow: "hidden",
-        paddingBottom: "calc(128px + 3rem)",
+        paddingBottom: "128px",
       }}
     >
-      <MarqueeTitle text="EDUCATION" direction="right" />
+      <SectionWatermark text="EDUCATION" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}

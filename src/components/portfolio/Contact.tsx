@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { IDENTITY } from "@/lib/portfolio/data";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { SectionWatermark } from "./SectionWatermark";
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -214,7 +215,8 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="section surface-section">
+    <section id="contact" className="section surface-section" style={{ position: "relative", overflow: "hidden" }}>
+      <SectionWatermark text="CONTACT" />
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

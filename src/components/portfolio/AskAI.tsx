@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { IDENTITY, PROJECTS } from "@/lib/portfolio/data";
-import { MarqueeTitle } from "./MarqueeTitle";
+import { SectionWatermark } from "./SectionWatermark";
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -169,7 +169,7 @@ export function AskAI() {
       className="section surface-section"
       style={{ position: "relative", overflow: "hidden", padding: "128px 0" }}
     >
-      <MarqueeTitle text="ASK ME ANYTHING" direction="right" />
+      <SectionWatermark text="ASK AI" />
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         <div className="section-label">09 / ASK ME ANYTHING</div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">

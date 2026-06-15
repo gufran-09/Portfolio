@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MarqueeTitle } from "./MarqueeTitle";
+import { SectionWatermark } from "./SectionWatermark";
 import "./Experience.css";
 
 const EXPERIENCES = [
@@ -41,9 +41,9 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="experience-section section-has-marquee"
+      className="experience-section"
     >
-      <MarqueeTitle text="EXPERIENCE" direction="left" />
+      <SectionWatermark text="EXPERIENCE" />
 
       <div className="container exp-container">
         {/* Header */}

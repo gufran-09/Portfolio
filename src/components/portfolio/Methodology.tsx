@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { MarqueeTitle } from "./MarqueeTitle";
+import { SectionWatermark } from "./SectionWatermark";
 import { useEffect, useRef, useState } from "react";
 import "./Methodology.css";
 
@@ -109,8 +109,8 @@ export function Methodology() {
   }, []);
 
   return (
-    <section id="methodology" className="methodology-section section-has-marquee">
-      <MarqueeTitle text="HOW I WORK" direction="left" />
+    <section id="methodology" className="methodology-section">
+      <SectionWatermark text="METHODOLOGY" />
 
       <div className="container" style={{ position: "relative", zIndex: 1 }}>
         {/* Header */}

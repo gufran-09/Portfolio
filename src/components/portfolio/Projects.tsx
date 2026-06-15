@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { projectsData } from "./projectsData";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectDetailPanel } from "./ProjectDetailPanel";
-import { MarqueeTitle } from "./MarqueeTitle";
+import { SectionWatermark } from "./SectionWatermark";
 import { Magnetic } from "@/components/ui/Magnetic";
 
 export function Projects() {
@@ -25,10 +25,10 @@ export function Projects() {
       style={{
         position: "relative",
         overflow: "hidden",
-        paddingBottom: "calc(128px + 3rem)",
+        paddingBottom: "128px",
       }}
     >
-      <MarqueeTitle text="PROJECTS" direction="right" />
+      <SectionWatermark text="PROJECTS" />
       {/* SECTION HEADER */}
       <div
         style={{

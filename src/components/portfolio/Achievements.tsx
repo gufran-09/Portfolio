@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Trophy, PenTool, Award, Flame, Medal } from "lucide-react";
 import { TROPHIES } from "@/lib/portfolio/data";
+import { SectionWatermark } from "./SectionWatermark";
 import "./Achievements.css";
 
 const itemVariants = {
@@ -31,7 +32,8 @@ export function Achievements() {
   };
 
   return (
-    <section id="achievements" className="section surface-section" style={{ padding: "var(--space-32) 0" }}>
+    <section id="achievements" className="section surface-section" style={{ padding: "var(--space-32) 0", position: "relative", overflow: "hidden" }}>
+      <SectionWatermark text="ACHIEVEMENTS" />
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
