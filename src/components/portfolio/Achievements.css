@@ -1,0 +1,203 @@
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* ACHIEVEMENTS / MILESTONES SECTION                                          */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+/* Accent variable mappings per category */
+.ach-card.amber {
+  --ach-accent: #f59e0b;
+  --ach-accent-rgb: 245, 158, 11;
+}
+
+.ach-card.pink {
+  --ach-accent: #ec4899;
+  --ach-accent-rgb: 236, 72, 153;
+}
+
+.ach-card.blue {
+  --ach-accent: #3b82f6;
+  --ach-accent-rgb: 59, 130, 246;
+}
+
+.ach-card.green {
+  --ach-accent: #10b981;
+  --ach-accent-rgb: 16, 185, 129;
+}
+
+.ach-card.purple {
+  --ach-accent: #8b5cf6;
+  --ach-accent-rgb: 139, 92, 246;
+}
+
+.ach-card.teal {
+  --ach-accent: #14b8a6;
+  --ach-accent-rgb: 20, 184, 166;
+}
+
+/* Card basic design */
+.ach-card {
+  position: relative;
+  background: rgba(15, 17, 20, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 220px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* Lift on hover & colored border/glow */
+.ach-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--ach-accent-rgb), 0.35);
+  background: rgba(15, 17, 20, 0.6);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3), 0 0 20px rgba(var(--ach-accent-rgb), 0.12);
+}
+
+/* Featured card layout spans 2 columns on lg grids */
+.ach-card.featured {
+  background: linear-gradient(135deg, rgba(30, 25, 15, 0.85) 0%, rgba(15, 12, 10, 0.75) 100%);
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 0 16px rgba(245, 158, 11, 0.08);
+  padding: 2.25rem 2.5rem;
+}
+
+.ach-card.featured:hover {
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 24px rgba(245, 158, 11, 0.18);
+}
+
+/* Background large trophy decoration in featured card */
+.ach-featured-bg-icon {
+  position: absolute;
+  bottom: -40px;
+  right: -20px;
+  opacity: 0.025;
+  color: var(--ach-accent);
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.ach-card.featured:hover .ach-featured-bg-icon {
+  opacity: 0.04;
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* Top bar row in cards */
+.ach-card-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glowing Icon Chips */
+.ach-icon-chip {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(var(--ach-accent-rgb), 0.15) 0%, rgba(var(--ach-accent-rgb), 0.03) 100%);
+  border: 1.5px solid rgba(var(--ach-accent-rgb), 0.35);
+  box-shadow: 0 8px 16px -8px rgba(var(--ach-accent-rgb), 0.4);
+  color: var(--ach-accent);
+  transition: all 0.3s ease;
+  margin-bottom: 1.25rem;
+}
+
+.ach-card:hover .ach-icon-chip {
+  border-color: var(--ach-accent);
+  box-shadow: 0 8px 20px -4px rgba(var(--ach-accent-rgb), 0.6);
+  transform: scale(1.03);
+}
+
+/* Featured Badge */
+.ach-featured-badge {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+  align-self: flex-start;
+}
+
+/* Text elements */
+.ach-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.ach-card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.ach-card-sub {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-3);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.ach-card-year {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-3);
+  margin-top: auto;
+}
+
+/* Stat card (e.g. 300+ problems solved) layout */
+.ach-stat-box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  flex-grow: 1;
+}
+
+.ach-stat-value {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.75) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ach-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-2);
+  line-height: 1.5;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .ach-card.featured {
+    padding: 1.5rem 1.75rem;
+  }
+}

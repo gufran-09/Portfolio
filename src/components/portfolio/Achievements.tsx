@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Trophy, PenTool, Award, Flame, Medal } from "lucide-react";
 import { TROPHIES } from "@/lib/portfolio/data";
+import "./Achievements.css";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 16 },
@@ -21,7 +22,7 @@ const iconMap: Record<string, any> = {
 
 export function Achievements() {
   return (
-    <section id="achievements" className="section surface-section">
+    <section id="achievements" className="section surface-section" style={{ padding: "var(--space-32) 0" }}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -41,6 +42,10 @@ export function Achievements() {
         >
           {TROPHIES.map((trophy, i) => {
             const Icon = iconMap[trophy.icon] || Trophy;
+            const isFeatured = trophy.featured;
+            const isStat = trophy.isStat;
+            const accentClass = trophy.accent || "teal";
+
             return (
               <motion.div
                 key={i}
@@ -49,12 +54,45 @@ export function Achievements() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ delay: i * 0.06 }}
-                className="card"
+                className={`ach-card ${accentClass} ${isFeatured ? "featured" : ""}`}
               >
-                <Icon size={20} style={{ color: "var(--color-accent)" }} />
-                <h3 className="h3 mt-4 mb-2">{trophy.title}</h3>
-                <p className="small mb-3">{trophy.sub}</p>
-                <p className="mono">{trophy.year}</p>
+                {/* Background faded icon for featured card */}
+                {isFeatured && (
+                  <Icon className="ach-featured-bg-icon" size={160} />
+                )}
+
+                {/* Top Row: Icon Chip & Badge */}
+                <div className="ach-card-top-row">
+                  <div className="ach-icon-chip">
+                    <Icon size={20} strokeWidth={2} />
+                  </div>
+                  {isFeatured && (
+                    <span className="ach-featured-badge">FEATURED</span>
+                  )}
+                </div>
+
+                {/* Card Content */}
+                <div className="ach-content">
+                  {isStat ? (
+                    // Stat Card (300+ problems solved)
+                    <div className="ach-stat-box">
+                      <h3 className="ach-card-title">{trophy.title}</h3>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="ach-stat-value">300+</span>
+                        <span className="ach-stat-label" style={{ color: "var(--color-text-3)" }}>
+                          {trophy.sub}
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    // Regular & Featured Card Layout
+                    <>
+                      <h3 className="ach-card-title">{trophy.title}</h3>
+                      <p className="ach-card-sub">{trophy.sub}</p>
+                    </>
+                  )}
+                  <span className="ach-card-year">{trophy.year}</span>
+                </div>
               </motion.div>
             );
           })}
@@ -63,3 +101,4 @@ export function Achievements() {
     </section>
   );
 }
+
