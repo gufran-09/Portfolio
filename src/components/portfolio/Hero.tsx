@@ -210,6 +210,8 @@ export function Hero() {
             <Magnetic>
               <a
                 href="/assets/Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 download="Gufran_Ahmed_Resume.pdf"
                 style={{
                   padding: "12px 28px",
