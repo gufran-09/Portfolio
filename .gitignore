@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Build and deployment directories
+.vercel
+.output
+.vinxi
+.wrangler
