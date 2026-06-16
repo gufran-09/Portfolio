@@ -40,8 +40,7 @@ export function TestimonialCard() {
           margin: 0,
         }}
       >
-        Great developer — delivered a scalable React app on time. Clean code,
-        great communication, very professional.
+        We trusted you with our whole digital presence, and you delivered far beyond expectations. The platform you built now powers hundreds of real bookings. Proud to call you part of the Flyout Tours family.
       </p>
 
       {/* Person */}
@@ -59,7 +58,7 @@ export function TestimonialCard() {
             width: 32,
             height: 32,
             borderRadius: "50%",
-            background: "#6366f1",
+            background: "#15ff00ff",
             color: "#fff",
             fontFamily: "'Inter', sans-serif",
             fontWeight: 700,
@@ -70,7 +69,7 @@ export function TestimonialCard() {
             flexShrink: 0,
           }}
         >
-          SV
+          FT
         </div>
         <div>
           <div
@@ -81,7 +80,7 @@ export function TestimonialCard() {
               color: "#f0f0f0",
             }}
           >
-            Sarah V.
+            Flyout Tour LLC
           </div>
           <div
             style={{
