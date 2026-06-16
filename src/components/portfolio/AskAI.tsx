@@ -59,6 +59,7 @@ FACTS ABOUT GUFRAN AHMED:
 - Full Stack Software Engineer, 3+ years experience
 - Based in Hyderabad, India
 - Specializes in: React, Next.js, Node.js, TypeScript, Python, PostgreSQL, MongoDB, Docker, AWS
+- Work Experience: Software Engineer at Flyout Tours (2025 - Present, current role), Frontend Developer at StreetOne Trading (2024, 2 months)
 - 1000+ LeetCode problems solved, top competitive programmer
 - 300+ day coding streak on Codolio
 - Built 50+ projects including production applications

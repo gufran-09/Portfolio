@@ -29,9 +29,9 @@ export const TYPEWRITER_STRINGS = [
 ];
 
 export const HERO_STATS = [
-  { label: "Years Exp", value: "3+", dot: "var(--color-accent)" },
-  { label: "Projects", value: "50+", dot: "var(--color-success)" },
-  { label: "LeetCode", value: "1K+", dot: "#f59e0b" },
+  { label: "Years Exp", value: "1+", dot: "var(--color-accent)" },
+  { label: "Projects", value: "25+", dot: "var(--color-success)" },
+  { label: "LeetCode", value: "110+", dot: "#f59e0b" },
 ];
 
 export const STATS = [
@@ -161,10 +161,10 @@ export const PROJECTS: Project[] = [
   {
     name: "Whirlpool",
     desc: "Real-time collaborative code editor with multi-cursor support and shared terminals.",
-    tech: ["React", "Monaco", "Socket.io", "Redis"],
+    tech: ["React", "Monaco", "Socket.io", "Websocket"],
     tags: ["React", "Nextjs", "Full Stack"],
     featured: true,
-    github: "https://github.com/gufran-09/Trading",
+    github: "https://github.com/gufran-09",
     demo: "#",
     livelink: "#",
   },
@@ -187,20 +187,20 @@ export const PROJECTS: Project[] = [
     livelink: "#",
   },
   {
-    name: "StockSense",
+    name: "College FAQ Chatbot",
     desc: "Stock portfolio tracker with realtime quotes, charts, and tax-lot accounting.",
-    tech: ["React", "FastAPI", "PostgreSQL", "Chart.js"],
-    tags: ["React", "Nextjs", "Full Stack"],
-    github: "#",
+    tech: ["Java", "SpringBoot", "PostgreSQL", "Docker"],
+    tags: ["React", "Backend", "Full Stack", "Java"],
+    github: "https://github.com/gufran-09/College-FAQ-Chatbot",
     demo: "#",
     livelink: "#",
   },
   {
-    name: "ByteNotes",
+    name: "Ecommmerce",
     desc: "Developer-focused note-taking app with markdown, code blocks, and local-first sync.",
-    tech: ["Electron", "React", "SQLite"],
-    tags: ["React"],
-    github: "#",
+    tech: ["Java", "SpringBoot", "PostgreSQL", "Docker"],
+    tags: ["React", "Backend", "Java"],
+    github: "https://github.com/gufran-09/E-Commerce",
     demo: "#",
     livelink: "#",
   },
@@ -227,6 +227,18 @@ export const EXPERIENCE = [
       "Mentored 3 junior developers across two product squads.",
     ],
     tech: ["React", "TypeScript", "Nextjs", "AWS"],
+  },
+  {
+    company: "StreetOne Trading",
+    initials: "SO",
+    role: "Frontend Developer",
+    date: "2026 (2 months)",
+    location: "Remote",
+    bullets: [
+      "Built responsive trading-platform UI components in React for data-dense dashboards.",
+      "Optimized rendering of real-time trading data to improve dashboard responsiveness.",
+    ],
+    tech: ["React", "JavaScript"],
   },
 ];
 

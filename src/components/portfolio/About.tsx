@@ -469,22 +469,22 @@ export function About() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <StatCard
-                target={50}
+                target={25}
                 label="Projects Built"
                 format={(n) => `${n}+`}
               />
               <StatCard
-                target={3}
+                target={1}
                 label="Years Experience"
                 format={(n) => `${n}+`}
               />
               <StatCard
-                target={1000}
+                target={110}
                 label="LeetCode Solved"
                 format={(n) => (n >= 100 ? "100+" : `${n}`)}
               />
               <StatCard
-                target={15}
+                target={2}
                 label="Happy Clients"
                 format={(n) => `${n}+`}
               />
