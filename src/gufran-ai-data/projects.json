@@ -1,0 +1,206 @@
+[
+    {
+        "name": "Flyout Tours",
+        "slug": "flyout-tours",
+        "featured": true,
+        "category": "Full Stack Product / Travel Platform",
+        "summary": "A travel-focused product platform involving frontend, backend, and database-driven workflows.",
+        "description": "Flyout Tours represents Gufran’s work on a product-oriented application rather than just a college project. It involved handling application workflows, product-related data, and real engineering tasks around integration and deployment.",
+        "problem": "Travel and booking-oriented products require structured handling of packages, product information, user-facing flows, and reliable data updates.",
+        "solution": "Worked on building and improving product workflows, frontend/backend integration, and database-connected application features.",
+        "tech": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "Supabase"
+        ],
+        "tags": [
+            "React",
+            "Full Stack",
+            "Product Engineering"
+        ],
+        "responsibilities": [
+            "Worked on frontend and backend integration tasks.",
+            "Handled product-related implementation and data updates.",
+            "Contributed to real-world product workflows rather than only demo features."
+        ],
+        "whatItShows": [
+            "Experience working on a live product setup",
+            "Understanding of database-backed application flows",
+            "Comfort with production debugging and iteration"
+        ],
+        "github": "https://github.com/gufran-09/",
+        "demo": "#",
+        "liveLink": "#"
+    },
+    {
+        "name": "Whirlpool",
+        "slug": "whirlpool",
+        "featured": true,
+        "category": "Real-Time Collaboration Tool",
+        "summary": "A collaborative coding environment with real-time interaction features.",
+        "description": "Whirlpool is a real-time collaborative code editor concept focused on shared editing and synchronized interactions.",
+        "problem": "Collaborative coding tools need low-latency communication, synchronized editing, and a clean interface for multi-user interaction.",
+        "solution": "Built a collaborative editor experience using frontend and real-time communication tools.",
+        "tech": [
+            "React",
+            "Monaco Editor",
+            "Socket.io",
+            "WebSockets"
+        ],
+        "tags": [
+            "React",
+            "Realtime",
+            "Full Stack"
+        ],
+        "responsibilities": [
+            "Built the frontend collaboration experience.",
+            "Integrated real-time communication for synchronized usage.",
+            "Worked on interactive editing workflows."
+        ],
+        "whatItShows": [
+            "Ability to build real-time applications",
+            "Experience with WebSocket-based interaction models",
+            "Comfort with developer-tool style products"
+        ],
+        "github": "https://github.com/gufran-09",
+        "demo": "#",
+        "liveLink": "#"
+    },
+    {
+        "name": "Agent Ascend",
+        "slug": "agent-ascend",
+        "featured": false,
+        "category": "Frontend / Component Engineering",
+        "summary": "A React-based component or UI system focused on reusable building blocks.",
+        "description": "Agent Ascend appears to be a frontend-focused project around reusable components and UI architecture.",
+        "problem": "Frontend projects benefit from reusable components, consistency, and maintainable design systems.",
+        "solution": "Built reusable frontend components and structured UI patterns using React and TypeScript.",
+        "tech": [
+            "React",
+            "TypeScript"
+        ],
+        "tags": [
+            "React",
+            "Frontend"
+        ],
+        "responsibilities": [
+            "Built reusable UI components.",
+            "Worked with typed frontend development patterns.",
+            "Focused on maintainable component structure."
+        ],
+        "whatItShows": [
+            "Frontend engineering discipline",
+            "Component-based thinking",
+            "TypeScript familiarity"
+        ],
+        "github": "https://github.com/gufran-09/Agent_Ascend",
+        "demo": "#",
+        "liveLink": "#"
+    },
+    {
+        "name": "Event Manager",
+        "slug": "event-manager",
+        "featured": false,
+        "category": "Full Stack Application",
+        "summary": "An event/task management style application with modern web tooling.",
+        "description": "Event Manager is a full-stack style application demonstrating modern app development patterns and integration workflows.",
+        "problem": "Event and task workflows require structured data, good UX, and reliable state handling.",
+        "solution": "Built a modern app using a React-based framework and backend-connected data workflows.",
+        "tech": [
+            "Next.js",
+            "OpenAI",
+            "Prisma",
+            "Vercel"
+        ],
+        "tags": [
+            "React",
+            "Full Stack"
+        ],
+        "responsibilities": [
+            "Worked on full-stack implementation.",
+            "Handled feature integration and app workflows.",
+            "Explored AI-assisted product functionality."
+        ],
+        "whatItShows": [
+            "Ability to combine frontend, backend, and AI integration",
+            "Comfort with modern web application tooling",
+            "Interest in product-driven engineering"
+        ],
+        "github": "https://github.com/gufran-09/Event-Manager",
+        "demo": "#",
+        "liveLink": "#"
+    },
+    {
+        "name": "College FAQ Chatbot",
+        "slug": "college-faq-chatbot",
+        "featured": false,
+        "category": "AI / RAG / Backend Application",
+        "summary": "A college-focused FAQ chatbot built with Spring Boot, PostgreSQL, and retrieval-based AI workflows.",
+        "description": "This project is one of the strongest representations of Gufran’s interest in AI-integrated backend applications. It combines document understanding, retrieval, embeddings, and LLM-based response generation in a practical student-facing use case.",
+        "problem": "Students often struggle to find accurate answers about college-related processes, documents, and information spread across multiple sources.",
+        "solution": "Built a retrieval-based chatbot that stores and retrieves relevant context before generating answers, using backend services and AI model integrations.",
+        "tech": [
+            "Java",
+            "Spring Boot",
+            "PostgreSQL",
+            "Docker",
+            "ChromaDB",
+            "Ollama"
+        ],
+        "tags": [
+            "Backend",
+            "Java",
+            "AI",
+            "Full Stack"
+        ],
+        "responsibilities": [
+            "Designed backend services and data flow for chatbot interactions.",
+            "Worked on retrieval pipelines, embeddings, and vector-store integration.",
+            "Integrated local AI/LLM workflows using Ollama-based tooling.",
+            "Handled PostgreSQL and supporting service setup."
+        ],
+        "whatItShows": [
+            "Strong interest in AI-enabled backend systems",
+            "Hands-on work with RAG architecture",
+            "Ability to combine Spring Boot, databases, Docker, and LLM tooling"
+        ],
+        "github": "https://github.com/gufran-09/College-FAQ-Chatbot",
+        "demo": "#",
+        "liveLink": "#"
+    },
+    {
+        "name": "E-Commerce",
+        "slug": "e-commerce",
+        "featured": false,
+        "category": "Backend / Full Stack Application",
+        "summary": "An e-commerce application demonstrating backend workflows, data management, and business-style application structure.",
+        "description": "The E-Commerce project reflects work on a business-style application with product-oriented backend logic and database workflows.",
+        "problem": "E-commerce systems need structured handling of products, user actions, and database-backed workflows.",
+        "solution": "Built a backend-connected application with support for core commerce flows and data management.",
+        "tech": [
+            "Java",
+            "Spring Boot",
+            "PostgreSQL",
+            "Docker"
+        ],
+        "tags": [
+            "Backend",
+            "Java",
+            "React"
+        ],
+        "responsibilities": [
+            "Worked on backend logic and application structure.",
+            "Handled database-connected workflows.",
+            "Applied Spring Boot to a business-style application use case."
+        ],
+        "whatItShows": [
+            "Understanding of backend application development",
+            "Comfort with Spring Boot and relational databases",
+            "Ability to work on product-style data flows"
+        ],
+        "github": "https://github.com/gufran-09/E-Commerce",
+        "demo": "#",
+        "liveLink": "#"
+    }
+]

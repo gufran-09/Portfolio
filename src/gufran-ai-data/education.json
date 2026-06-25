@@ -1,0 +1,49 @@
+[
+    {
+        "degree": "B.Tech in Computer Science",
+        "institution": "Vardhaman College of Engineering",
+        "startYear": 2024,
+        "endYear": 2028,
+        "location": "Hyderabad",
+        "cgpa": "8.9 / 10",
+        "summary": "Pursuing undergraduate studies in Computer Science with a strong focus on software engineering, problem solving, and real-world project development.",
+        "coursework": [
+            "Data Structures and Algorithms",
+            "Operating Systems",
+            "Database Management Systems",
+            "Computer Networks",
+            "Software Engineering",
+            "Machine Learning",
+            "Agile Methodologies",
+            "System Design"
+        ]
+    },
+    {
+        "degree": "Intermediate (Class 12)",
+        "institution": "Sri Chaitanya College",
+        "startYear": 2022,
+        "endYear": 2024,
+        "location": "Hyderabad",
+        "cgpa": "9.45 / 10",
+        "summary": "Completed intermediate education with a strong academic record in Mathematics, Physics, and Chemistry.",
+        "coursework": [
+            "Mathematics",
+            "Physics",
+            "Chemistry"
+        ]
+    },
+    {
+        "degree": "Secondary School (Class 10)",
+        "institution": "Sri Chaitanya School",
+        "startYear": 2021,
+        "endYear": 2022,
+        "location": "Hyderabad",
+        "cgpa": "9.3 / 10",
+        "summary": "Completed secondary education with strong academic performance and early interest in mathematics and problem solving.",
+        "coursework": [
+            "Mathematics",
+            "Science",
+            "Social Studies"
+        ]
+    }
+]

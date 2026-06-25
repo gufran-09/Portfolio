@@ -1,0 +1,34 @@
+[
+    {
+        "question": "Who is Gufran Ahmed?",
+        "answer": "Gufran Ahmed is a Computer Science student and software engineer based in Hyderabad, focused on full-stack development, backend systems, and AI-powered applications. He has worked on projects involving React, Spring Boot, Node.js, PostgreSQL, Supabase, and retrieval-based AI systems."
+    },
+    {
+        "question": "What are Gufran’s strongest technical areas?",
+        "answer": "Gufran’s strongest areas are React-based frontend development, Java and Spring Boot backend development, database-backed applications, and AI-integrated product development such as RAG chatbots and developer tools."
+    },
+    {
+        "question": "What kind of roles is Gufran targeting?",
+        "answer": "He is best suited for software engineering internships and early-career roles in backend engineering, full-stack development, and AI-enabled application development."
+    },
+    {
+        "question": "Tell me about Gufran’s backend experience.",
+        "answer": "Gufran has worked on backend-oriented applications using Java, Spring Boot, Node.js, PostgreSQL, and Supabase. His work includes API-driven applications, chatbot systems, database-backed products, and business-style app workflows."
+    },
+    {
+        "question": "What is Gufran’s College FAQ Chatbot project?",
+        "answer": "The College FAQ Chatbot is a retrieval-based AI project that uses backend services, embeddings, vector retrieval, and LLM integration to answer college-related questions. It reflects Gufran’s interest in combining Spring Boot, databases, Docker, and AI workflows into practical applications."
+    },
+    {
+        "question": "Why should a company hire Gufran?",
+        "answer": "Gufran combines strong academic discipline with hands-on product building. He has worked across frontend, backend, databases, and AI-enabled applications, and has shown the ability to build practical systems rather than only academic demos. His profile is especially strong for teams looking for a fast-learning engineer with a builder mindset and growing backend depth."
+    },
+    {
+        "question": "What makes Gufran different from many student developers?",
+        "answer": "Beyond academic coursework, Gufran has worked on practical product and engineering workflows, including full-stack projects, backend systems, and AI-integrated applications. He is actively building in areas like Spring Boot, retrieval-based AI, deployment, and real product-style development."
+    },
+    {
+        "question": "What technologies does Gufran work with?",
+        "answer": "His stack includes React, TypeScript, JavaScript, Tailwind CSS, Node.js, Express.js, Java, Spring Boot, PostgreSQL, Supabase, MongoDB, Docker, and AI tooling for RAG-style applications."
+    }
+]

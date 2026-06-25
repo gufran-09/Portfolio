@@ -1,0 +1,51 @@
+[
+    {
+        "title": "Winner — Webathon, Festronix",
+        "year": "2026",
+        "type": "Competition",
+        "summary": "Won a national-level website building competition, ranking 1st among participating teams.",
+        "featured": true,
+        "recruiterValue": "Demonstrates competitive problem solving, execution speed, and the ability to build under constraints."
+    },
+    {
+        "title": "Runner-up — Hyderabad AI Hackathon",
+        "year": "2023",
+        "type": "Hackathon",
+        "summary": "Secured runner-up position in the Hyderabad AI Hackathon organized by Bower School of Entrepreneurship.",
+        "featured": false,
+        "recruiterValue": "Reflects early interest in AI and applied problem solving."
+    },
+    {
+        "title": "Gold Certificate — NPTEL Programming in Java",
+        "year": "2025",
+        "type": "Academic / Certification Achievement",
+        "summary": "Earned a Gold certificate in Programming in Java with a score of 94%.",
+        "featured": false,
+        "recruiterValue": "Supports strong Java fundamentals and disciplined academic execution."
+    },
+    {
+        "title": "2nd Place — National Mathematics Day",
+        "year": "2024",
+        "type": "Academic Competition",
+        "summary": "Secured 2nd place in a department-level analytical and mathematical reasoning competition.",
+        "featured": false,
+        "recruiterValue": "Highlights problem-solving ability and analytical thinking."
+    },
+    {
+        "title": "300+ Coding Problems Solved",
+        "year": "2026",
+        "type": "DSA / Competitive Programming",
+        "summary": "Solved 300+ coding problems across platforms such as LeetCode, CodeChef, GeeksforGeeks, and HackerRank.",
+        "featured": false,
+        "recruiterValue": "Shows consistency in problem solving, algorithmic thinking, and coding discipline."
+    },
+    {
+        "title": "College Rank 1",
+        "year": "2022",
+        "type": "Academic Recognition",
+        "summary": "Recognized with a top academic rank in the CSE department.",
+        "featured": false,
+        "recruiterValue": "Signals strong academic consistency.",
+        "needsVerification": true
+    }
+]

@@ -1,0 +1,33 @@
+[
+    {
+        "name": "Programming in Java",
+        "issuer": "NPTEL",
+        "year": "2025",
+        "score": "94%",
+        "summary": "Completed NPTEL Programming in Java with a high score, strengthening Java fundamentals and structured programming knowledge."
+    },
+    {
+        "name": "Git - Skill Up",
+        "issuer": "GeeksforGeeks",
+        "year": "2026",
+        "summary": "Covered version control fundamentals and practical Git workflows."
+    },
+    {
+        "name": "Networking and Web Technology",
+        "issuer": "Infosys Springboard",
+        "year": "2025",
+        "summary": "Learned web technology and networking fundamentals relevant to modern application development."
+    },
+    {
+        "name": "Software Engineering and Agile Software Development",
+        "issuer": "Infosys Springboard",
+        "year": "2026",
+        "summary": "Studied software engineering processes, team workflows, and agile development practices."
+    },
+    {
+        "name": "AI Fluency for Students",
+        "issuer": "Anthropic",
+        "year": "2025",
+        "summary": "Completed foundational AI literacy training focused on practical understanding of modern AI systems."
+    }
+]

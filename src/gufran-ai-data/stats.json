@@ -1,0 +1,28 @@
+{
+    "heroStats": [
+        {
+            "label": "Projects Built",
+            "value": "15+"
+        },
+        {
+            "label": "Coding Problems Solved",
+            "value": "300+"
+        },
+        {
+            "label": "Products / Platforms Worked On",
+            "value": "2+"
+        }
+    ],
+    "quickFacts": {
+        "college": "Vardhaman College of Engineering",
+        "degree": "B.Tech in Computer Science",
+        "location": "Hyderabad, India",
+        "primaryAreas": [
+            "Full Stack Development",
+            "Backend Engineering",
+            "Spring Boot",
+            "React",
+            "AI-integrated applications"
+        ]
+    }
+}

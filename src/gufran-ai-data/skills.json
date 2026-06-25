@@ -1,0 +1,67 @@
+{
+    "coreSkills": {
+        "frontend": [
+            "React",
+            "TypeScript",
+            "JavaScript",
+            "Tailwind CSS",
+            "Vite",
+            "Framer Motion"
+        ],
+        "backend": [
+            "Node.js",
+            "Express.js",
+            "Java",
+            "Spring Boot",
+            "REST APIs",
+            "WebSockets"
+        ],
+        "databases": [
+            "PostgreSQL",
+            "Supabase",
+            "MongoDB",
+            "MySQL"
+        ],
+        "aiAndAppEngineering": [
+            "RAG chatbot development",
+            "LLM API integration",
+            "Prompt design",
+            "Embeddings-based retrieval",
+            "Ollama-based local inference workflows"
+        ],
+        "developerTools": [
+            "Git",
+            "GitHub",
+            "Postman",
+            "VS Code",
+            "IntelliJ IDEA",
+            "Docker"
+        ]
+    },
+    "workingKnowledge": {
+        "frontend": [
+            "Next.js",
+            "Redux",
+            "Zustand",
+            "TanStack Query"
+        ],
+        "backend": [
+            "JWT authentication",
+            "API integration",
+            "real-time features"
+        ],
+        "devopsAndDeployment": [
+            "Vercel",
+            "basic Linux workflows",
+            "Docker container workflows"
+        ]
+    },
+    "currentlyLearningOrExploring": [
+        "System design fundamentals",
+        "Spring Security",
+        "Production backend architecture",
+        "AI-powered product workflows",
+        "Scalable deployment practices"
+    ],
+    "skillsSummary": "Gufran’s strongest skills currently lie in React-based frontend development, Java/Spring Boot and Node.js backend development, database-backed applications, and building practical AI-enabled tools such as RAG chatbots and portfolio assistants."
+}

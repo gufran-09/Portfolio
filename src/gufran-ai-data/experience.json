@@ -1,0 +1,45 @@
+[
+    {
+        "company": "Flyout Tours",
+        "role": "Software Engineer",
+        "employmentType": "Remote / Project-based",
+        "start": "2025",
+        "end": "Present",
+        "location": "Remote",
+        "summary": "Worked on software development tasks for Flyout Tours, contributing to product workflows, frontend/backend integration, and production-oriented feature work.",
+        "responsibilities": [
+            "Worked on application features and product-related engineering tasks.",
+            "Contributed to frontend and backend integration workflows.",
+            "Handled database-driven product updates and implementation tasks.",
+            "Worked with real-world deployment and product iteration issues."
+        ],
+        "tech": [
+            "React",
+            "JavaScript",
+            "TypeScript",
+            "Supabase",
+            "PostgreSQL"
+        ],
+        "recruiterTakeaway": "This experience shows exposure to product-oriented engineering beyond academic projects, including live workflows, integration, and production problem solving."
+    },
+    {
+        "company": "StreetOne Trading",
+        "role": "Frontend Developer",
+        "employmentType": "Remote / Short-term engagement",
+        "start": "2026",
+        "end": "2026",
+        "duration": "2 months",
+        "location": "Remote",
+        "summary": "Worked on frontend development tasks for a trading-related platform, contributing to UI implementation and data-heavy dashboard experiences.",
+        "responsibilities": [
+            "Built and improved responsive UI components using React.",
+            "Worked on dashboard-oriented frontend implementation.",
+            "Handled interface work for data-heavy product screens."
+        ],
+        "tech": [
+            "React",
+            "JavaScript"
+        ],
+        "recruiterTakeaway": "This role reflects hands-on frontend implementation experience in a real product setting, especially around dashboard-like interfaces."
+    }
+]

@@ -1,0 +1,43 @@
+{
+    "name": "Gufran Ahmed",
+    "firstName": "Gufran",
+    "lastName": "Ahmed",
+    "monogram": "GA",
+    "headline": "Software Engineer",
+    "roleSummary": "Computer Science student and software engineer focused on full-stack development, backend systems, and AI-powered applications.",
+    "location": "Hyderabad, India",
+    "tagline": "I build things that live on the internet.",
+    "email": "gufranahmed0921@gmail.com",
+    "links": {
+        "github": "https://github.com/gufran-09",
+        "githubUser": "gufran-09",
+        "linkedin": "https://linkedin.com/in/gufran-ahmed21/",
+        "X": "https://x.com/gufran_21",
+        "codolio": "https://codolio.com/profile/gufran_21",
+        "codolioUser": "gufran_21"
+    },
+    "currentFocus": [
+        "Full-stack web development",
+        "Backend engineering",
+        "Spring Boot applications",
+        "React-based frontend development",
+        "Database-backed systems",
+        "AI-integrated applications",
+        "RAG chatbots and developer tooling"
+    ],
+    "identitySummary": "Gufran Ahmed is a Computer Science student at Vardhaman College of Engineering, Hyderabad, building full-stack and AI-assisted software products. His work spans React, Node.js, Spring Boot, PostgreSQL, Supabase, and developer-focused applications. He is especially interested in backend systems, practical product engineering, and building projects that combine solid software fundamentals with AI capabilities.",
+    "targetRoles": [
+        "Software Engineering Intern",
+        "Backend Engineering Intern",
+        "Full Stack Developer Intern",
+        "Junior Software Engineer",
+        "AI Application Engineer Intern"
+    ],
+    "toneKeywords": [
+        "professional",
+        "curious",
+        "builder mindset",
+        "product-oriented",
+        "backend-leaning full-stack engineer"
+    ]
+}
